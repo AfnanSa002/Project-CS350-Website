@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ACMClassifier.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">ACMClassifier.java</span></div><h1>ACMClassifier.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.io.File;
+import java.util.*;
+
+<span class="nc" id="L6">class ACMClassifier</span>
+{
+    public static void main(String[] args) 
+    {
+        //creates train.arff with sample data(Only runs if file has not been created)
+<span class="nc" id="L11">        InitialTrainer trainer = new InitialTrainer();</span>
+<span class="nc" id="L12">        trainer.run();</span>
+        
+        //Verify Input from User
+<span class="nc" id="L15">        List&lt;String&gt; listOfPaths = verifyPaths(args);</span>
+        
+        //create and process classify docs
+<span class="nc" id="L18">        String vocabPath = &quot;src/main/resources/vocabCollection.text&quot;;</span>
+<span class="nc" id="L19">        List&lt;ClassifyDocument&gt; documentsToClassify = new ArrayList&lt;ClassifyDocument&gt;();</span>
+<span class="nc" id="L20">        ClassifyParser cParser = new ClassifyParser(vocabPath);</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (String path: listOfPaths)</span>
+<span class="nc" id="L22">            documentsToClassify.add(cParser.createAndProcessDocument(path));</span>
+
+        //run machine to classify documents with train.arff
+<span class="nc" id="L25">        String arffPath = &quot;src/main/resources/train.arff&quot;;</span>
+<span class="nc" id="L26">        LearningMachine machine = new LearningMachine(arffPath, cParser.getVocabCollection());</span>
+<span class="nc" id="L27">        machine.run(documentsToClassify);</span>
+
+        //return output
+<span class="nc" id="L30">        int i = 0;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (String path: listOfPaths)</span>
+        {
+<span class="nc" id="L33">            String categoryKey = documentsToClassify.get(i).getCategory();</span>
+<span class="nc" id="L34">            String category = retrieveCategory(categoryKey.toUpperCase());</span>
+            
+<span class="nc" id="L36">            System.out.println(path + &quot;\n  &quot; + category + &quot;\n&quot;);</span>
+<span class="nc" id="L37">            i++;</span>
+<span class="nc" id="L38">        }</span>
+<span class="nc" id="L39">    }</span>
+
+    private static List&lt;String&gt; verifyPaths(String[] args)
+    {
+<span class="nc" id="L43">        List&lt;String&gt; validPaths = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for (String path: args)</span>
+        {
+<span class="nc" id="L46">            File file = new File(path);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (!file.exists())</span>
+            {
+<span class="nc" id="L49">                System.out.println(path + &quot; does not exist.\n&quot;);</span>
+<span class="nc" id="L50">                continue;</span>
+            }
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (file.isDirectory())</span>
+            {
+<span class="nc" id="L54">                System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
+<span class="nc" id="L55">                continue;</span>
+            }
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            if (file.length()==0)</span>
+            {
+<span class="nc" id="L59">                System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
+<span class="nc" id="L60">                continue;</span>
+            }
+<span class="nc" id="L62">            String extension = path.substring(path.length()-3);</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">            if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;);</span>
+            {
+<span class="nc" id="L65">                System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
+            }
+<span class="nc" id="L67">            validPaths.add(path);</span>
+        }
+<span class="nc" id="L69">        return validPaths;</span>
+    }
+
+    private static String retrieveCategory(String category)
+    {
+        String categoryName;
+<span class="nc bnc" id="L75" title="All 12 branches missed.">        switch (category)</span>
+        {
+            case &quot;A&quot;:
+<span class="nc" id="L78">                categoryName = &quot;A. General Literature&quot;;</span>
+<span class="nc" id="L79">                break;</span>
+            case &quot;B&quot;:
+<span class="nc" id="L81">                categoryName = &quot;B. Hardware&quot;;</span>
+<span class="nc" id="L82">                break;</span>
+            case &quot;C&quot;:
+<span class="nc" id="L84">                categoryName = &quot;C. Computer Systems Organization&quot;;</span>
+<span class="nc" id="L85">                break;</span>
+            case &quot;D&quot;:
+<span class="nc" id="L87">                categoryName = &quot;D. Software&quot;;</span>
+<span class="nc" id="L88">                break;</span>
+            case &quot;E&quot;:
+<span class="nc" id="L90">                categoryName = &quot;E. Data&quot;;</span>
+<span class="nc" id="L91">                break;</span>
+            case &quot;F&quot;:
+<span class="nc" id="L93">                categoryName = &quot;F. Theory of Computation&quot;;</span>
+<span class="nc" id="L94">                break;</span>
+            case &quot;G&quot;:
+<span class="nc" id="L96">                categoryName = &quot;G. Mathematics of Computing&quot;;</span>
+<span class="nc" id="L97">                break;</span>
+            case &quot;H&quot;:
+<span class="nc" id="L99">                categoryName = &quot;H. Information Systems&quot;;</span>
+<span class="nc" id="L100">                break;</span>
+            case &quot;I&quot;:
+<span class="nc" id="L102">                categoryName = &quot;I. Computing and Methodologies&quot;;</span>
+<span class="nc" id="L103">                break;</span>
+            case &quot;J&quot;:
+<span class="nc" id="L105">                categoryName = &quot;J. Computer Applications&quot;;</span>
+<span class="nc" id="L106">                break;</span>
+            case &quot;K&quot;:
+<span class="nc" id="L108">                categoryName = &quot;K. Computing Milieux&quot;;</span>
+<span class="nc" id="L109">                break;</span>
+            default:
+<span class="nc" id="L111">                categoryName = &quot;(no classes)&quot;;</span>
+        }
+<span class="nc" id="L113">        return categoryName;</span>
+    }
+
+     // &quot;A. General Literature&quot;, &quot;B. Hardware&quot;,
+    //                           &quot;C. Computer Systems Organization&quot;,&quot;D. Software&quot;,
+    //                           &quot;E. Data&quot;,&quot;F. Theory of Computation&quot;,&quot;G. Mathematics of Computing&quot;,
+    //                           &quot;H. Information Systems&quot;,&quot;I. Computing and Methodologies&quot;,
+    //                           &quot;J. Computer Applications&quot;,&quot;K. Computing Milieux&quot;
+}
+
+//TODO BEFORE RELEASE
+    //Initial Trainer    
+        //hardcode sample DATA
+        //hardcode sample VOCAB
+    //Learning Machine
+        //Tests(sorry we didn't do it before Professor Kennedy)
+        //solve question in LearningMachine.extractClassifyData()
+        //Optimize gamma and C values of SMO (Section 5.4 in Design Notes)
+            //Test machine accuracy using N-fold Cross Validation (Section 5.3 in Design Notes)
+    //Scripting
+        //classify.bat file for use on Windows Machines
+        //classify file for use on Linux, OS/X, and CygWin Machines
+    //CleanUp
+        //eliminate as many Todo's as possible
+        //maybe remove any DATA MEMBERS and METHODS that are inherited from superclass (namely Document and its subclasses)
+        
+
+//Possible Document Types: TrainDocument, ClassifyDocument,        ARFFTrainDocument, 
+//Possible Parser Types: TrainParser, ClassifyParser,              ARFFParser
+
+//PARSING FLOWS
+    //New Train Documents (includes sample docs run on first execution and any docs added in further calls to Trainer)
+        //readin, create document with rawtext, splitText OMITTING STOPWORDS into wordList, addToVocab to (initial/previous) vocabCollection,
+        //createTokenMap with vocabCollection keys, count occurences of each key in the wordList (stored as values), 
+        //calculate idf, normalize, term weights
+
+    //Classify Documents  (includes docs we want to classify)
+        //readin, create document with rawtext, createTokenMap with vocabCollection keys,
+        //count occurences of those words straight from rawText, normalize, term weights
+
+    //Old Train Documents (includes data from previously made arff files)
+        //readinARFF (only reads in data values), createTempTokenMap with vocabCollection keys, 
+        //for normalized count values, just read in attribute values in order 
+            //(if (atributevalue == 0)set value to 0; else set value to 1)
+            //any of the words that weren't in previous vocab, can have a normalized count of 0
+        //termweights
+
+//IMPORTANT NOTES
+//USING LinkedHashMap which is ordered by insertion
+//Only Train can add to vocabCollections vocab words make up most of our training data
+
+//FEATURE FLOW
+//Classify
+    //(FIRST TIME)read in sample train documents, create, and process (FirstTime)(but dont need store in object)
+        //readin, create document with rawtext, splitText OMITTING STOPWORDS into wordList, addToVocab to create initial vocabCollection,
+        //createTokenMap with vocabCollection keys, count occurences of each key in the wordList (stored as values), 
+        //calculate idf, normalize, term weights
+        //create ARFF (with vocabKeys as attributes and the term weights as the attribute values)
+
+    //Create our ToBeClassified documents as usual (NOT ADDING TO VOCABCOLLLECTION)
+        //readin, create document with rawtext, createTokenMap with vocabCollection keys, count occurences of those words straight from rawText,
+        //normalize, term weights
+    
+    //Run SVM and compare classifydocuments against train ARFF
+
+
+//TO DO LISTS
+    //Classifier    
+        //***Convert Classify Data to Instances
+        //**Create SMO(SVM)
+        //*Run SVM
+        //*Output Results
+    
+    //Trainer
+        //**General Document Process (implement TIKA for readIn, test object I/O for vocabCollection)
+        //*****Reorganize Class Structure (TrainDoc/ARFFDoc(HARD), TrainParser(maybe another for ARFF?)) maybe?
+        //Create Initial ARFF
+            //***Convert initial train info into Instances
+            //*Convert Instances to ARFF
+        //****Create ARFFDocs (with just a tokenMap with NEW vocabCollection keys)
+        //Create New ARFF with new TrainDocs and ARFFDocs
+            //***Convert this info into Instances
+            //*Convert Instances to ARFF
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

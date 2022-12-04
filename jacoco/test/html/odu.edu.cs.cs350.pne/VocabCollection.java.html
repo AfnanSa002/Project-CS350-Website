@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VocabCollection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">VocabCollection.java</span></div><h1>VocabCollection.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
+import java.lang.Math;
+
+
+/* Possible Special Cases (totalDocuments)(docFreq)
+ * (0)(n)   -&gt; will always result in Infinite idf (BAD)
+ * (1)(1)   -&gt; will always result in 0 idf (bad as all termweights will be 0)
+ * (n)(n)   -&gt; will always result in 0 idf (good because that means the word appears in every document)
+ * (2n)(n)  -&gt; will always result in 1 idf (idk (good or bad) termWeights will stay the same)
+ */
+class VocabCollection
+{
+<span class="fc" id="L22">    private LinkedHashMap&lt;String, WordFrequency&gt; vocabMap = new LinkedHashMap&lt;String, WordFrequency&gt;();</span>
+    private int totalDocuments;
+
+    
+    public VocabCollection()
+<span class="fc" id="L27">    {</span>
+<span class="fc" id="L28">        totalDocuments = 0;</span>
+<span class="fc" id="L29">    }</span>
+
+    public void increaseTotalDocs()
+    {
+<span class="fc" id="L33">        totalDocuments++;</span>
+<span class="fc" id="L34">    }</span>
+
+    public void addWord(String word)
+    {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (!vocabMap.containsKey(word))</span>
+<span class="fc" id="L39">            vocabMap.put(word, new WordFrequency());</span>
+        
+<span class="fc" id="L41">        var wordStats = vocabMap.get(word);</span>
+<span class="fc" id="L42">        wordStats.docFrequency++;</span>
+<span class="fc" id="L43">    }</span>
+
+    public void calcInverseDocFrequency()
+    {
+<span class="fc" id="L47">        double log2 = Math.log(2);</span>
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (Map.Entry&lt;String, WordFrequency&gt; element: vocabMap.entrySet())</span>
+        {
+<span class="fc" id="L51">            WordFrequency wordStats = (WordFrequency)element.getValue();</span>
+<span class="fc" id="L52">            wordStats.inverseDocFrequency = Math.log(totalDocuments/(double)wordStats.docFrequency) / log2;</span>
+<span class="fc" id="L53">        }</span>
+<span class="fc" id="L54">    }</span>
+
+    // public void trackWordsInAllDocs()   //ADDTRACKING
+    // {
+    //     for (Map.Entry&lt;String,WordFrequency&gt; element: vocabMap.entrySet())
+    //     {
+    //         WordFrequency wordStats = (WordFrequency)element.getValue();
+    //         if (wordStats.docFrequency == totalDocuments)
+    //             wordStats.isInAllDocuments = true;
+    //     }
+    // }
+
+    public void readInVocab(String vocabPath)
+    {
+        try
+        {
+<span class="fc" id="L70">            File file = new File (vocabPath);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (!file.exists())</span>
+<span class="fc" id="L72">                file.createNewFile();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (file.length()==0)</span>
+<span class="fc" id="L74">                return;</span>
+            
+<span class="fc" id="L76">            Scanner reader = new Scanner(file);</span>
+            
+<span class="fc" id="L78">            totalDocuments = reader.nextInt();</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            while (reader.hasNext())</span>
+            {
+<span class="fc" id="L81">                String word = reader.next();</span>
+<span class="fc" id="L82">                vocabMap.put(word, new WordFrequency());</span>
+<span class="fc" id="L83">                WordFrequency wordStats = vocabMap.get(word);</span>
+<span class="fc" id="L84">                wordStats.docFrequency = reader.nextInt();</span>
+                //wordStats.isInAllDocuments = reader.nextBoolean();  //ADDTRACKING
+<span class="fc" id="L86">            }</span>
+<span class="fc" id="L87">            reader.close();</span>
+        }
+<span class="fc" id="L89">        catch (Exception e)</span>
+        {
+<span class="fc" id="L91">            System.out.println(&quot;An error occured&quot;);</span>
+<span class="fc" id="L92">            e.printStackTrace();</span>
+<span class="fc" id="L93">        }</span>
+<span class="fc" id="L94">    }</span>
+    
+    public void writeOutVocab(String filePath)
+    {
+        try
+        {
+<span class="fc" id="L100">            FileWriter writer = new FileWriter(filePath);</span>
+<span class="fc" id="L101">            writer.write(totalDocuments + &quot;\n&quot;);</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">            for (Map.Entry&lt;String, WordFrequency&gt; element: vocabMap.entrySet())</span>
+            {
+<span class="fc" id="L104">                WordFrequency wordStats = (WordFrequency)element.getValue();</span>
+<span class="fc" id="L105">                writer.write(element.getKey() + &quot; &quot; + wordStats.docFrequency + &quot;\n&quot;);</span>
+                                    //&quot; &quot; + wordStats.isInAllDocuments + &quot;\n&quot;);  //ADDTRACKING
+
+<span class="fc" id="L108">            }</span>
+<span class="fc" id="L109">            writer.close();</span>
+        }
+<span class="nc" id="L111">        catch (IOException e)</span>
+        {
+<span class="nc" id="L113">            System.out.println(&quot;An error occurred&quot;);</span>
+<span class="nc" id="L114">            e.printStackTrace();</span>
+<span class="fc" id="L115">        }</span>
+<span class="fc" id="L116">    }</span>
+    
+    
+    //retrieves all words in vocabMap
+    public Set&lt;String&gt; getKeySet()
+    {
+<span class="fc" id="L122">        return vocabMap.keySet();</span>
+    }
+
+    public LinkedHashMap&lt;String, WordFrequency&gt; getVocabMap()
+    {
+<span class="fc" id="L127">        return vocabMap;</span>
+    }
+
+    public int getTotalDocuments()
+    {
+<span class="fc" id="L132">        return totalDocuments;</span>
+    }
+
+    public double getInvDocFreq(String word)
+    {
+<span class="fc" id="L137">        return vocabMap.get(word).inverseDocFrequency;</span>
+    }
+
+    public int getDocFreq(String word)
+    {
+<span class="fc" id="L142">        return vocabMap.get(word).docFrequency;</span>
+    }
+
+    public Object assertEquals(String eInstance, String string) {
+<span class="nc" id="L146">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

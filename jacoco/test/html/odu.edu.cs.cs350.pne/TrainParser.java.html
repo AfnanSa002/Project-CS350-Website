@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrainParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">TrainParser.java</span></div><h1>TrainParser.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.io.*;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.sax.BodyContentHandler;
+
+
+public class TrainParser      //Singleton
+{
+    private StopList stopWords;
+<span class="fc" id="L15">    private VocabCollection vocab = new VocabCollection();</span>
+    
+    
+    public TrainParser (StopList list, String vocabPath)
+<span class="fc" id="L19">    {   </span>
+<span class="fc" id="L20">        stopWords = list;</span>
+<span class="fc" id="L21">        vocab.readInVocab(vocabPath);</span>
+<span class="fc" id="L22">    }</span>
+   
+    //entry point for document creation
+    public TrainDocument createDocument(String filePath, String category)
+    {   
+<span class="fc" id="L27">        String text = readFileStandard(filePath);</span>
+<span class="fc" id="L28">        TrainDocument document = new TrainDocument(text, category);</span>
+<span class="fc" id="L29">        document.splitText(stopWords); //ommitting stopwords</span>
+<span class="fc" id="L30">        document.createTokenMap();</span>
+<span class="fc" id="L31">        document.addToVocab(vocab);</span>
+<span class="fc" id="L32">        return document;</span>
+    }
+
+
+    public String readFileStandard(String filePath)
+    {
+<span class="fc" id="L38">        String extension = filePath.substring(filePath.length()-3);</span>
+        
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (extension.equals(&quot;pdf&quot;))</span>
+        {
+            try
+            {  
+<span class="fc" id="L44">                File file = new File(filePath);   </span>
+<span class="fc" id="L45">                PDDocument doc = PDDocument.load(file);  </span>
+<span class="fc" id="L46">                String rawText = new PDFTextStripper().getText(doc);</span>
+
+<span class="fc" id="L48">                doc.close();</span>
+
+<span class="fc" id="L50">                return rawText;</span>
+            }
+<span class="nc" id="L52">            catch (IOException e) </span>
+            {
+<span class="nc" id="L54">                System.out.println(&quot;Not able to load PDF&quot;);</span>
+<span class="nc" id="L55">                e.printStackTrace();</span>
+<span class="nc" id="L56">                return &quot;Error&quot;;</span>
+            }
+        }    
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
+        {
+<span class="fc" id="L61">            StringBuilder builder = new StringBuilder();</span>
+            
+<span class="fc" id="L63">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
+            {   
+                String str;
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                while ((str = buffer.readLine()) != null)</span>
+                {    
+<span class="fc" id="L69">                    builder.append(str + &quot; &quot;);</span>
+                }
+<span class="fc" id="L71">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="fc" id="L72">                return builder.toString();</span>
+            }
+<span class="nc" id="L74">            catch (IOException e)</span>
+            {
+<span class="nc" id="L76">                System.out.println(&quot;Not able to load Text File&quot;);</span>
+<span class="nc" id="L77">                e.printStackTrace();</span>
+<span class="nc" id="L78">                return &quot;Error&quot;;</span>
+            }
+        }
+        else
+        {
+<span class="nc" id="L83">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
+<span class="nc" id="L84">            return &quot;Invalid&quot;;</span>
+        }
+    }
+
+    public StopList getStopList()
+    {
+<span class="fc" id="L90">        return stopWords;</span>
+    }
+
+    public VocabCollection getVocabCollection()
+    {
+<span class="fc" id="L95">        return vocab;</span>
+    }
+
+    
+}
+
+//entry point for document processing
+    // public void processDocument(TrainDocument document)
+    // {
+    //     if (!idfCalculated)
+    //     {
+    //         vocab.calcInverseDocFrequency();    //TODO: This does not need to be looped over
+    //         idfCalculated = true;
+    //     }
+       
+    //     document.calculateTermWeights(vocab);
+    // }
+
+    // public void writeOutVocabWrapper(String filePath)
+    // {
+    //     vocab.writeOutVocab(filePath);
+    // }
+
+
+// public String readFileWithTIKA(String filePath) //Table: fix input stream so we can implement with TIKA
+    // {
+    //         AutoDetectParser parser = new AutoDetectParser();
+    //         BodyContentHandler handler = new BodyContentHandler();
+    //         Metadata metadata = new Metadata();
+        
+    //     try {
+    //         File file = new File(filePath);
+    //         InputStream stream = new FileInputStream(file);
+    //         //InputStream stream = this.getClass().getClassLoader().getResourceAsStream(filePath);
+            
+    //         parser.parse(stream, handler, metadata);
+    //         stream.close();     //Table: problem as it reads stream as an empty string
+    //         return handler.toString();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         System.out.println(&quot;Error Occured&quot;);
+    //         e.printStackTrace();
+    //         return &quot;Error&quot;;
+    //     }
+    // }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

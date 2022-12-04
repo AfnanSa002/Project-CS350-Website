@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ACMTrainer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">ACMTrainer.java</span></div><h1>ACMTrainer.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+<span class="nc" id="L9">public class ACMTrainer </span>
+{
+    //Single FilePath with Category
+    // private static String categories;
+    // private static String filePaths;
+    
+    //Multiple filePaths
+    // private static List&lt;String&gt; categories = new ArrayList&lt;String&gt;();
+    // private static List&lt;String&gt; filePaths = new ArrayList&lt;String&gt;();
+    
+    public static void main(String[] args) 
+    {
+        //creates train.arff with sample data(Only runs if file has not been created)
+<span class="nc" id="L22">        InitialTrainer trainer = new InitialTrainer();</span>
+<span class="nc" id="L23">        trainer.run();</span>
+        
+        //Verify Input from User
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (!isValidInputs(args))</span>
+<span class="nc" id="L27">            System.exit(1);</span>
+
+<span class="nc" id="L29">        String vocabPath = &quot;src/main/resources/vocabCollection.txt&quot;;</span>
+<span class="nc" id="L30">        String arffPath = &quot;src/main/resources/train.arff&quot;;</span>
+<span class="nc" id="L31">        StopList stopList = new StopList();</span>
+
+        //DECODE AND PROCESS Documents from ARFF
+<span class="nc" id="L34">        ArffParser arffParser = new ArffParser(vocabPath);</span>
+<span class="nc" id="L35">        List&lt;Document&gt; documents = arffParser.run(arffPath);</span>
+
+        //CREATE AND PROCESS NEW Inputted Documents
+<span class="nc" id="L38">        TrainParser tParser = new TrainParser(stopList, vocabPath);</span>
+<span class="nc" id="L39">        TrainDocument inputtedDocument = tParser.createDocument(args[0], args[1].toUpperCase());</span>
+        ///tParser.processDocument(inputtedDocument);
+        //tParser.writeOutVocabWrapper(vocabPath);
+
+        //CALCULATE TERMWEIGHTS (doing all docs together so we have completed vocab)
+<span class="nc" id="L44">        VocabCollection vocab = tParser.getVocabCollection();</span>
+<span class="nc" id="L45">        vocab.calcInverseDocFrequency();</span>
+<span class="nc" id="L46">        vocab.writeOutVocab(vocabPath);</span>
+<span class="nc" id="L47">        documents.add((Document)inputtedDocument);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for (Document doc: documents)</span>
+<span class="nc" id="L49">            doc.calculateTermWeights(vocab);</span>
+        
+        //ENCODE NEW ARFF from Inputted Documents and ARFF Documents
+<span class="nc" id="L52">        ArffGenerator generator = new ArffGenerator(arffPath, vocab);</span>
+<span class="nc" id="L53">        generator.generateInstances(documents);</span>
+<span class="nc" id="L54">        generator.outputToArff();</span>
+        
+        //EXIT
+<span class="nc" id="L57">    }</span>
+    
+    //Single File
+    private static boolean isValidInputs(String[] args)
+    {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (args.length != 2)</span>
+        {
+<span class="nc" id="L64">            System.out.println(&quot;Please include a single file path followed by a specified category.\n&quot;);</span>
+<span class="nc" id="L65">            return false;</span>
+        }
+        
+<span class="nc" id="L68">        String path = args[0];</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (!isValidPath(path))</span>
+<span class="nc" id="L70">            return false;   </span>
+
+<span class="nc" id="L72">        String category = args[1];</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (!isValidCategory(category))</span>
+<span class="nc" id="L74">            return false;</span>
+
+<span class="nc" id="L76">        return true;</span>
+    }
+
+    private static boolean isValidPath(String path)
+    {
+<span class="nc" id="L81">        File file = new File(path);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (!file.exists())</span>
+        {
+<span class="nc" id="L84">            System.out.println(path + &quot; does not exist.\n&quot;);</span>
+<span class="nc" id="L85">            return false;</span>
+        }
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (file.isDirectory())</span>
+        {
+<span class="nc" id="L89">            System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
+<span class="nc" id="L90">            return false;</span>
+        }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (file.length()==0)</span>
+        {
+<span class="nc" id="L94">            System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
+<span class="nc" id="L95">            return false;</span>
+        }
+<span class="nc" id="L97">        String extension = path.substring(path.length()-3);</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">        if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;)</span>
+        {
+<span class="nc" id="L100">            System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
+<span class="nc" id="L101">            return false;</span>
+        }
+<span class="nc" id="L103">        return true;</span>
+    }
+
+    //Verifies a single category
+    private static boolean isValidCategory(String category)
+    {
+<span class="nc" id="L109">        String[] validCategories = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="nc" id="L110">        List&lt;String&gt; validCatList = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L111">        validCatList.addAll(Arrays.asList(validCategories));</span>
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (validCatList.contains(category.toUpperCase()))</span>
+<span class="nc" id="L114">            return true;</span>
+        
+<span class="nc" id="L116">        System.out.println(&quot;Supplied Category must be within the range A-K according to the ACM Classification System.\n&quot;);</span>
+<span class="nc" id="L117">        return false;</span>
+    }
+    
+    
+}
+
+//TODOS (In Order of Importance)
+    //Tests
+        //InitTrainer.constructInitialDataTest (Tabled till sample files available)
+        //LearningMachine.classifyDataTest (Tabled till learning machine optimized)
+    //General 
+        //Initial Trainer
+            //hardcode sample DATA
+            //hardcode sample VOCAB
+            //HOPEFULLY he gives us sample files/data (Tabled)
+        //Learning Machine Optimization
+            //Optimize gamma and C values of SMO (Section 5.4 in Design Notes)
+            //Test machine accuracy using N-fold Cross Validation (Section 5.3 in Design Notes)
+        //Scripting
+            //classify.bat file for use on Windows Machines
+            //classify file for use on Linux, OS/X, and CygWin Machines
+            //train.bat file for use on Windows Machines
+            //train file for use on Linux, OS/X, and CygWin Machines
+        //REPORTS
+            //Setup GitHub Actions
+            //Setup GitHub Reports
+        //StopWords
+            //add common words to stopWords.txt
+        //CleanUp
+            //eliminate as many Todo's as possible
+            //Remove CLI?
+        //Optional (Tabled)
+            //implement multiple categories (Design issue NEEDED but do we wanna take the L)
+            //Explore TF-IDF instead of binary-IDF
+            //Seperate classes in packages
+
+                
+//Possible Document Types: TrainDocument, ClassifyDocument,        ARFFTrainDocument, 
+//Possible Parser Types: TrainParser, ClassifyParser,              ARFFParser
+
+
+//FEATURE FLOW
+//Train 
+    //(FIRST TIME)read in sample train documents, create, and process (FirstTime)(but dont need store in object)
+        //readin, create document with rawtext, splitText OMITTING STOPWORDS into wordList, addToVocab to create initial vocabCollection,
+        //createTokenMap with vocabCollection keys, count occurences of each key in the wordList (stored as values), 
+        //calculate idf, normalize, term weights, 
+        //(TRACK WORDS IN ALL DOCS (keep track of words occuring in all documents as will result in termweight of 0 bc idf == log(N/df) == 0; maybe call from outside parser)), 
+        //writeOutVocab
+        //create ARFF (with vocabKeys as attributes and the term weights as the attribute values)
+
+    //read in NEW Traindocuments, create, and process
+        //readin, readInVocab, create document with rawtext, splitText OMITTING STOPWORDS into wordList, addToVocab to previous vocabCollection,
+        //createTokenMap with new vocabCollection keys, count occurences of each key in the wordList (stored as values), 
+        //calculate idf, normalize, term weights, 
+        //(DONT TRACK WORDS IN ALL DOCS (bc we need previous values for ARFFDoc Construction; maybe call from outside parser)),
+        //writeOutVocab
+
+    //create ARFFDocuments with current arff info using NEW vocabMap as keys
+        //readinARFF, readInVocab, createTempTokenMap with NEW vocabCollection keys, 
+        //for normalized count values, see below
+        //calculate idf and termweights, 
+        //(NOW TRACK WORDS IN ALL DOCS (to update VocabCollection))
+        //(writeOutVocab to update VocabCollection)
+
+    //*******(AT THIS STAGE, we have documents and trainDocuments with n+m keys 
+                //(n=previousNumOfVocabWords)(m=wordsThatWereNotInPreviousVocab))
+
+    //Create ARFF with new documents and old train documents using new info and new number of attributes
+
+//NOTES:
+//TODO: issue can be handled when reading in arffs if we track vocab words in all documents.
+//Already created WordFrequency.isInAllDocuments and VocabCollection.trackWordsInAllDocs()
+    //Need to edit read/write functions for VocabCollection include isInAllDocuments member
+// if (weight == 0)
+// {
+//     if (thatVocabWord.isInAllDocuments == true)
+//         word.normalizedCount = 1;
+//     else
+//         word.normalizedCount = 0;
+// }
+// else
+//     word.normalizedCount = 1;
+
+//Loop through values of vocabWords (simulateVocabConstruction())
+            /*
+             * this function only adds word if vocabWord[v] in doc occurs more than 5 times(normalized count == 1). 
+             * However, in trainingDoc construction, each word is added to vocab if its 
+             * count is more than 0 (if it occurs at all and not in stopList)
+             * 
+             * EXAMPLE:
+             * weight == norm * idf
+             * weight == norm * log_2(N/df)
+             * therefore, if word appears in all docs N/df == 1 -&gt; idf == 0
+             *    if, all docs have this word less than 5 times -&gt; norm == 0
+             *        weight == 0 * 0 (insignificant effect)
+             *    if, one document has word more than 5 times -&gt; norm == 1
+             *        weight == 1 * 0 (SIGNIFICANT bc we are showing a weight of 0 for a word that is significant ot signature)
+             *    if, one document is added with word more than 5 times -&gt; norm == 1
+             *        weight == 1 * 0 (SIGNIFICANT bc we are showing a weight of 0 for a word that is significant ot signature)
+             * 
+             * QUESTION: Do we want to add words to vocab if they appear once?
+             *           Or, do we want to add words if they appear more than 5 times (normalized count == 1)?
+             */
+
+
+//----------------------------------------------------------------
+//*********************** Tabled Methods *************************
+//----------------------------------------------------------------
+
+////INTRO
+        //-------------------------------------------
+        //******************* CLI *******************
+        //-------------------------------------------
+        //LOOP TO TAKE IN FILE PATHS
+        // if(args.length == 0)
+        // {
+        //     System.out.println(&quot;==================== ACM Trainer ====================&quot;);
+        //     System.out.println(&quot;         Commands: !done, !help, and !quit&quot;);
+        //     System.out.println(&quot;=====================================================&quot;);
+        //     Scanner userInputScanner = new Scanner(System.in);
+        //     boolean isLooping = true;
+        //     while(isLooping)
+        //     {
+        //         String inputString = userInputScanner.nextLine();
+        //         if(inputString.toLowerCase().equals(&quot;!done&quot;))
+        //         {
+        //             //User is finished with processing
+        //             isLooping = false;
+        //         }
+        //         else if(inputString.toLowerCase().equals(&quot;!help&quot;))
+        //         {
+        //             //Output help information to user
+        //             displayHelpInformation();
+        //         }
+        //         else if(inputString.toLowerCase().equals(&quot;!quit&quot;))
+        //         {
+        //             //QUIT Program?
+        //         }
+        //         else
+        //         {
+        //             //verify and add this path to the array of file paths that will be processed
+        //             System.out.println(&quot;Path: \&quot;&quot;+inputString+&quot;\&quot;&quot;);
+        //             filePaths.add(inputString);
+        //         }
+        //     }
+        //     System.out.println(&quot;FINISHED GETTING FILE PATHS&quot;);
+        //     userInputScanner.close();
+        // }
+        // else
+        // {
+        //     for (String input:args)
+        //         filePaths.add(input);
+        // }
+
+        //Displays to the console, all of the relavent commands and information regarding this program
+    // static void displayHelpInformation()
+    // {
+    //     System.out.println(&quot;==================== ACM Trainer Help ====================&quot;);
+    //     System.out.println(&quot;TODO - Put some additional information regarding program usage&quot;);
+    //     System.out.println(&quot;&quot;);
+    //     System.out.println(&quot;Commands:&quot;);
+    //     System.out.println(&quot;!done - Indicates that the program has recieved all of the file paths to be used for classification. Program &quot;
+    //         +&quot;will proceed to procressing each document to generate a trained file&quot;);
+    //     System.out.println(&quot;!help - Displays information about the program and it's relavent commands.&quot;);
+    //     System.out.println(&quot;!quit - Quits the program without making any changes to the training file.&quot;);
+    // }
+
+    //Multiple Files (file,cat,file,cat,file,cat,...)
+    // private static void verifyInput(String[] args)
+    // {
+    //     List&lt;String&gt; inputOrder = new ArrayList&lt;String&gt;();  //contains valid paths and valid categories in order
+    //     for (String input: args)
+    //     {
+    //         if (input.contains(&quot;/&quot;)||input.contains(&quot;\\&quot;))
+    //         {
+    //             if (!inputOrder.isEmpty())
+    //             {
+    //                 String prevInput = inputOrder.get(inputOrder.size()-1);
+    //                 if (prevInput.contains(&quot;/&quot;)||prevInput.contains(&quot;\\&quot;))  //don't allow a 2 files to be read sequentially
+    //                     continue;
+    //             }    
+
+    //             if (isValidPath(input))
+    //             {    
+    //                 filePaths.add(input);
+    //                 inputOrder.add(input);
+    //             }
+    //         }
+    //         else
+    //         {
+    //             //assures inputOrder doesn't hav
+    //             if (inputOrder.isEmpty())
+    //                 continue;
+    //             String prevInput = inputOrder.get(inputOrder.size()-1);
+
+    //             //assures every category comes after a valid filePath
+    //             if (!prevInput.contains(&quot;/&quot;) &amp;&amp; !prevInput.contains(&quot;\\&quot;))
+    //                 continue;
+
+    //             //we now know we are looking for a category
+    //             String category = validateCategory(input);
+                
+    //             if (category!=&quot;&quot;)
+    //             { 
+    //                 categories.add(input);
+    //                 inputOrder.add(input);
+    //             }
+    //             else
+    //             {
+    //                 String path = filePaths.get(filePaths.size()-1);
+    //                 filePaths.remove(filePaths.size()-1);
+    //                 System.out.println(input + &quot; is not a valid category\n  &quot; + path + &quot; has been removed\n&quot;);
+    //             }
+    //         }
+    //     }
+    // }
+
+    // private static boolean isValidPath(String path)
+    // {
+    //     File file = new File(path);
+    //     if (!file.exists())
+    //     {
+    //         System.out.println(path + &quot; does not exist.\n&quot;);
+    //         return false;
+    //     }
+    //     if (file.isDirectory())
+    //     {
+    //         System.out.println(path + &quot; is a directory, not a file.\n&quot;);
+    //         return false;
+    //     }
+    //     if (file.length()==0)
+    //     {
+    //         System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);
+    //         return false;
+    //     }
+    //     String extension = path.substring(path.length()-3);
+    //     if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;)
+    //     {
+    //         System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);
+    //         return false;
+    //     }
+    //     return true;
+    // }
+
+    // private static String validateCategory(String input)
+    // {
+    //     String temp = input.toLowerCase().replace(&quot; +&quot;, &quot;&quot;);
+    //     if (temp == &quot;a.generalliterature&quot; || temp == &quot;generalliterature&quot;)
+    //         return &quot;A. General Literature&quot;;
+    //     if (temp == &quot;b.hardware&quot; || temp == &quot;hardware&quot;)
+    //         return &quot;B. Hardware&quot;;
+    //     if (temp == &quot;c.computersystemorganization&quot; || temp == &quot;computersystemorganization&quot;)
+    //         return &quot;C. Computer System Organization&quot;;
+    //     if (temp == &quot;d.software&quot; || temp == &quot;software&quot;)
+    //         return &quot;D. Software&quot;;
+    //     if (temp == &quot;e.data&quot; || temp == &quot;data&quot;)
+    //         return &quot;E. Data&quot;;
+    //     if (temp == &quot;f.theoryofcomputation&quot; || temp == &quot;theoryofcomputation&quot;)
+    //         return &quot;F. Theory of Computation&quot;;
+    //     if (temp == &quot;g.mathematicsofcomputing&quot; || temp == &quot;mathematicsofcomputing&quot;)
+    //         return &quot;G. Mathematics of Computing&quot;;
+    //     if (temp == &quot;h.informationsystems&quot; || temp == &quot;informationsystems&quot;)
+    //         return &quot;H. Information Systems&quot;;
+    //     if (temp == &quot;i.computingandmethodologies&quot; || temp == &quot;computingandmethodologies&quot;)
+    //         return &quot;I. Computing and Methodologies&quot;;
+    //     if (temp == &quot;j.computerapplications&quot; || temp == &quot;computerapplications&quot;)
+    //         return &quot;J. Computer Applications&quot;;
+    //     if (temp == &quot;k.computingmilieux&quot; || temp == &quot;computingmilieux&quot;)
+    //         return &quot;K. Computing Milieux&quot;;
+    //     return &quot;&quot;;
+    // }
+
+    // &quot;A. General Literature&quot;, &quot;B. Hardware&quot;,
+    //                           &quot;C. Computer Systems Organization&quot;,&quot;D. Software&quot;,
+    //                           &quot;E. Data&quot;,&quot;F. Theory of Computation&quot;,&quot;G. Mathematics of Computing&quot;,
+    //                           &quot;H. Information Systems&quot;,&quot;I. Computing and Methodologies&quot;,
+    //                           &quot;J. Computer Applications&quot;,&quot;K. Computing Milieux&quot;
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,139 @@
+
+------------------------------------------------------------
+Root project 'Project-CS350'
+------------------------------------------------------------
+
+allprojects: [root project 'Project-CS350']
+ant: org.gradle.api.internal.project.DefaultAntBuilder@2e7b3258
+antBuilderFactory: org.gradle.api.internal.project.DefaultAntBuilderFactory@1f01ad2e
+archivesBaseName: Project-CS350
+artifacts: org.gradle.api.internal.artifacts.dsl.DefaultArtifactHandler_Decorated@2e40e620
+asDynamicObject: DynamicObject for root project 'Project-CS350'
+autoTargetJvmDisabled: false
+bake: task ':bake'
+base: extension 'base'
+baseClassLoaderScope: org.gradle.api.internal.initialization.DefaultClassLoaderScope@527c508c
+buildDir: /Users/jayfoster/John's Code/Project-CS350/build
+buildFile: /Users/jayfoster/John's Code/Project-CS350/build.gradle
+buildHomePage: task ':buildHomePage'
+buildPath: :
+buildScriptSource: org.gradle.groovy.scripts.TextResourceScriptSource@25e24169
+buildscript: org.gradle.api.internal.initialization.DefaultScriptHandler@3798f026
+childProjects: {}
+class: class org.gradle.api.internal.project.DefaultProject_Decorated
+classLoaderScope: org.gradle.api.internal.initialization.DefaultClassLoaderScope@423ddf77
+classes: task ':classes'
+clean: task ':clean'
+compileJava: task ':compileJava'
+compileTestJava: task ':compileTestJava'
+components: SoftwareComponentInternal set
+configurationActions: org.gradle.configuration.project.DefaultProjectConfigurationActionContainer@1e406113
+configurationTargetIdentifier: org.gradle.configuration.ConfigurationTargetIdentifier$1@2e08ba67
+configurations: configuration container
+convention: org.gradle.internal.extensibility.DefaultConvention@19d65fc6
+copyDocumentation: task ':copyDocumentation'
+copyJBakeTemplates: task ':copyJBakeTemplates'
+copyReports: task ':copyReports'
+crossProjectModelAccess: org.gradle.api.internal.project.DefaultCrossProjectModelAccess@693f851a
+defaultArtifacts: extension 'defaultArtifacts'
+defaultTasks: []
+deferredProjectConfiguration: org.gradle.api.internal.project.DeferredProjectConfiguration@74ea29d7
+dependencies: org.gradle.api.internal.artifacts.dsl.dependencies.DefaultDependencyHandler_Decorated@1f5a7eaf
+dependencyLocking: org.gradle.internal.locking.DefaultDependencyLockingHandler_Decorated@34d93aed
+dependencyMetaDataProvider: org.gradle.internal.service.scopes.ProjectScopeServices$ProjectBackedModuleMetaDataProvider@21db6e39
+dependencyReport: task ':dependencyReport'
+depth: 0
+description: null
+detachedState: false
+displayName: root project 'Project-CS350'
+distsDirName: distributions
+distsDirectory: extension 'base' property 'distsDirectory'
+doAllTheCopying: task ':doAllTheCopying'
+docsDir: /Users/jayfoster/John's Code/Project-CS350/build/docs
+docsDirName: docs
+ext: org.gradle.internal.extensibility.DefaultExtraPropertiesExtension@45a4f44
+extensions: org.gradle.internal.extensibility.DefaultConvention@19d65fc6
+fileOperations: org.gradle.api.internal.file.DefaultFileOperations@4839f666
+fileResolver: org.gradle.api.internal.file.BaseDirFileResolver@354aa3de
+gatherReports: task ':gatherReports'
+gradle: build 'Project-CS350'
+group: 
+htmlDependencyReport: task ':htmlDependencyReport'
+identityPath: :
+inheritedScope: org.gradle.internal.extensibility.ExtensibleDynamicObject$InheritedDynamicObject@4f9aa9e8
+internalStatus: property(java.lang.Object, fixed(class java.lang.String, integration))
+jacoco: extension 'jacoco'
+jacocoAggregatedReport: task ':jacocoAggregatedReport'
+jacocoLogTestCoverage: task ':jacocoLogTestCoverage'
+jacocoTestReport: task ':jacocoTestReport'
+jar: task ':jar'
+java: extension 'java'
+javaToolchains: extension 'javaToolchains'
+jbake: extension 'jbake'
+layout: org.gradle.api.internal.file.DefaultProjectLayout@19ecef30
+libsDirName: libs
+libsDirectory: extension 'base' property 'libsDirectory'
+listenerBuildOperationDecorator: org.gradle.configuration.internal.DefaultListenerBuildOperationDecorator@1ee1a0ad
+logger: org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger@6c22959d
+logging: org.gradle.internal.logging.services.DefaultLoggingManager@7ed5b4fc
+model: root project 'Project-CS350'
+modelIdentityDisplayName: null
+modelRegistry: org.gradle.model.internal.registry.DefaultModelRegistry@649a9727
+name: Project-CS350
+normalization: org.gradle.normalization.internal.DefaultInputNormalizationHandler_Decorated@1a7161eb
+objects: org.gradle.api.internal.model.DefaultObjectFactory@9064ec0
+owner: root project 'Project-CS350'
+parent: null
+parentIdentifier: null
+path: :
+pluginContext: false
+pluginManager: org.gradle.api.internal.plugins.DefaultPluginManager_Decorated@5a277948
+plugins: [org.gradle.api.plugins.HelpTasksPlugin@6ab4ee84, org.gradle.buildinit.plugins.BuildInitPlugin@7b5ba400, org.gradle.buildinit.plugins.WrapperPlugin@409085e5, org.gradle.language.base.plugins.LifecycleBasePlugin@219c5986, org.gradle.api.plugins.BasePlugin@6c9143ff, org.gradle.api.plugins.JvmEcosystemPlugin@4acc91c9, org.gradle.api.plugins.ReportingBasePlugin@eb78ad8, org.gradle.api.plugins.JavaBasePlugin$Inject@4da4a2e1, org.gradle.testing.base.plugins.TestSuiteBasePlugin@2bcc8e11, org.gradle.api.plugins.JvmTestSuitePlugin@5a01078, org.gradle.api.plugins.JavaPlugin@3773bb5e, org.gradle.testing.jacoco.plugins.JacocoPlugin@5f28a4fb, org.barfuin.gradle.jacocolog.JacocoLogPlugin@10db0509, org.gradle.api.plugins.ProjectReportsPlugin@15fde4ba, org.jbake.gradle.JBakePlugin@3ffe1410]
+processOperations: org.gradle.process.internal.DefaultExecActionFactory$DecoratingExecActionFactory@256b6068
+processResources: task ':processResources'
+processTestResources: task ':processTestResources'
+project: root project 'Project-CS350'
+projectConfigurator: org.gradle.api.internal.project.BuildOperationCrossProjectConfigurator@6dd0ca81
+projectDir: /Users/jayfoster/John's Code/Project-CS350
+projectEvaluationBroadcaster: ProjectEvaluationListener broadcast
+projectEvaluator: org.gradle.configuration.project.LifecycleProjectEvaluator@17723bb5
+projectPath: :
+projectReport: task ':projectReport'
+projectReportDir: /Users/jayfoster/John's Code/Project-CS350/build/reports/project
+projectReportDirName: project
+projects: [root project 'Project-CS350']
+properties: {...}
+propertyReport: task ':propertyReport'
+providers: org.gradle.api.internal.provider.DefaultProviderFactory_Decorated@58e3e3df
+publicType: org.gradle.api.plugins.BasePluginConvention
+reporting: extension 'reporting'
+reportsDir: /Users/jayfoster/John's Code/Project-CS350/build/reports
+repositories: repository container
+resources: org.gradle.api.internal.resources.DefaultResourceHandler@2675a08b
+rootDir: /Users/jayfoster/John's Code/Project-CS350
+rootProject: root project 'Project-CS350'
+rootScript: false
+script: false
+scriptHandlerFactory: org.gradle.api.internal.initialization.DefaultScriptHandlerFactory@4d9af206
+scriptPluginFactory: org.gradle.configuration.ScriptPluginFactorySelector@4b33d793
+serviceRegistryFactory: org.gradle.internal.service.scopes.ProjectScopeServices$$Lambda$1109/0x000000080134de38@60c4df4c
+services: ProjectScopeServices
+setUpWebsite: task ':setUpWebsite'
+sourceCompatibility: 11
+sourceSets: SourceSet container
+standardOutputCapture: org.gradle.internal.logging.services.DefaultLoggingManager@7ed5b4fc
+state: project state 'EXECUTED'
+status: integration
+subprojects: []
+targetCompatibility: 11
+taskReport: task ':taskReport'
+taskThatOwnsThisObject: null
+tasks: task set
+test: task ':test'
+testClasses: task ':testClasses'
+testReportDir: /Users/jayfoster/John's Code/Project-CS350/build/reports/tests
+testReportDirName: tests
+testResultsDir: /Users/jayfoster/John's Code/Project-CS350/build/test-results
+testResultsDirName: test-results
+testing: extension 'testing'
+version: unspecified

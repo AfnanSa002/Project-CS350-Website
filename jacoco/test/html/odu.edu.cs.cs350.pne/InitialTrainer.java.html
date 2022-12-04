@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InitialTrainer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">InitialTrainer.java</span></div><h1>InitialTrainer.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSink;
+
+//-------------------------------------------------
+//************ Data Flow (Temporary) **************
+//-------------------------------------------------
+
+public class InitialTrainer
+{
+<span class="fc" id="L19">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+    private String[] trainData;             
+    private String[] vocabWords;            
+<span class="fc" id="L22">    VocabCollection tempVocab = new VocabCollection();</span>
+
+    InitialTrainer()
+<span class="fc" id="L25">    {</span>
+<span class="fc" id="L26">        String[] tempData = {&quot;&quot;};   //TODO: supply sample data (categoryKey is first entry of each dataString)</span>
+<span class="fc" id="L27">        String[] tempVocab = {&quot;&quot;};  //TODO: supply vocab words in order data supplies them</span>
+<span class="fc" id="L28">        trainData = tempData;</span>
+<span class="fc" id="L29">        vocabWords = tempVocab;</span>
+<span class="fc" id="L30">    }</span>
+
+    //For Testing Purposes
+    InitialTrainer(String[] tempData, String[] tempVocab)
+<span class="fc" id="L34">    {</span>
+<span class="fc" id="L35">        trainData = tempData;</span>
+<span class="fc" id="L36">        vocabWords = tempVocab;</span>
+<span class="fc" id="L37">    }</span>
+    
+    public void run()
+    {
+<span class="nc" id="L41">        String arffPath = &quot;src/main/resources/train.arff&quot;;</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (validARFFPresent(arffPath))</span>
+<span class="nc" id="L43">            return;</span>
+
+<span class="nc" id="L45">        String vocabPath = &quot;src/main/resources/vocabCollection.txt&quot;;</span>
+<span class="nc" id="L46">        File vocabFile = new File(vocabPath);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (vocabFile.exists()) //guard against prior runs</span>
+<span class="nc" id="L48">            vocabFile.delete();</span>
+<span class="nc" id="L49">        tempVocab.readInVocab(vocabPath);   //no path exists so it creates a new vocabFile</span>
+<span class="nc" id="L50">        simulateVocabConstruction();</span>
+<span class="nc" id="L51">        tempVocab.writeOutVocab(vocabPath); </span>
+<span class="nc" id="L52">        Instances dTraining = dataExtractionWithData();</span>
+<span class="nc" id="L53">        outputToARFF(dTraining, arffPath);</span>
+<span class="nc" id="L54">    }</span>
+
+    public boolean validARFFPresent(String arffPath)
+    {
+<span class="fc" id="L58">        File file = new File(arffPath);</span>
+        try {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (!file.exists())     //if file does not exist, create a file</span>
+<span class="fc" id="L61">                file.createNewFile();</span>
+            
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            if (file.length()==0)   //if file does not have content it is invalid</span>
+<span class="fc" id="L64">                return false;</span>
+
+<span class="fc" id="L66">            return true;            //else it is valid</span>
+<span class="nc" id="L67">        } catch (IOException e) {</span>
+<span class="nc" id="L68">            System.out.println(&quot;An error occurred.&quot;);</span>
+<span class="nc" id="L69">            e.printStackTrace();</span>
+<span class="nc" id="L70">            return false;</span>
+        }
+    }
+
+    public void simulateVocabConstruction()
+    {
+<span class="fc" id="L76">        int numOfDocuments = trainData.length;</span>
+
+        //initializes number of documents
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (int i=0; i&lt;numOfDocuments; i++)</span>
+<span class="fc" id="L80">            tempVocab.increaseTotalDocs();</span>
+
+        //Loop through document data
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        for (String data: trainData)</span>
+        {
+<span class="fc" id="L85">            String[] values = data.split(&quot;,&quot;);</span>
+
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            for (int i=0; i&lt;values.length-1; i++)</span>
+            {
+<span class="fc" id="L89">                double weight = Double.parseDouble(values[i]); //0 if not in doc, any number if in doc</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                if (weight!=0)</span>
+<span class="fc" id="L91">                    tempVocab.addWord(vocabWords[i]); //look above for issue</span>
+            }
+        }
+<span class="fc" id="L94">    }</span>
+
+    public Instances dataExtractionWithData()
+    {
+<span class="fc" id="L98">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
+
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (String word: vocabWords)</span>
+        {
+<span class="fc" id="L102">            Attribute attr = new Attribute(word);</span>
+<span class="fc" id="L103">            attrInfo.add(attr);</span>
+        }
+
+        //create and add category attribute
+<span class="fc" id="L107">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L108">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
+<span class="fc" id="L109">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
+<span class="fc" id="L110">        attrInfo.add(category);</span>
+
+<span class="fc" id="L112">        final int numOfAttributes = attrInfo.size();</span>
+
+<span class="fc" id="L114">        Instances training = new Instances(&quot;TrainingData&quot;, attrInfo, trainData.length);</span>
+<span class="fc" id="L115">        training.setClass(category);</span>
+
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (String data: trainData)</span>
+        {
+<span class="fc" id="L119">            String[] values = data.split(&quot;,&quot;);</span>
+<span class="fc" id="L120">            Instance instance = new DenseInstance(numOfAttributes);</span>
+<span class="fc" id="L121">            instance.setDataset(training);</span>
+            
+<span class="fc" id="L123">            int i = 0;</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            for (; i&lt;values.length-1; i++)</span>
+<span class="fc" id="L125">                instance.setValue(i, Double.parseDouble(values[i]));</span>
+
+<span class="fc" id="L127">            instance.setValue(i, values[i]);</span>
+            
+<span class="fc" id="L129">            training.add(instance);</span>
+        }
+
+<span class="fc" id="L132">        return training;</span>
+    }
+
+    public void outputToARFF(Instances training, String arffPath)
+    {
+        try
+        {
+<span class="nc" id="L139">            DataSink.write(arffPath, training);</span>
+        }
+<span class="nc" id="L141">        catch (Exception e)</span>
+        {
+<span class="nc" id="L143">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
+<span class="nc" id="L144">            e.printStackTrace();</span>
+<span class="nc" id="L145">        }</span>
+<span class="nc" id="L146">    }</span>
+
+    public VocabCollection getVocab()
+    {
+<span class="fc" id="L150">        return tempVocab;</span>
+    }
+
+    public String[] getTrainData()
+    {
+<span class="fc" id="L155">        return trainData;</span>
+    }
+
+    public String[] getVocabWords()
+    {
+<span class="fc" id="L160">        return vocabWords;</span>
+    }
+    
+}
+
+         //DO NOT DELETE PAST THIS POINT
+//-------------------------------------------------
+//************ FilePath Flow (Tabled) *************
+//-------------------------------------------------
+
+// public class InitialTrainer 
+// {
+//     private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};
+//     private String[] trainFilePaths;     
+//     private String[] fileCategories;         //these are categoryKeys
+//     private List&lt;Document&gt; listOfDocuments = new ArrayList&lt;Document&gt;();
+//     VocabCollection vocab;
+
+//     InitialTrainer()
+//     {
+//         String[] tempFilePaths = {&quot;&quot;};  //Tabled: put sample data files hardcoded in
+//         String[] tempCategories = {&quot;&quot;}; //Tabled: put categories hardcoded in
+//         trainFilePaths = tempFilePaths;
+//         fileCategories = tempCategories;
+//     }
+
+//     //For Testing Purposes
+//     InitialTrainer(String[] tempFilePaths, String[] tempCategories)
+//     {
+//         trainFilePaths = tempFilePaths;
+//         fileCategories = tempCategories;
+//     }
+
+//     public void run()
+//     {
+//         String arffPath = &quot;src/main/resources/train.arff&quot;;
+//         if (validARFFPresent(arffPath))
+//             return;
+
+//         //FilePath Flow (With ArffGenerator)
+//         constructInitialData();
+//         ArffGenerator generator = new ArffGenerator(arffPath, vocab);
+//         generator.generateInstances(listOfDocuments);
+//         generator.outputToARFF();
+//     }
+
+//     public boolean validARFFPresent(String arffPath)
+//     {
+//         File file = new File(arffPath);
+//         try {
+//             if (!file.exists())     //if file does not exist, create a file
+//                 file.createNewFile();
+            
+//             if (file.length()==0)   //if file does not have content it is invalid
+//                 return false;
+
+//             return true;            //else it is valid
+//         } catch (IOException e) {
+//             System.out.println(&quot;An error occurred.&quot;);
+//             e.printStackTrace();
+//             return false;
+//         }
+//     }
+
+//     public void constructInitialData()
+//     {
+//         List&lt;TrainDocument&gt; trainDocs = new ArrayList&lt;TrainDocument&gt;();
+//         String stopPath = &quot;src/main/resources/stopWords.txt&quot;;
+//         String vocabPath = &quot;src/main/resources/vocabCollection.txt&quot;;
+//         File vocabFile = new File(vocabPath);
+//         if (vocabFile.exists()) //assure fresh vocab is created
+//             vocabFile.delete();
+//         TrainParser tParser = new TrainParser(new StopList(stopPath), vocabPath);   //no path exists so constructor creates a new vocabFile
+
+//         int i = 0;
+//         for (String path: trainFilePaths)
+//         {
+//             trainDocs.add(tParser.createDocument(path, fileCategories[i]));    //category supplied is a key
+//             i++;
+//         }
+       
+//         vocab = tParser.getVocabCollection();
+//         vocab.calcInverseDocFrequency();
+
+//         for (TrainDocument doc: trainDocs)
+//         {
+//             doc.calculateTermWeights(vocab);
+//             listOfDocuments.add((Document)doc);
+//         }
+    
+//         //tParser.writeOutVocabWrapper(vocabPath);
+//         vocab.writeOutVocab(vocabPath);        
+//     }
+
+//     public String[] getFilePaths()
+//     {
+//         return trainFilePaths;
+//     }
+
+//     public String[] getFileCategories()
+//     {
+//         return fileCategories;
+//     }
+
+//     public VocabCollection getVocab()
+//     {
+//         return tempVocab;
+//     }
+
+//     public List&lt;Document&gt; getListOfDocs()
+//     {
+//         return listOfDocuments;
+//     }
+// }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

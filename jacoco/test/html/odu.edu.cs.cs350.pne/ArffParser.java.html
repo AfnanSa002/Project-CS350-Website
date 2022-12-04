@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ArffParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">ArffParser.java</span></div><h1>ArffParser.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import weka.classifiers.bayes.net.BIFReader;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils;
+import weka.core.converters.ArffLoader.ArffReader;
+
+public class ArffParser
+{
+<span class="fc" id="L18">    private VocabCollection vocab = new VocabCollection();</span>
+
+    ArffParser(String vocabPath)
+<span class="fc" id="L21">    {</span>
+<span class="fc" id="L22">        vocab.readInVocab(vocabPath);</span>
+<span class="fc" id="L23">    }</span>
+
+    public List&lt;Document&gt; run(String arffPath)
+    {
+<span class="nc" id="L27">        String arffText = readInArff(arffPath);</span>
+<span class="nc" id="L28">        List&lt;String&gt; dataLines = isolateData(arffText);</span>
+<span class="nc" id="L29">        List&lt;Document&gt; documents = new ArrayList&lt;Document&gt;();</span>
+        
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        for(String dataLine: dataLines)</span>
+        {
+<span class="nc" id="L34">            ArffDocument doc = new ArffDocument();</span>
+<span class="nc" id="L35">            doc.decodeArffData(dataLine, vocab);</span>
+            //doc.calculateTermWeights(vocab);  //cant do till new vocab is created
+<span class="nc" id="L37">            documents.add((Document)doc);   //cast to document</span>
+<span class="nc" id="L38">        }</span>
+<span class="nc" id="L39">        return documents;</span>
+    }
+    
+    public String readInArff(String arffPath)
+    {
+<span class="fc" id="L44">        StringBuilder builder = new StringBuilder();</span>
+        
+<span class="fc" id="L46">        try (BufferedReader buffer = new BufferedReader(new FileReader(arffPath)))</span>
+        {   
+            String str;
+
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            while ((str = buffer.readLine()) != null)</span>
+            {    
+<span class="fc" id="L52">                builder.append(str + &quot;\n&quot;);</span>
+            }
+<span class="fc" id="L54">            builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="fc" id="L55">            return builder.toString();</span>
+        }
+<span class="nc" id="L57">        catch (Exception e)</span>
+        {
+<span class="nc" id="L59">            System.out.println(&quot;An Error Occurred Reading in &quot; + arffPath);</span>
+<span class="nc" id="L60">            e.printStackTrace();</span>
+<span class="nc" id="L61">            return null;</span>
+        }
+    }
+
+    public List&lt;String&gt; isolateData(String arffText)
+    {
+<span class="fc" id="L67">        List&lt;String&gt; dataLines = new ArrayList&lt;String&gt;();</span>
+        
+<span class="fc" id="L69">        int firstDataIndex = arffText.indexOf(&quot;@data&quot;)+6;</span>
+<span class="fc" id="L70">        String arffData = arffText.substring(firstDataIndex);</span>
+<span class="fc" id="L71">        Scanner scanner = new Scanner(arffData);</span>
+
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        while (scanner.hasNextLine())</span>
+        {
+<span class="fc" id="L75">            dataLines.add(scanner.nextLine());</span>
+        }
+        
+<span class="fc" id="L78">        scanner.close();</span>
+
+<span class="fc" id="L80">        return dataLines;</span>
+    }
+
+    public VocabCollection getVocabCollection()
+    {
+<span class="fc" id="L85">        return vocab;</span>
+    }
+}
+
+
+// BufferedReader reader = new BufferedReader(new FileReader(arffPath));
+//                 ArffReader arff = new ArffReader(reader);
+
+//                 //File file = new File(arffPath);
+//                 // if (!new File(arffPath).exists()) 
+//                 // throw new IOException(&quot;File does not exist: &quot; + arffPath);
+
+//                 //Instances data = arff.getData();
+//                 Instances data = ConverterUtils.DataSource.read(arffPath);
+//                 data.setClassIndex(data.numAttributes()-1);
+
+//                 return arff.toString();
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
