@@ -1,1 +1,1 @@
-Click [here](./home/html).
+Click [here](./home.html).
