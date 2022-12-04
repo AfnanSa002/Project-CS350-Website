@@ -1,1 +1,1 @@
-#This is a temp README
+Click [here](./home/html).
