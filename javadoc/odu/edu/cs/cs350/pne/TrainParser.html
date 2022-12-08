@@ -76,6 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TrainParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A Train Parser reads in the raw text from a file and constructs a Train Document from that text.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +90,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(odu.edu.cs.cs350.pne.StopList,java.lang.String)" class="member-name-link">TrainParser</a><wbr>(<a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a>&nbsp;list,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vocabPath)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Train Parser with an associated StopList and VocabCollection.</div>
+</div>
 </div>
 </section>
 </li>
@@ -107,16 +110,24 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TrainDocument.html" title="class in odu.edu.cs.cs350.pne">TrainDocument</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createDocument(java.lang.String,java.lang.String)" class="member-name-link">createDocument</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a Train Document from a file path and a specified category.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStopList()" class="member-name-link">getStopList</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the StopList associated with this Train Parser</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVocabCollection()" class="member-name-link">getVocabCollection</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the VocabCollection associated with this Train Parser</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#readFileStandard(java.lang.String)" class="member-name-link">readFileStandard</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Reads in a pdf file or a txt file from a file path.</div>
+</div>
 </div>
 </div>
 </div>
@@ -139,6 +150,12 @@ loadScripts(document, 'script');</script>
 <h3>TrainParser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TrainParser</span><wbr><span class="parameters">(<a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a>&nbsp;list,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vocabPath)</span></div>
+<div class="block">Creates a Train Parser with an associated StopList and VocabCollection.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>list</code> - A StopList that holds words that will be ommitted when analyzing a Train Document.</dd>
+<dd><code>vocabPath</code> - A path to a file storing a VocabCollection</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -154,24 +171,49 @@ loadScripts(document, 'script');</script>
 <h3>createDocument</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TrainDocument.html" title="class in odu.edu.cs.cs350.pne">TrainDocument</a></span>&nbsp;<span class="element-name">createDocument</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</span></div>
+<div class="block">Creates a Train Document from a file path and a specified category.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>filePath</code> - A path to a file that will be used in training a LearningMachine(SVM)</dd>
+<dd><code>category</code> - A specified category to be associated with a Train Document</dd>
+<dt>Returns:</dt>
+<dd>A Train Document that holds the category and document signature of the document</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="readFileStandard(java.lang.String)">
 <h3>readFileStandard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">readFileStandard</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span></div>
+<div class="block">Reads in a pdf file or a txt file from a file path.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>filePath</code> - Path to a file</dd>
+<dt>Returns:</dt>
+<dd>The raw text of a file</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getStopList()">
 <h3>getStopList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a></span>&nbsp;<span class="element-name">getStopList</span>()</div>
+<div class="block">Returns the StopList associated with this Train Parser</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A StopList</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVocabCollection()">
 <h3>getVocabCollection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></span>&nbsp;<span class="element-name">getVocabCollection</span>()</div>
+<div class="block">Returns the VocabCollection associated with this Train Parser</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A VocabCollection</dd>
+</dl>
 </section>
 </li>
 </ul>

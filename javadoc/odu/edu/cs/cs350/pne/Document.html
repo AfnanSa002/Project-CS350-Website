@@ -80,6 +80,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Document</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A Document is a general object used for storing a document's raw text, category, and functional signature.
+ Document is a super class for <code>TrainDocument</code>, <code>ClassifyDocument</code>, and <code>ArffDocument</code>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,10 +96,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#category" class="member-name-link">category</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The associated category(classificiation) of a document.</div>
+</div>
 <div class="col-first odd-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link">LinkedHashMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="WordInfo.html" title="class in odu.edu.cs.cs350.pne">WordInfo</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#tokenMap" class="member-name-link">tokenMap</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">The functional signature of a document, storing each significant word along with its
+ count, normalized count, and term weight.</div>
+</div>
 </div>
 </section>
 </li>
@@ -109,9 +116,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">Document</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;data,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">Document</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Document with specified raw text and a category.</div>
+</div>
 </div>
 </section>
 </li>
@@ -128,28 +137,44 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateTermWeights(odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">calculateTermWeights</a><wbr>(<a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;vocab)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Calculates the term weight for each word in the document's tokenMap.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(java.lang.String)" class="member-name-link">contains</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;word)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if the document's tokenMap contains the word, false if not.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCategory()" class="member-name-link">getCategory</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the category of this document.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRawText()" class="member-name-link">getRawText</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the raw text of a document.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link">LinkedHashMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="WordInfo.html" title="class in odu.edu.cs.cs350.pne">WordInfo</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTokenMap()" class="member-name-link">getTokenMap</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the token map of this document.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWordWeight(java.lang.String)" class="member-name-link">getWordWeight</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;word)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the word weight of a word stored in this document's token map.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCategory(java.lang.String)" class="member-name-link">setCategory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newCategory)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the category of this document.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#trimText(java.lang.String)" class="member-name-link">trimText</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawText)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts raw text to lowercase and removes all punctuation, numbers, and extraneous white space.</div>
+</div>
 </div>
 </div>
 </div>
@@ -171,12 +196,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="category">
 <h3>category</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">category</span></div>
+<div class="block">The associated category(classificiation) of a document.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="tokenMap">
 <h3>tokenMap</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link">LinkedHashMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="WordInfo.html" title="class in odu.edu.cs.cs350.pne">WordInfo</a>&gt;</span>&nbsp;<span class="element-name">tokenMap</span></div>
+<div class="block">The functional signature of a document, storing each significant word along with its
+ count, normalized count, and term weight.</div>
 </section>
 </li>
 </ul>
@@ -190,8 +218,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.String)">
 <h3>Document</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Document</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;data,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Document</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</span></div>
+<div class="block">Creates a Document with specified raw text and a category.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>text</code> - The specified raw text of a document</dd>
+<dd><code>category</code> - The specified category of a document</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -206,48 +240,96 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="contains(java.lang.String)">
 <h3>contains</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;word)</span></div>
+<div class="block">Returns true if the document's tokenMap contains the word, false if not.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>word</code> - A word that is searched for in the document's tokenMap</dd>
+<dt>Returns:</dt>
+<dd>true if Document contains the word, false if not</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="trimText(java.lang.String)">
 <h3>trimText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">trimText</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawText)</span></div>
+<div class="block">Converts raw text to lowercase and removes all punctuation, numbers, and extraneous white space.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rawText</code> - The raw text to be trimmed</dd>
+<dt>Returns:</dt>
+<dd>Trimmed raw text text</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="calculateTermWeights(odu.edu.cs.cs350.pne.VocabCollection)">
 <h3>calculateTermWeights</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">calculateTermWeights</span><wbr><span class="parameters">(<a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;vocab)</span></div>
+<div class="block">Calculates the term weight for each word in the document's tokenMap.
+ The term weight is the product of the words normalized count and the
+ inverse document frequency of the word in a VocabCollection.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vocab</code> - The VocabCollection that contains the inverse document frequencies</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRawText()">
 <h3>getRawText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getRawText</span>()</div>
+<div class="block">Returns the raw text of a document.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The raw text</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setCategory(java.lang.String)">
 <h3>setCategory</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCategory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newCategory)</span></div>
+<div class="block">Sets the category of this document.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>newCategory</code> - The category being assigned</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getCategory()">
 <h3>getCategory</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCategory</span>()</div>
+<div class="block">Returns the category of this document.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The assigned category</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTokenMap()">
 <h3>getTokenMap</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link">LinkedHashMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="WordInfo.html" title="class in odu.edu.cs.cs350.pne">WordInfo</a>&gt;</span>&nbsp;<span class="element-name">getTokenMap</span>()</div>
+<div class="block">Returns the token map of this document.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The token map of this document</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWordWeight(java.lang.String)">
 <h3>getWordWeight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">getWordWeight</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;word)</span></div>
+<div class="block">Returns the word weight of a word stored in this document's token map.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>word</code> - A word in this document's token map</dd>
+<dt>Returns:</dt>
+<dd>The term weight of the word specified as a parameter</dd>
+</dl>
 </section>
 </li>
 </ul>

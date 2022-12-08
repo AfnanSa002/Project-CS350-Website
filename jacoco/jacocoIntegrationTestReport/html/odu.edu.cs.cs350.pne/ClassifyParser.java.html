@@ -7,111 +7,120 @@ import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-
+/**
+ * A Classify Parser reads in the raw text from a file and constructs a Classify Document from that text.
+ */
 public class ClassifyParser 
 {
-<span class="nc" id="L13">    private VocabCollection vocab = new VocabCollection();</span>
-<span class="nc" id="L14">    boolean idfCalculated = false;</span>
+    /**
+     * Holds significant words found across all Train Documents
+     * that have been or will be eventually stored in an arff file.
+     */
+<span class="nc" id="L19">    private VocabCollection vocab = new VocabCollection();</span>
 
+    /**
+     * States whether the associated VocabCollection has calculated its
+     * inverse document frequencies.
+     */
+<span class="nc" id="L25">    boolean idfCalculated = false;</span>
+
+    /**
+     * Creates a Classify Parser with an associated VocabCollection.
+     * @param vocabPath A path to a file storing a VocabCollection
+     */
     public ClassifyParser (String vocabPath)
-<span class="nc" id="L17">    {</span>
-<span class="nc" id="L18">        vocab.readInVocab(vocabPath);</span>
-<span class="nc" id="L19">    }</span>
+<span class="nc" id="L32">    {</span>
+<span class="nc" id="L33">        vocab.readInVocab(vocabPath);</span>
+<span class="nc" id="L34">    }</span>
    
-    //entry point for document creation
+    /**
+     * Creates a Classify Document from a file path and processes that document.
+     * @param filePath A path to a file that will be classified using a Learning Machine (SVM)
+     * @return A Classify Document that holds the document signature of a document
+     */
     public ClassifyDocument createAndProcessDocument(String filePath)
     {   
-<span class="nc" id="L24">        String text = readFileStandard(filePath);</span>
-<span class="nc" id="L25">        ClassifyDocument cDocument = new ClassifyDocument(text);</span>
-<span class="nc" id="L26">        cDocument.splitText(vocab);</span>
-<span class="nc" id="L27">        cDocument.createTokenMap();</span>
+<span class="nc" id="L43">        String text = readFileStandard(filePath);</span>
+<span class="nc" id="L44">        ClassifyDocument cDocument = new ClassifyDocument(text);</span>
+<span class="nc" id="L45">        cDocument.splitText(vocab);</span>
+<span class="nc" id="L46">        cDocument.createTokenMap();</span>
         
-<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (idfCalculated == false) //only need to calculate idf once</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (idfCalculated == false) //only need to calculate idf once</span>
         {
-<span class="nc" id="L31">            vocab.calcInverseDocFrequency();</span>
-<span class="nc" id="L32">            idfCalculated = true;</span>
+<span class="nc" id="L50">            vocab.calcInverseDocFrequency();</span>
+<span class="nc" id="L51">            idfCalculated = true;</span>
         }
 
-<span class="nc" id="L35">        cDocument.calculateTermWeights(vocab);</span>
-<span class="nc" id="L36">        return cDocument;</span>
+<span class="nc" id="L54">        cDocument.calculateTermWeights(vocab);</span>
+<span class="nc" id="L55">        return cDocument;</span>
     }
 
+    /**
+     * Reads in a pdf file or a txt file from a file path.
+     * @param filePath Path to a file
+     * @return The raw text of a file
+     */
     public String readFileStandard(String filePath)
     {
-<span class="nc" id="L41">        String extension = filePath.substring(filePath.length()-3);</span>
+<span class="nc" id="L65">        String extension = filePath.substring(filePath.length()-3);</span>
         
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (extension.equals(&quot;pdf&quot;))</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (extension.equals(&quot;pdf&quot;))</span>
         {
             try
             {  
-<span class="nc" id="L47">                File file = new File(filePath);   </span>
-<span class="nc" id="L48">                PDDocument doc = PDDocument.load(file);  </span>
-<span class="nc" id="L49">                String rawText = new PDFTextStripper().getText(doc);</span>
+<span class="nc" id="L71">                File file = new File(filePath);   </span>
+<span class="nc" id="L72">                PDDocument doc = PDDocument.load(file);  </span>
+<span class="nc" id="L73">                String rawText = new PDFTextStripper().getText(doc);</span>
 
-<span class="nc" id="L51">                doc.close();</span>
+<span class="nc" id="L75">                doc.close();</span>
 
-<span class="nc" id="L53">                return rawText;</span>
+<span class="nc" id="L77">                return rawText;</span>
             }
-<span class="nc" id="L55">            catch (IOException e) </span>
+<span class="nc" id="L79">            catch (IOException e) </span>
             {
-<span class="nc" id="L57">                System.out.println(&quot;Not able to load PDF&quot;);</span>
-<span class="nc" id="L58">                e.printStackTrace();</span>
-<span class="nc" id="L59">                return &quot;Error&quot;;</span>
+<span class="nc" id="L81">                System.out.println(&quot;Not able to load PDF&quot;);</span>
+<span class="nc" id="L82">                e.printStackTrace();</span>
+<span class="nc" id="L83">                return &quot;Error&quot;;</span>
             }
         }    
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
         {
-<span class="nc" id="L64">            StringBuilder builder = new StringBuilder();</span>
+<span class="nc" id="L88">            StringBuilder builder = new StringBuilder();</span>
             
-<span class="nc" id="L66">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
+<span class="nc" id="L90">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
             {   
                 String str;
 
-<span class="nc bnc" id="L70" title="All 2 branches missed.">                while ((str = buffer.readLine()) != null)</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                while ((str = buffer.readLine()) != null)</span>
                 {    
-<span class="nc" id="L72">                    builder.append(str + &quot; &quot;);</span>
+<span class="nc" id="L96">                    builder.append(str + &quot; &quot;);</span>
                 }
-<span class="nc" id="L74">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
-<span class="nc" id="L75">                return builder.toString();</span>
+<span class="nc" id="L98">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="nc" id="L99">                return builder.toString();</span>
             }
-<span class="nc" id="L77">            catch (IOException e)</span>
+<span class="nc" id="L101">            catch (IOException e)</span>
             {
-<span class="nc" id="L79">                System.out.println(&quot;Not able to load Text File&quot;);</span>
-<span class="nc" id="L80">                e.printStackTrace();</span>
-<span class="nc" id="L81">                return &quot;Error&quot;;</span>
+<span class="nc" id="L103">                System.out.println(&quot;Not able to load Text File&quot;);</span>
+<span class="nc" id="L104">                e.printStackTrace();</span>
+<span class="nc" id="L105">                return &quot;Error&quot;;</span>
             }
         }
         else
         {
-<span class="nc" id="L86">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
-<span class="nc" id="L87">            return &quot;Invalid&quot;;</span>
+<span class="nc" id="L110">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
+<span class="nc" id="L111">            return &quot;Invalid&quot;;</span>
         }
     }
 
+    /**
+     * Returns the VocabCollection associated with this Classify Parser
+     * @return A VocabCollection
+     */
     public VocabCollection getVocabCollection()
     {
-<span class="nc" id="L93">        return vocab;</span>
+<span class="nc" id="L121">        return vocab;</span>
     }
 
-    // public String readFileWithTIKA(String filePath)
-    // {
-    //     AutoDetectParser parser = new AutoDetectParser();
-    //     BodyContentHandler handler = new BodyContentHandler();
-    //     Metadata metadata = new Metadata();
-
-    //     try (InputStream stream = new FileInputStream(filePath)) {
-    //         parser.parse(stream, handler, metadata);
-        
-    //         return handler.toString();
-    //     }
-
-    //     catch (Exception e)
-    //     {
-    //         System.out.println(&quot;Error Occured&quot;);
-    //         e.printStackTrace();
-    //         return &quot;&quot;;
-    //     }
-    // }
 }
     
 

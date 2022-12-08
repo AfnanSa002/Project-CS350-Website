@@ -78,6 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ArffDocument</span>
 <span class="extends-implements">extends <a href="Document.html" title="class in odu.edu.cs.cs350.pne">Document</a></span></div>
+<div class="block">An Arff Document contains the assigned category and document signature of a file
+ used in training a Learning Machine (SVM).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,7 +101,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ArffDocument</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an Arff Document by setting the raw text to null
+ and initially setting the category to null.</div>
+</div>
 </div>
 </section>
 </li>
@@ -117,7 +122,10 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decodeArffData(java.lang.String,odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">decodeArffData</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffData,
  <a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;vocab)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Decodes an arff data line and sets up the document's token map and category
+ according to the data found in the arff data line.</div>
+</div>
 </div>
 </div>
 </div>
@@ -142,6 +150,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>ArffDocument</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ArffDocument</span>()</div>
+<div class="block">Creates an Arff Document by setting the raw text to null
+ and initially setting the category to null.</div>
 </section>
 </li>
 </ul>
@@ -157,6 +167,13 @@ loadScripts(document, 'script');</script>
 <h3>decodeArffData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">decodeArffData</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffData,
  <a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;vocab)</span></div>
+<div class="block">Decodes an arff data line and sets up the document's token map and category
+ according to the data found in the arff data line.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arffData</code> - A line of data from an arff file</dd>
+<dd><code>vocab</code> - The VocabCollection associated with arff file being operated on.</dd>
+</dl>
 </section>
 </li>
 </ul>

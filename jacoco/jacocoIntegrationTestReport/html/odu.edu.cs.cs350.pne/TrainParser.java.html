@@ -4,134 +4,125 @@ import java.io.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-
+/**
+ * A Train Parser reads in the raw text from a file and constructs a Train Document from that text.
+ */
 public class TrainParser      //Singleton
 {
+    /**
+     * Holds the words that will be omitted when analyzing a Train Document.
+     */
     private StopList stopWords;
-<span class="nc" id="L11">    private VocabCollection vocab = new VocabCollection();</span>
+
+    /**
+     * Holds significant words found across all Train Documents
+     * that have been or will eventually be stored in an arff file.
+     */
+<span class="nc" id="L21">    private VocabCollection vocab = new VocabCollection();</span>
     
     
+    /**
+     * Creates a Train Parser with an associated StopList and VocabCollection.
+     * @param list A StopList that holds words that will be ommitted when analyzing a Train Document.
+     * @param vocabPath A path to a file storing a VocabCollection
+     */
     public TrainParser (StopList list, String vocabPath)
-<span class="nc" id="L15">    {   </span>
-<span class="nc" id="L16">        stopWords = list;</span>
-<span class="nc" id="L17">        vocab.readInVocab(vocabPath);</span>
-<span class="nc" id="L18">    }</span>
+<span class="nc" id="L30">    {   </span>
+<span class="nc" id="L31">        stopWords = list;</span>
+<span class="nc" id="L32">        vocab.readInVocab(vocabPath);</span>
+<span class="nc" id="L33">    }</span>
    
     //entry point for document creation
+    /**
+     * Creates a Train Document from a file path and a specified category.
+     * @param filePath A path to a file that will be used in training a LearningMachine(SVM)
+     * @param category A specified category to be associated with a Train Document
+     * @return A Train Document that holds the category and document signature of the document
+     */
     public TrainDocument createDocument(String filePath, String category)
     {   
-<span class="nc" id="L23">        String text = readFileStandard(filePath);</span>
-<span class="nc" id="L24">        TrainDocument document = new TrainDocument(text, category);</span>
-<span class="nc" id="L25">        document.splitText(stopWords); //ommitting stopwords</span>
-<span class="nc" id="L26">        document.createTokenMap();</span>
-<span class="nc" id="L27">        document.addToVocab(vocab);</span>
-<span class="nc" id="L28">        return document;</span>
+<span class="nc" id="L44">        String text = readFileStandard(filePath);</span>
+<span class="nc" id="L45">        TrainDocument document = new TrainDocument(text, category);</span>
+<span class="nc" id="L46">        document.splitText(stopWords); //ommitting stopwords</span>
+<span class="nc" id="L47">        document.createTokenMap();</span>
+<span class="nc" id="L48">        document.addToVocab(vocab);</span>
+<span class="nc" id="L49">        return document;</span>
     }
 
-
+    /**
+     * Reads in a pdf file or a txt file from a file path.
+     * @param filePath Path to a file
+     * @return The raw text of a file
+     */
     public String readFileStandard(String filePath)
     {
-<span class="nc" id="L34">        String extension = filePath.substring(filePath.length()-3);</span>
+<span class="nc" id="L59">        String extension = filePath.substring(filePath.length()-3);</span>
         
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (extension.equals(&quot;pdf&quot;))</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (extension.equals(&quot;pdf&quot;))</span>
         {
             try
             {  
-<span class="nc" id="L40">                File file = new File(filePath);   </span>
-<span class="nc" id="L41">                PDDocument doc = PDDocument.load(file);  </span>
-<span class="nc" id="L42">                String rawText = new PDFTextStripper().getText(doc);</span>
+<span class="nc" id="L65">                File file = new File(filePath);   </span>
+<span class="nc" id="L66">                PDDocument doc = PDDocument.load(file);  </span>
+<span class="nc" id="L67">                String rawText = new PDFTextStripper().getText(doc);</span>
 
-<span class="nc" id="L44">                doc.close();</span>
+<span class="nc" id="L69">                doc.close();</span>
 
-<span class="nc" id="L46">                return rawText;</span>
+<span class="nc" id="L71">                return rawText;</span>
             }
-<span class="nc" id="L48">            catch (IOException e) </span>
+<span class="nc" id="L73">            catch (IOException e) </span>
             {
-<span class="nc" id="L50">                System.out.println(&quot;Not able to load PDF&quot;);</span>
-<span class="nc" id="L51">                e.printStackTrace();</span>
-<span class="nc" id="L52">                return &quot;Error&quot;;</span>
+<span class="nc" id="L75">                System.out.println(&quot;Not able to load PDF&quot;);</span>
+<span class="nc" id="L76">                e.printStackTrace();</span>
+<span class="nc" id="L77">                return &quot;Error&quot;;</span>
             }
         }    
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
         {
-<span class="nc" id="L57">            StringBuilder builder = new StringBuilder();</span>
+<span class="nc" id="L82">            StringBuilder builder = new StringBuilder();</span>
             
-<span class="nc" id="L59">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
+<span class="nc" id="L84">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
             {   
                 String str;
 
-<span class="nc bnc" id="L63" title="All 2 branches missed.">                while ((str = buffer.readLine()) != null)</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                while ((str = buffer.readLine()) != null)</span>
                 {    
-<span class="nc" id="L65">                    builder.append(str + &quot; &quot;);</span>
+<span class="nc" id="L90">                    builder.append(str + &quot; &quot;);</span>
                 }
-<span class="nc" id="L67">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
-<span class="nc" id="L68">                return builder.toString();</span>
+<span class="nc" id="L92">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="nc" id="L93">                return builder.toString();</span>
             }
-<span class="nc" id="L70">            catch (IOException e)</span>
+<span class="nc" id="L95">            catch (IOException e)</span>
             {
-<span class="nc" id="L72">                System.out.println(&quot;Not able to load Text File&quot;);</span>
-<span class="nc" id="L73">                e.printStackTrace();</span>
-<span class="nc" id="L74">                return &quot;Error&quot;;</span>
+<span class="nc" id="L97">                System.out.println(&quot;Not able to load Text File&quot;);</span>
+<span class="nc" id="L98">                e.printStackTrace();</span>
+<span class="nc" id="L99">                return &quot;Error&quot;;</span>
             }
         }
         else
         {
-<span class="nc" id="L79">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
-<span class="nc" id="L80">            return &quot;Invalid&quot;;</span>
+<span class="nc" id="L104">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
+<span class="nc" id="L105">            return &quot;Invalid&quot;;</span>
         }
     }
 
+    /**
+     * Returns the StopList associated with this Train Parser
+     * @return A StopList
+     */
     public StopList getStopList()
     {
-<span class="nc" id="L86">        return stopWords;</span>
+<span class="nc" id="L115">        return stopWords;</span>
     }
 
+    /**
+     * Returns the VocabCollection associated with this Train Parser
+     * @return A VocabCollection
+     */
     public VocabCollection getVocabCollection()
     {
-<span class="nc" id="L91">        return vocab;</span>
+<span class="nc" id="L124">        return vocab;</span>
     }
-
     
 }
-
-//entry point for document processing
-    // public void processDocument(TrainDocument document)
-    // {
-    //     if (!idfCalculated)
-    //     {
-    //         vocab.calcInverseDocFrequency();    //TODO: This does not need to be looped over
-    //         idfCalculated = true;
-    //     }
-       
-    //     document.calculateTermWeights(vocab);
-    // }
-
-    // public void writeOutVocabWrapper(String filePath)
-    // {
-    //     vocab.writeOutVocab(filePath);
-    // }
-
-
-// public String readFileWithTIKA(String filePath) //Table: fix input stream so we can implement with TIKA
-    // {
-    //         AutoDetectParser parser = new AutoDetectParser();
-    //         BodyContentHandler handler = new BodyContentHandler();
-    //         Metadata metadata = new Metadata();
-        
-    //     try {
-    //         File file = new File(filePath);
-    //         InputStream stream = new FileInputStream(file);
-    //         //InputStream stream = this.getClass().getClassLoader().getResourceAsStream(filePath);
-            
-    //         parser.parse(stream, handler, metadata);
-    //         stream.close();     //Table: problem as it reads stream as an empty string
-    //         return handler.toString();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         System.out.println(&quot;Error Occured&quot;);
-    //         e.printStackTrace();
-    //         return &quot;Error&quot;;
-    //     }
-    // }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

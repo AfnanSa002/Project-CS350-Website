@@ -2,71 +2,125 @@
 
 import java.util.*;
 
-
+/**
+ * A Document is a general object used for storing a document's raw text, category, and functional signature.
+ * Document is a super class for {@code TrainDocument}, {@code ClassifyDocument}, and {@code ArffDocument}.
+ */
 public class Document {
+    /**
+     * The raw text of a document.
+     */
     private String rawText;
+
+    /**
+     * The associated category(classificiation) of a document.
+     */
     protected String category;
-<span class="fc" id="L9">    protected LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String, WordInfo&gt;();   //stores words as tokens with wordInfo</span>
 
-    public Document(String data, String category)
-<span class="fc" id="L12">    {</span>
-<span class="fc" id="L13">        this.rawText = data;</span>
-<span class="fc" id="L14">        this.category = category;</span>
-<span class="fc" id="L15">    }</span>
+    /**
+     * The functional signature of a document, storing each significant word along with its
+     * count, normalized count, and term weight.
+     */
+<span class="fc" id="L24">    protected LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String, WordInfo&gt;();   //stores words as tokens with wordInfo</span>
 
+    /**
+     * Creates a Document with specified raw text and a category.
+     * @param text The specified raw text of a document
+     * @param category The specified category of a document
+     */
+    public Document(String text, String category)
+<span class="fc" id="L32">    {</span>
+<span class="fc" id="L33">        this.rawText = text;</span>
+<span class="fc" id="L34">        this.category = category;</span>
+<span class="fc" id="L35">    }</span>
+
+    /**
+     * Returns true if the document's tokenMap contains the word, false if not.
+     * @param word A word that is searched for in the document's tokenMap
+     * @return true if Document contains the word, false if not
+     */
     public boolean contains(String word)
     {
-<span class="nc" id="L19">        return tokenMap.containsKey(word);</span>
+<span class="nc" id="L44">        return tokenMap.containsKey(word);</span>
     }
 
-    //converts to lowercase and removes all punctuation, numbers, and extraneous white space
+    /**
+     * Converts raw text to lowercase and removes all punctuation, numbers, and extraneous white space.
+     * @param rawText The raw text to be trimmed
+     * @return Trimmed raw text text
+     */
     public String trimText(String rawText)
     {
-<span class="nc" id="L25">        String alphaNumText = rawText.replaceAll(&quot;[^a-zA-Z0-9 \n]*&quot;, &quot;&quot;).toLowerCase();</span>
-<span class="nc" id="L26">        String oneLineText =  alphaNumText.replaceAll(&quot;\n+&quot;, &quot; &quot;);</span>
-<span class="nc" id="L27">        String singleySpacedText = oneLineText.trim().replaceAll(&quot; +&quot;, &quot; &quot;);</span>
+<span class="nc" id="L54">        String alphaNumText = rawText.replaceAll(&quot;[^a-zA-Z0-9 \n]*&quot;, &quot;&quot;).toLowerCase();</span>
+<span class="nc" id="L55">        String oneLineText =  alphaNumText.replaceAll(&quot;\n+&quot;, &quot; &quot;);</span>
+<span class="nc" id="L56">        String singleySpacedText = oneLineText.trim().replaceAll(&quot; +&quot;, &quot; &quot;);</span>
 
-<span class="nc" id="L29">        return singleySpacedText;</span>
+<span class="nc" id="L58">        return singleySpacedText;</span>
     }
 
+    /**
+     * Calculates the term weight for each word in the document's tokenMap.
+     * The term weight is the product of the words normalized count and the
+     * inverse document frequency of the word in a VocabCollection.
+     * @param vocab The VocabCollection that contains the inverse document frequencies
+     */
     public void calculateTermWeights(VocabCollection vocab)
     {
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())</span>
         {
-<span class="nc" id="L36">            String word = element.getKey();</span>
-<span class="nc" id="L37">            WordInfo info = (WordInfo)element.getValue();</span>
+<span class="nc" id="L71">            String word = element.getKey();</span>
+<span class="nc" id="L72">            WordInfo info = (WordInfo)element.getValue();</span>
 
             // info.normalizedCount = (double)info.count/(double)numOfWords;    //normalize using TF-IDF
-<span class="nc" id="L40">            info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word); //normalize using Binary-IDF</span>
-<span class="nc" id="L41">        }</span>
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L75">            info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word); //normalize using Binary-IDF</span>
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">    }</span>
     
-    //Getters and Setters
+    /**
+     * Returns the raw text of a document.
+     * @return The raw text
+     */
     public String getRawText()
     {
-<span class="nc" id="L47">        return this.rawText;</span>
+<span class="nc" id="L85">        return this.rawText;</span>
     }
 
+    /**
+     * Sets the category of this document.
+     * @param newCategory The category being assigned
+     */
     public void setCategory(String newCategory)
     {
-<span class="nc" id="L52">        this.category = newCategory;</span>
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L94">        this.category = newCategory;</span>
+<span class="nc" id="L95">    }</span>
 
+    /**
+     * Returns the category of this document.
+     * @return The assigned category
+     */
     public String getCategory()
     {
-<span class="nc" id="L57">        return this.category;</span>
+<span class="nc" id="L103">        return this.category;</span>
     }
 
+    /**
+     * Returns the token map of this document.
+     * @return The token map of this document
+     */
     public LinkedHashMap&lt;String, WordInfo&gt; getTokenMap()
     {
-<span class="nc" id="L62">        return this.tokenMap;</span>
+<span class="nc" id="L112">        return this.tokenMap;</span>
     }
 
+    /**
+     * Returns the word weight of a word stored in this document's token map.
+     * @param word A word in this document's token map
+     * @return The term weight of the word specified as a parameter
+     */
     public double getWordWeight(String word)
     {
-<span class="nc" id="L67">        return tokenMap.get(word).termWeight;</span>
+<span class="nc" id="L122">        return tokenMap.get(word).termWeight;</span>
     }
 
-    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

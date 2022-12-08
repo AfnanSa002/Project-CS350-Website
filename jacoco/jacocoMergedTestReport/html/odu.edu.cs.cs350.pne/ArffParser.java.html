@@ -6,91 +6,108 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * An Arff Parser reads in the text from an arff file and constructs a list of Arff Documents from the data in that text.
+ * The resulting Arff Documents hold data that was once associated with Train Documents
+ * but then converted into an arff file.
+ */
 public class ArffParser
 {
-<span class="fc" id="L12">    private VocabCollection vocab = new VocabCollection();</span>
+    /**
+     * Holds significant words found across all Train Documents
+     * that have been or will be eventually stored in an arff file.
+     */
+<span class="fc" id="L20">    private VocabCollection vocab = new VocabCollection();</span>
 
+    /**
+     * Creates an Arff Parser with an associated VocabCollection.
+     * @param vocabPath A path to a file that stores a VocabCollection
+     */
     public ArffParser(String vocabPath)
-<span class="fc" id="L15">    {</span>
-<span class="fc" id="L16">        vocab.readInVocab(vocabPath);</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L27">    {</span>
+<span class="fc" id="L28">        vocab.readInVocab(vocabPath);</span>
+<span class="fc" id="L29">    }</span>
 
+    /**
+     * Coordinates the contruction of Arff Documents from the data lines of an Arff File.
+     * @param arffPath A path to an arff file
+     * @return A list of Documents, each containing a category and a document signature (tokenMap)
+     */
     public List&lt;Document&gt; run(String arffPath)
     {
-<span class="fc" id="L21">        String arffText = readInArff(arffPath);</span>
-<span class="fc" id="L22">        List&lt;String&gt; dataLines = isolateData(arffText);</span>
-<span class="fc" id="L23">        List&lt;Document&gt; documents = new ArrayList&lt;Document&gt;();</span>
+<span class="fc" id="L38">        String arffText = readInArff(arffPath);</span>
+<span class="fc" id="L39">        List&lt;String&gt; dataLines = isolateData(arffText);</span>
+<span class="fc" id="L40">        List&lt;Document&gt; documents = new ArrayList&lt;Document&gt;();</span>
         
 
-<span class="fc bfc" id="L26" title="All 2 branches covered.">        for(String dataLine: dataLines)</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for(String dataLine: dataLines)</span>
         {
-<span class="fc" id="L28">            ArffDocument doc = new ArffDocument();</span>
-<span class="fc" id="L29">            doc.decodeArffData(dataLine, vocab);</span>
+<span class="fc" id="L45">            ArffDocument doc = new ArffDocument();</span>
+<span class="fc" id="L46">            doc.decodeArffData(dataLine, vocab);</span>
             //doc.calculateTermWeights(vocab);  //cant do till new vocab is created
-<span class="fc" id="L31">            documents.add((Document)doc);   //cast to document</span>
-<span class="fc" id="L32">        }</span>
-<span class="fc" id="L33">        return documents;</span>
+<span class="fc" id="L48">            documents.add((Document)doc);   //cast to document</span>
+<span class="fc" id="L49">        }</span>
+<span class="fc" id="L50">        return documents;</span>
     }
     
+    /**
+     * Reads in the raw text of an arff file.
+     * @param arffPath A path to an arff file
+     * @return The raw text of an arff file
+     */
     public String readInArff(String arffPath)
     {
-<span class="fc" id="L38">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L60">        StringBuilder builder = new StringBuilder();</span>
         
-<span class="fc" id="L40">        try (BufferedReader buffer = new BufferedReader(new FileReader(arffPath)))</span>
+<span class="fc" id="L62">        try (BufferedReader buffer = new BufferedReader(new FileReader(arffPath)))</span>
         {   
             String str;
 
-<span class="fc bfc" id="L44" title="All 2 branches covered.">            while ((str = buffer.readLine()) != null)</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            while ((str = buffer.readLine()) != null)</span>
             {    
-<span class="fc" id="L46">                builder.append(str + &quot;\n&quot;);</span>
+<span class="fc" id="L68">                builder.append(str + &quot;\n&quot;);</span>
             }
-<span class="fc" id="L48">            builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
-<span class="fc" id="L49">            return builder.toString();</span>
+<span class="fc" id="L70">            builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="fc" id="L71">            return builder.toString();</span>
         }
-<span class="nc" id="L51">        catch (Exception e)</span>
+<span class="nc" id="L73">        catch (Exception e)</span>
         {
-<span class="nc" id="L53">            System.out.println(&quot;An Error Occurred Reading in &quot; + arffPath);</span>
-<span class="nc" id="L54">            e.printStackTrace();</span>
-<span class="nc" id="L55">            return null;</span>
+<span class="nc" id="L75">            System.out.println(&quot;An Error Occurred Reading in &quot; + arffPath);</span>
+<span class="nc" id="L76">            e.printStackTrace();</span>
+<span class="nc" id="L77">            return null;</span>
         }
     }
 
+    /**
+     * Isolates the data lines (lines occuring after the data tag) from the raw text of an arff file.
+     * @param arffText The raw text of an arff file
+     * @return A list of data lines found after the data tag of an arff file
+     */
     public List&lt;String&gt; isolateData(String arffText)
     {
-<span class="fc" id="L61">        List&lt;String&gt; dataLines = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L88">        List&lt;String&gt; dataLines = new ArrayList&lt;String&gt;();</span>
         
-<span class="fc" id="L63">        int firstDataIndex = arffText.indexOf(&quot;@data&quot;)+6;</span>
-<span class="fc" id="L64">        String arffData = arffText.substring(firstDataIndex);</span>
-<span class="fc" id="L65">        Scanner scanner = new Scanner(arffData);</span>
+<span class="fc" id="L90">        int firstDataIndex = arffText.indexOf(&quot;@data&quot;)+6;</span>
+<span class="fc" id="L91">        String arffData = arffText.substring(firstDataIndex);</span>
+<span class="fc" id="L92">        Scanner scanner = new Scanner(arffData);</span>
 
-<span class="fc bfc" id="L67" title="All 2 branches covered.">        while (scanner.hasNextLine())</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        while (scanner.hasNextLine())</span>
         {
-<span class="fc" id="L69">            dataLines.add(scanner.nextLine());</span>
+<span class="fc" id="L96">            dataLines.add(scanner.nextLine());</span>
         }
         
-<span class="fc" id="L72">        scanner.close();</span>
+<span class="fc" id="L99">        scanner.close();</span>
 
-<span class="fc" id="L74">        return dataLines;</span>
+<span class="fc" id="L101">        return dataLines;</span>
     }
 
+    /**
+     * Returns the VocabCollection associated with this Arff Parser
+     * @return A VocabCollection
+     */
     public VocabCollection getVocabCollection()
     {
-<span class="fc" id="L79">        return vocab;</span>
+<span class="fc" id="L110">        return vocab;</span>
     }
 }
-
-
-// BufferedReader reader = new BufferedReader(new FileReader(arffPath));
-//                 ArffReader arff = new ArffReader(reader);
-
-//                 //File file = new File(arffPath);
-//                 // if (!new File(arffPath).exists()) 
-//                 // throw new IOException(&quot;File does not exist: &quot; + arffPath);
-
-//                 //Instances data = arff.getData();
-//                 Instances data = ConverterUtils.DataSource.read(arffPath);
-//                 data.setClassIndex(data.numAttributes()-1);
-
-//                 return arff.toString();
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

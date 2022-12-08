@@ -76,6 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ClassifyParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A Classify Parser reads in the raw text from a file and constructs a Classify Document from that text.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -88,7 +89,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">ClassifyParser</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vocabPath)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Classify Parser with an associated VocabCollection.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,13 +108,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createAndProcessDocument(java.lang.String)" class="member-name-link">createAndProcessDocument</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a Classify Document from a file path and processes that document.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVocabCollection()" class="member-name-link">getVocabCollection</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the VocabCollection associated with this Classify Parser</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#readFileStandard(java.lang.String)" class="member-name-link">readFileStandard</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Reads in a pdf file or a txt file from a file path.</div>
+</div>
 </div>
 </div>
 </div>
@@ -133,6 +142,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>ClassifyParser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ClassifyParser</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vocabPath)</span></div>
+<div class="block">Creates a Classify Parser with an associated VocabCollection.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vocabPath</code> - A path to a file storing a VocabCollection</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -147,18 +161,37 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="createAndProcessDocument(java.lang.String)">
 <h3>createAndProcessDocument</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a></span>&nbsp;<span class="element-name">createAndProcessDocument</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span></div>
+<div class="block">Creates a Classify Document from a file path and processes that document.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>filePath</code> - A path to a file that will be classified using a Learning Machine (SVM)</dd>
+<dt>Returns:</dt>
+<dd>A Classify Document that holds the document signature of a document</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="readFileStandard(java.lang.String)">
 <h3>readFileStandard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">readFileStandard</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filePath)</span></div>
+<div class="block">Reads in a pdf file or a txt file from a file path.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>filePath</code> - Path to a file</dd>
+<dt>Returns:</dt>
+<dd>The raw text of a file</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVocabCollection()">
 <h3>getVocabCollection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></span>&nbsp;<span class="element-name">getVocabCollection</span>()</div>
+<div class="block">Returns the VocabCollection associated with this Classify Parser</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A VocabCollection</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -76,6 +76,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ArffParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">An Arff Parser reads in the text from an arff file and constructs a list of Arff Documents from the data in that text.
+ The resulting Arff Documents hold data that was once associated with Train Documents
+ but then converted into an arff file.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -88,7 +91,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">ArffParser</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vocabPath)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an Arff Parser with an associated VocabCollection.</div>
+</div>
 </div>
 </section>
 </li>
@@ -105,16 +110,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVocabCollection()" class="member-name-link">getVocabCollection</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the VocabCollection associated with this Arff Parser</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isolateData(java.lang.String)" class="member-name-link">isolateData</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffText)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Isolates the data lines (lines occuring after the data tag) from the raw text of an arff file.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#readInArff(java.lang.String)" class="member-name-link">readInArff</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Reads in the raw text of an arff file.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Document.html" title="class in odu.edu.cs.cs350.pne">Document</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run(java.lang.String)" class="member-name-link">run</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Coordinates the contruction of Arff Documents from the data lines of an Arff File.</div>
+</div>
 </div>
 </div>
 </div>
@@ -136,6 +149,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>ArffParser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ArffParser</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vocabPath)</span></div>
+<div class="block">Creates an Arff Parser with an associated VocabCollection.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vocabPath</code> - A path to a file that stores a VocabCollection</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -150,24 +168,50 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="run(java.lang.String)">
 <h3>run</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Document.html" title="class in odu.edu.cs.cs350.pne">Document</a>&gt;</span>&nbsp;<span class="element-name">run</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</span></div>
+<div class="block">Coordinates the contruction of Arff Documents from the data lines of an Arff File.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arffPath</code> - A path to an arff file</dd>
+<dt>Returns:</dt>
+<dd>A list of Documents, each containing a category and a document signature (tokenMap)</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="readInArff(java.lang.String)">
 <h3>readInArff</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">readInArff</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</span></div>
+<div class="block">Reads in the raw text of an arff file.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arffPath</code> - A path to an arff file</dd>
+<dt>Returns:</dt>
+<dd>The raw text of an arff file</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isolateData(java.lang.String)">
 <h3>isolateData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">isolateData</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffText)</span></div>
+<div class="block">Isolates the data lines (lines occuring after the data tag) from the raw text of an arff file.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arffText</code> - The raw text of an arff file</dd>
+<dt>Returns:</dt>
+<dd>A list of data lines found after the data tag of an arff file</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVocabCollection()">
 <h3>getVocabCollection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></span>&nbsp;<span class="element-name">getVocabCollection</span>()</div>
+<div class="block">Returns the VocabCollection associated with this Arff Parser</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A VocabCollection</dd>
+</dl>
 </section>
 </li>
 </ul>
