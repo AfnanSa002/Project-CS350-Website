@@ -78,6 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">TrainDocument</span>
 <span class="extends-implements">extends <a href="Document.html" title="class in odu.edu.cs.cs350.pne">Document</a></span></div>
+<div class="block">A Train Document contains the raw text, assigned category, and functional signature of a file
+ used in training a Learning Machine (SVM).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,9 +100,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">TrainDocument</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;data,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">TrainDocument</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawText,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Train Document with the raw text of a file and an assigned category.</div>
+</div>
 </div>
 </section>
 </li>
@@ -117,16 +121,25 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addToVocab(odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">addToVocab</a><wbr>(<a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;vocab)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds every word in the tokenMap to a VocabCollection.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createTokenMap()" class="member-name-link">createTokenMap</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Counts up words in wordList and adds any that occur 5 or more times to tokenMap.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWordList()" class="member-name-link">getWordList</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the wordList that contains all words in rawText that aren't stop words.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#splitText(odu.edu.cs.cs350.pne.StopList)" class="member-name-link">splitText</a><wbr>(<a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a>&nbsp;stopWords)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Splits the raw text into individual words and adds words not found
+ in the stop list to wordList.</div>
+</div>
 </div>
 </div>
 </div>
@@ -150,8 +163,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.String)">
 <h3>TrainDocument</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TrainDocument</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;data,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TrainDocument</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rawText,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</span></div>
+<div class="block">Creates a Train Document with the raw text of a file and an assigned category.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rawText</code> - The raw text of a file</dd>
+<dd><code>category</code> - An assigned category</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -166,24 +185,42 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="splitText(odu.edu.cs.cs350.pne.StopList)">
 <h3>splitText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">splitText</span><wbr><span class="parameters">(<a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a>&nbsp;stopWords)</span></div>
+<div class="block">Splits the raw text into individual words and adds words not found
+ in the stop list to wordList.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>stopWords</code> - A StopList that contains words not to be recorded in wordList</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="createTokenMap()">
 <h3>createTokenMap</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">createTokenMap</span>()</div>
+<div class="block">Counts up words in wordList and adds any that occur 5 or more times to tokenMap.
+ Also, each word's count is set along with setting its normalized count to 1.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="addToVocab(odu.edu.cs.cs350.pne.VocabCollection)">
 <h3>addToVocab</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addToVocab</span><wbr><span class="parameters">(<a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;vocab)</span></div>
+<div class="block">Adds every word in the tokenMap to a VocabCollection.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vocab</code> - The VocabCollection to which words in tokenMap are added</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWordList()">
 <h3>getWordList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getWordList</span>()</div>
+<div class="block">Returns the wordList that contains all words in rawText that aren't stop words.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A List of words in rawText that aren't stop words</dd>
+</dl>
 </section>
 </li>
 </ul>

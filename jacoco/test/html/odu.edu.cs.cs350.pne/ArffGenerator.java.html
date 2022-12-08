@@ -11,90 +11,91 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSink;
 
+
 public class ArffGenerator 
 {
     String arffPath;
     Instances training;
     VocabCollection vocab;
-<span class="fc" id="L19">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="fc" id="L20">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
 
    
-    ArffGenerator(String path, VocabCollection v)
-<span class="fc" id="L23">    {</span>
-<span class="fc" id="L24">        arffPath = path;</span>
-<span class="fc" id="L25">        vocab = v;</span>
-<span class="fc" id="L26">    }</span>
+    public ArffGenerator(String path, VocabCollection v)
+<span class="fc" id="L24">    {</span>
+<span class="fc" id="L25">        arffPath = path;</span>
+<span class="fc" id="L26">        vocab = v;</span>
+<span class="fc" id="L27">    }</span>
     
     //Create a file that consists of the trained data
     public void generateInstances(List&lt;Document&gt; listOfDocuments)
     {
-<span class="fc" id="L31">        Set&lt;String&gt; vocabSet = vocab.getKeySet();  //set does maintain order of linkedhashmap</span>
-<span class="fc" id="L32">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
+<span class="fc" id="L32">        Set&lt;String&gt; vocabSet = vocab.getKeySet();  //set does maintain order of linkedhashmap</span>
+<span class="fc" id="L33">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
 
         //create vocab attributes
-<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (String word: vocabSet)</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (String word: vocabSet)</span>
         {
-<span class="fc" id="L37">            Attribute attr = new Attribute(word);</span>
-<span class="fc" id="L38">            attrInfo.add(attr);</span>
-<span class="fc" id="L39">        }</span>
+<span class="fc" id="L38">            Attribute attr = new Attribute(word);</span>
+<span class="fc" id="L39">            attrInfo.add(attr);</span>
+<span class="fc" id="L40">        }</span>
 
         //create and add category attribute
-<span class="fc" id="L42">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L43">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
-<span class="fc" id="L44">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
-<span class="fc" id="L45">        attrInfo.add(category);</span>
+<span class="fc" id="L43">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L44">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
+<span class="fc" id="L45">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
+<span class="fc" id="L46">        attrInfo.add(category);</span>
 
-<span class="fc" id="L47">        final int numOfAttributes = attrInfo.size();</span>
+<span class="fc" id="L48">        final int numOfAttributes = attrInfo.size();</span>
 
-<span class="fc" id="L49">        training = new Instances(&quot;TrainingData&quot;, attrInfo, listOfDocuments.size());</span>
-<span class="fc" id="L50">        training.setClass(category);</span>
+<span class="fc" id="L50">        training = new Instances(&quot;TrainingData&quot;, attrInfo, listOfDocuments.size());</span>
+<span class="fc" id="L51">        training.setClass(category);</span>
 
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        for (Document doc: listOfDocuments)</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (Document doc: listOfDocuments)</span>
         {
-<span class="fc" id="L54">            Instance instance = new DenseInstance(numOfAttributes);</span>
-<span class="fc" id="L55">            instance.setDataset(training);</span>
+<span class="fc" id="L55">            Instance instance = new DenseInstance(numOfAttributes);</span>
+<span class="fc" id="L56">            instance.setDataset(training);</span>
             
-<span class="fc" id="L57">            int i = 0;</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">            for (String word: vocabSet)</span>
+<span class="fc" id="L58">            int i = 0;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            for (String word: vocabSet)</span>
             {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">                if (doc.contains(word))</span>
-<span class="fc" id="L61">                    instance.setValue(i, doc.getWordWeight(word));</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">                if (doc.contains(word))</span>
+<span class="fc" id="L62">                    instance.setValue(i, doc.getWordWeight(word));</span>
                 else
-<span class="fc" id="L63">                    instance.setValue(i, 0.0);</span>
-<span class="fc" id="L64">                i++;</span>
-<span class="fc" id="L65">            }</span>
+<span class="fc" id="L64">                    instance.setValue(i, 0.0);</span>
+<span class="fc" id="L65">                i++;</span>
+<span class="fc" id="L66">            }</span>
 
-<span class="fc" id="L67">            instance.setValue(i, doc.getCategory());</span>
-<span class="fc" id="L68">            training.add(instance);</span>
-<span class="fc" id="L69">        }</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L68">            instance.setValue(i, doc.getCategory());</span>
+<span class="fc" id="L69">            training.add(instance);</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
 
     public void outputToArff()
     {
         try
         {
-<span class="fc" id="L76">            DataSink.write(arffPath, training);</span>
+<span class="fc" id="L77">            DataSink.write(arffPath, training);</span>
         }
-<span class="nc" id="L78">        catch (Exception e)</span>
+<span class="nc" id="L79">        catch (Exception e)</span>
         {
-<span class="nc" id="L80">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
-<span class="nc" id="L81">            e.printStackTrace();</span>
-<span class="fc" id="L82">        }</span>
-<span class="fc" id="L83">    }</span>
+<span class="nc" id="L81">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
+<span class="nc" id="L82">            e.printStackTrace();</span>
+<span class="fc" id="L83">        }</span>
+<span class="fc" id="L84">    }</span>
 
     public String getArffPath()
     {
-<span class="fc" id="L87">        return arffPath;</span>
+<span class="fc" id="L88">        return arffPath;</span>
     }
 
     public VocabCollection getVocabCollection()
     {
-<span class="fc" id="L92">        return vocab;</span>
+<span class="fc" id="L93">        return vocab;</span>
     }
 
     public Instances getInstances()
     {
-<span class="fc" id="L97">        return training;</span>
+<span class="fc" id="L98">        return training;</span>
     }
     
 }

@@ -2,68 +2,69 @@
 
 import java.util.*;
 
+
 public class Document {
     private String rawText;
     protected String category;
-<span class="fc" id="L8">    protected LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String, WordInfo&gt;();   //stores words as tokens with wordInfo</span>
+<span class="fc" id="L9">    protected LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String, WordInfo&gt;();   //stores words as tokens with wordInfo</span>
 
     public Document(String data, String category)
-<span class="fc" id="L11">    {</span>
-<span class="fc" id="L12">        this.rawText = data;</span>
-<span class="fc" id="L13">        this.category = category;</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L12">    {</span>
+<span class="fc" id="L13">        this.rawText = data;</span>
+<span class="fc" id="L14">        this.category = category;</span>
+<span class="fc" id="L15">    }</span>
 
     public boolean contains(String word)
     {
-<span class="fc" id="L18">        return tokenMap.containsKey(word);</span>
+<span class="fc" id="L19">        return tokenMap.containsKey(word);</span>
     }
 
     //converts to lowercase and removes all punctuation, numbers, and extraneous white space
     public String trimText(String rawText)
     {
-<span class="fc" id="L24">        String alphaNumText = rawText.replaceAll(&quot;[^a-zA-Z0-9 \n]*&quot;, &quot;&quot;).toLowerCase();</span>
-<span class="fc" id="L25">        String oneLineText =  alphaNumText.replaceAll(&quot;\n+&quot;, &quot; &quot;);</span>
-<span class="fc" id="L26">        String singleySpacedText = oneLineText.trim().replaceAll(&quot; +&quot;, &quot; &quot;);</span>
+<span class="fc" id="L25">        String alphaNumText = rawText.replaceAll(&quot;[^a-zA-Z0-9 \n]*&quot;, &quot;&quot;).toLowerCase();</span>
+<span class="fc" id="L26">        String oneLineText =  alphaNumText.replaceAll(&quot;\n+&quot;, &quot; &quot;);</span>
+<span class="fc" id="L27">        String singleySpacedText = oneLineText.trim().replaceAll(&quot; +&quot;, &quot; &quot;);</span>
 
-<span class="fc" id="L28">        return singleySpacedText;</span>
+<span class="fc" id="L29">        return singleySpacedText;</span>
     }
 
     public void calculateTermWeights(VocabCollection vocab)
     {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())</span>
         {
-<span class="fc" id="L35">            String word = element.getKey();</span>
-<span class="fc" id="L36">            WordInfo info = (WordInfo)element.getValue();</span>
+<span class="fc" id="L36">            String word = element.getKey();</span>
+<span class="fc" id="L37">            WordInfo info = (WordInfo)element.getValue();</span>
 
             // info.normalizedCount = (double)info.count/(double)numOfWords;    //normalize using TF-IDF
-<span class="fc" id="L39">            info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word); //normalize using Binary-IDF</span>
-<span class="fc" id="L40">        }</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L40">            info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word); //normalize using Binary-IDF</span>
+<span class="fc" id="L41">        }</span>
+<span class="fc" id="L42">    }</span>
     
     //Getters and Setters
     public String getRawText()
     {
-<span class="fc" id="L46">        return this.rawText;</span>
+<span class="fc" id="L47">        return this.rawText;</span>
     }
 
     public void setCategory(String newCategory)
     {
-<span class="nc" id="L51">        this.category = newCategory;</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L52">        this.category = newCategory;</span>
+<span class="nc" id="L53">    }</span>
 
     public String getCategory()
     {
-<span class="fc" id="L56">        return this.category;</span>
+<span class="fc" id="L57">        return this.category;</span>
     }
 
     public LinkedHashMap&lt;String, WordInfo&gt; getTokenMap()
     {
-<span class="fc" id="L61">        return this.tokenMap;</span>
+<span class="fc" id="L62">        return this.tokenMap;</span>
     }
 
     public double getWordWeight(String word)
     {
-<span class="fc" id="L66">        return tokenMap.get(word).termWeight;</span>
+<span class="fc" id="L67">        return tokenMap.get(word).termWeight;</span>
     }
 
     

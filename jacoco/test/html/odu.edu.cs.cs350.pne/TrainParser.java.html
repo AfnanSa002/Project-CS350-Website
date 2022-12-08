@@ -4,95 +4,91 @@ import java.io.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.AutoDetectParser;
-import org.apache.tika.sax.BodyContentHandler;
-
 
 public class TrainParser      //Singleton
 {
     private StopList stopWords;
-<span class="fc" id="L15">    private VocabCollection vocab = new VocabCollection();</span>
+<span class="fc" id="L11">    private VocabCollection vocab = new VocabCollection();</span>
     
     
     public TrainParser (StopList list, String vocabPath)
-<span class="fc" id="L19">    {   </span>
-<span class="fc" id="L20">        stopWords = list;</span>
-<span class="fc" id="L21">        vocab.readInVocab(vocabPath);</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L15">    {   </span>
+<span class="fc" id="L16">        stopWords = list;</span>
+<span class="fc" id="L17">        vocab.readInVocab(vocabPath);</span>
+<span class="fc" id="L18">    }</span>
    
     //entry point for document creation
     public TrainDocument createDocument(String filePath, String category)
     {   
-<span class="fc" id="L27">        String text = readFileStandard(filePath);</span>
-<span class="fc" id="L28">        TrainDocument document = new TrainDocument(text, category);</span>
-<span class="fc" id="L29">        document.splitText(stopWords); //ommitting stopwords</span>
-<span class="fc" id="L30">        document.createTokenMap();</span>
-<span class="fc" id="L31">        document.addToVocab(vocab);</span>
-<span class="fc" id="L32">        return document;</span>
+<span class="fc" id="L23">        String text = readFileStandard(filePath);</span>
+<span class="fc" id="L24">        TrainDocument document = new TrainDocument(text, category);</span>
+<span class="fc" id="L25">        document.splitText(stopWords); //ommitting stopwords</span>
+<span class="fc" id="L26">        document.createTokenMap();</span>
+<span class="fc" id="L27">        document.addToVocab(vocab);</span>
+<span class="fc" id="L28">        return document;</span>
     }
 
 
     public String readFileStandard(String filePath)
     {
-<span class="fc" id="L38">        String extension = filePath.substring(filePath.length()-3);</span>
+<span class="fc" id="L34">        String extension = filePath.substring(filePath.length()-3);</span>
         
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (extension.equals(&quot;pdf&quot;))</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (extension.equals(&quot;pdf&quot;))</span>
         {
             try
             {  
-<span class="fc" id="L44">                File file = new File(filePath);   </span>
-<span class="fc" id="L45">                PDDocument doc = PDDocument.load(file);  </span>
-<span class="fc" id="L46">                String rawText = new PDFTextStripper().getText(doc);</span>
+<span class="fc" id="L40">                File file = new File(filePath);   </span>
+<span class="fc" id="L41">                PDDocument doc = PDDocument.load(file);  </span>
+<span class="fc" id="L42">                String rawText = new PDFTextStripper().getText(doc);</span>
 
-<span class="fc" id="L48">                doc.close();</span>
+<span class="fc" id="L44">                doc.close();</span>
 
-<span class="fc" id="L50">                return rawText;</span>
+<span class="fc" id="L46">                return rawText;</span>
             }
-<span class="nc" id="L52">            catch (IOException e) </span>
+<span class="nc" id="L48">            catch (IOException e) </span>
             {
-<span class="nc" id="L54">                System.out.println(&quot;Not able to load PDF&quot;);</span>
-<span class="nc" id="L55">                e.printStackTrace();</span>
-<span class="nc" id="L56">                return &quot;Error&quot;;</span>
+<span class="nc" id="L50">                System.out.println(&quot;Not able to load PDF&quot;);</span>
+<span class="nc" id="L51">                e.printStackTrace();</span>
+<span class="nc" id="L52">                return &quot;Error&quot;;</span>
             }
         }    
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
         {
-<span class="fc" id="L61">            StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L57">            StringBuilder builder = new StringBuilder();</span>
             
-<span class="fc" id="L63">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
+<span class="fc" id="L59">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
             {   
                 String str;
 
-<span class="fc bfc" id="L67" title="All 2 branches covered.">                while ((str = buffer.readLine()) != null)</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                while ((str = buffer.readLine()) != null)</span>
                 {    
-<span class="fc" id="L69">                    builder.append(str + &quot; &quot;);</span>
+<span class="fc" id="L65">                    builder.append(str + &quot; &quot;);</span>
                 }
-<span class="fc" id="L71">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
-<span class="fc" id="L72">                return builder.toString();</span>
+<span class="fc" id="L67">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="fc" id="L68">                return builder.toString();</span>
             }
-<span class="nc" id="L74">            catch (IOException e)</span>
+<span class="nc" id="L70">            catch (IOException e)</span>
             {
-<span class="nc" id="L76">                System.out.println(&quot;Not able to load Text File&quot;);</span>
-<span class="nc" id="L77">                e.printStackTrace();</span>
-<span class="nc" id="L78">                return &quot;Error&quot;;</span>
+<span class="nc" id="L72">                System.out.println(&quot;Not able to load Text File&quot;);</span>
+<span class="nc" id="L73">                e.printStackTrace();</span>
+<span class="nc" id="L74">                return &quot;Error&quot;;</span>
             }
         }
         else
         {
-<span class="nc" id="L83">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
-<span class="nc" id="L84">            return &quot;Invalid&quot;;</span>
+<span class="nc" id="L79">            System.out.println(&quot;Invalid File Type Extension&quot;);</span>
+<span class="nc" id="L80">            return &quot;Invalid&quot;;</span>
         }
     }
 
     public StopList getStopList()
     {
-<span class="fc" id="L90">        return stopWords;</span>
+<span class="fc" id="L86">        return stopWords;</span>
     }
 
     public VocabCollection getVocabCollection()
     {
-<span class="fc" id="L95">        return vocab;</span>
+<span class="fc" id="L91">        return vocab;</span>
     }
 
     

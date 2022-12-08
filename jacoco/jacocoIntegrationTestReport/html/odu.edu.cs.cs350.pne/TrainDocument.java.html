@@ -3,188 +3,108 @@
 import java.util.*;
 
 
+/**
+ * A Train Document contains the raw text, assigned category, and functional signature of a file
+ * used in training a Learning Machine (SVM).
+ */
 public class TrainDocument extends Document
 {   
-    //private String rawText;
-    //private String category;
-    //private LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String, WordInfo&gt;();
-<span class="nc" id="L11">    private List&lt;String&gt; wordList = new ArrayList&lt;String&gt;();                        //stores all words excluding stop words </span>
+    /**
+     * Stores all words except for stop words that are found in the document.
+     */
+<span class="nc" id="L15">    private List&lt;String&gt; wordList = new ArrayList&lt;String&gt;();</span>
     
-    public TrainDocument (String data, String category)
+    /**
+     * Creates a Train Document with the raw text of a file and an assigned category.
+     * @param rawText The raw text of a file
+     * @param category An assigned category
+     */
+    public TrainDocument (String rawText, String category)
     {
-<span class="nc" id="L15">        super(data, category);</span>
-<span class="nc" id="L16">    }</span>
+<span class="nc" id="L24">        super(rawText, category);</span>
+<span class="nc" id="L25">    }</span>
     
-    //splits text omitting STOPWORDS
+    /**
+     * Splits the raw text into individual words and adds words not found
+     * in the stop list to wordList.
+     * @param stopWords A StopList that contains words not to be recorded in wordList
+     */
     public void splitText(StopList stopWords)
     {
-<span class="nc" id="L21">        String trimmedText = trimText(this.getRawText());</span>
+<span class="nc" id="L34">        String trimmedText = trimText(this.getRawText());</span>
         
-<span class="nc" id="L23">        Scanner scanner = new Scanner(trimmedText);</span>
-<span class="nc" id="L24">        scanner.useDelimiter(&quot; &quot;);</span>
+<span class="nc" id="L36">        Scanner scanner = new Scanner(trimmedText);</span>
+<span class="nc" id="L37">        scanner.useDelimiter(&quot; &quot;);</span>
 
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        while (scanner.hasNext())</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        while (scanner.hasNext())</span>
         {
-<span class="nc" id="L28">            String word = scanner.next();</span>
-<span class="nc bnc" id="L29" title="All 2 branches missed.">            if(stopWords.contains(word))</span>
-<span class="nc" id="L30">                continue;</span>
+<span class="nc" id="L41">            String word = scanner.next();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            if(stopWords.contains(word))</span>
+<span class="nc" id="L43">                continue;</span>
             else
-<span class="nc" id="L32">                wordList.add(word);</span>
-<span class="nc" id="L33">        }</span>
+<span class="nc" id="L45">                wordList.add(word);</span>
+<span class="nc" id="L46">        }</span>
 
-<span class="nc" id="L35">        scanner.close();</span>
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L48">        scanner.close();</span>
+<span class="nc" id="L49">    }</span>
     
-    //Count up words in wordList and construct token map from words occuring 5 or more times
+    /**
+     * Counts up words in wordList and adds any that occur 5 or more times to tokenMap.
+     * Also, each word's count is set along with setting its normalized count to 1.
+     */
     public void createTokenMap()
     {
-<span class="nc" id="L41">        HashMap&lt;String,Integer&gt; counts = new HashMap&lt;String,Integer&gt;();</span>
+<span class="nc" id="L57">        HashMap&lt;String,Integer&gt; counts = new HashMap&lt;String,Integer&gt;();</span>
 
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        for (String word: wordList)</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (String word: wordList)</span>
         {             
-<span class="nc bnc" id="L45" title="All 2 branches missed.">            if (!counts.containsKey(word))</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            if (!counts.containsKey(word))</span>
             {
-<span class="nc" id="L47">                counts.put(word, (Integer)1);</span>
-<span class="nc" id="L48">                continue;</span>
+<span class="nc" id="L63">                counts.put(word, (Integer)1);</span>
+<span class="nc" id="L64">                continue;</span>
             }
             
-<span class="nc" id="L51">            int i = (int)counts.get(word);</span>
-<span class="nc" id="L52">            counts.put(word, (Integer)(++i));</span>
-<span class="nc" id="L53">        }</span>
+<span class="nc" id="L67">            int i = (int)counts.get(word);</span>
+<span class="nc" id="L68">            counts.put(word, (Integer)(++i));</span>
+<span class="nc" id="L69">        }</span>
 
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        for (Map.Entry&lt;String,Integer&gt; element: counts.entrySet())</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        for (Map.Entry&lt;String,Integer&gt; element: counts.entrySet())</span>
         {
-<span class="nc" id="L57">            int count = (int)element.getValue();</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (count &gt;= 5)</span>
+<span class="nc" id="L73">            int count = (int)element.getValue();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if (count &gt;= 5)</span>
             {
-<span class="nc" id="L60">                String word = element.getKey();</span>
-<span class="nc" id="L61">                tokenMap.put(word, new WordInfo());</span>
-<span class="nc" id="L62">                WordInfo info = tokenMap.get(word);</span>
-<span class="nc" id="L63">                info.count = count;</span>
-<span class="nc" id="L64">                info.normalizedCount = 1;   //if in token map, it occured at least 5 times</span>
+<span class="nc" id="L76">                String word = element.getKey();</span>
+<span class="nc" id="L77">                tokenMap.put(word, new WordInfo());</span>
+<span class="nc" id="L78">                WordInfo info = tokenMap.get(word);</span>
+<span class="nc" id="L79">                info.count = count;</span>
+<span class="nc" id="L80">                info.normalizedCount = 1;   //if in token map, it occured at least 5 times</span>
             }
-<span class="nc" id="L66">        }</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L82">        }</span>
+<span class="nc" id="L83">    }</span>
     
-    //adds keys of tokenMap (words that appear 5 or more times) to vocab
+    /**
+     * Adds every word in the tokenMap to a VocabCollection.
+     * @param vocab The VocabCollection to which words in tokenMap are added
+     */
     public void addToVocab(VocabCollection vocab)
     {
         
-<span class="nc" id="L73">        Set&lt;String&gt; wordSet = tokenMap.keySet();</span>
+<span class="nc" id="L92">        Set&lt;String&gt; wordSet = tokenMap.keySet();</span>
 
-<span class="nc" id="L75">        vocab.increaseTotalDocs();</span>
+<span class="nc" id="L94">        vocab.increaseTotalDocs();</span>
 
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        for (String word: wordSet)</span>
-<span class="nc" id="L78">            vocab.addWord(word);</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        for (String word: wordSet)</span>
+<span class="nc" id="L97">            vocab.addWord(word);</span>
+<span class="nc" id="L98">    }</span>
     
+    /**
+     * Returns the wordList that contains all words in rawText that aren't stop words.
+     * @return A List of words in rawText that aren't stop words
+     */
     public List&lt;String&gt; getWordList()
     {
-<span class="nc" id="L83">        return wordList;</span>
+<span class="nc" id="L106">        return wordList;</span>
     }
     
 }
-
-
-    //Adds to vocab only if word occurs more 5 times or more (normalizedCount == 1)
-    // public void addToVocabNormalized(VocabCollection vocab)
-    // {
-    //     HashMap&lt;String,Integer&gt; used = new HashMap&lt;String,Integer&gt;();
-
-    //     vocab.increaseTotalDocs();
-
-    //     for (String word: wordList)
-    //     {             
-    //         if (!used.containsKey(word))
-    //         {
-    //             used.put(word, (Integer)1);
-    //             continue;
-    //         }
-    //         if (used.get(word)==5)
-    //             continue;
-            
-    //         int i = (int)used.get(word);
-    //         used.put(word, (Integer)(++i));
-
-    //         if (i==5)
-    //             vocab.addWord(word);
-    //     }
-    // }
-
-    //adds each word (excluding stopWords) exactly once from wordList to vocabMap
-    // public void addToVocab(VocabCollection vocab)
-    // {
-    //     HashSet&lt;String&gt; used = new HashSet&lt;String&gt;();
-
-    //     vocab.increaseTotalDocs();
-
-    //     for (String word: wordList)
-    //     {             
-    //         if (used.contains(word))    //if true its already been added and we can continue
-    //             continue;
-    //         else
-    //         {
-    //             used.add(word);
-    //             vocab.addWord(word);
-    //         }
-    //     }
-
-    // @Override
-    // public void createTokenMap(VocabCollection vocab)
-    // {
-    //     //create map using vocabMap keys as keys for map
-    //     Set&lt;String&gt; temp = vocab.getKeySet();
-
-    //     for (String vocabWord: temp)
-    //     {
-    //         this.getTokenMap().put(vocabWord, new WordInfo());
-    //     }
-        
-    //     for (String word: wordList)
-    //     {
-    //        var wordInfo = this.getTokenMap().get(word);
-    //        wordInfo.count++;
-    //     }
-    // }
-
-    //calculates normalized count and the termweight using TF-IDF
-    // public void normalizeAndWeigh(VocabCollection vocab)
-    // {
-    //     for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())
-    //     {
-    //         String word = element.getKey();
-    //         WordInfo info = (WordInfo)element.getValue();
-    //         if (info.count == 0)
-    //             continue;
-            
-    //         if(info.count&gt;=5)    //normalize using binary representation
-    //             info.normalizedCount = 1;
-
-    //         // info.normalizedCount = (double)info.count/(double)numOfWords;    //normalize using TF-IDF
-    //         info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word);
-    //     }
-    // }
-
-
-    // public String getRawText(){return rawText;}
-
-    // public LinkedHashMap&lt;String, WordInfo&gt; getTokenMap(){return tokenMap;}
-    // */
-
-    // public String getCategory(){return category;}
-
-    // public int getNumOfWords(){return numOfWords;}
-
-    //normalize and Weigh cound data (already normalized as words added appear 5 or more times)
-    // public void calculateTermWeight(VocabCollection vocab)
-    // {
-    //     for (Map.Entry&lt;String, WordInfo&gt; element: tokenMap.entrySet())
-    //     {
-    //         String word = element.getKey();
-    //         WordInfo info = (WordInfo)element.getValue();
-
-    //         // info.normalizedCount = (double)info.count/(double)numOfWords;    //using TF-IDF
-    //         info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word); //using Binary-IDF
-    //     }
-    // }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
