@@ -67,7 +67,7 @@ import java.util.List;
      * @param args The user-supplied inputs
      * @return True if the inputs are valid, and False otherwise
      */
-    private static boolean isValidInputs(String[] args)
+    public static boolean isValidInputs(String[] args)
     {
 <span class="nc bnc" id="L72" title="All 2 branches missed.">        if (args.length != 2)</span>
         {
@@ -92,7 +92,7 @@ import java.util.List;
      * @param path A user-supplied file path
      * @return True if the path is valid, and False otherwise
      */
-    private static boolean isValidPath(String path)
+    public static boolean isValidPath(String path)
     {
 <span class="nc" id="L97">        File file = new File(path);</span>
 <span class="nc bnc" id="L98" title="All 2 branches missed.">        if (!file.exists())</span>
@@ -124,7 +124,7 @@ import java.util.List;
      * @param category A user-supplied category key
      * @return True if the category key is valid, and False otherwise
      */
-    private static boolean isValidCategory(String category)
+    public static boolean isValidCategory(String category)
     {
 <span class="nc" id="L129">        String[] validCategories = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
 <span class="nc" id="L130">        List&lt;String&gt; validCatList = new ArrayList&lt;String&gt;();</span>

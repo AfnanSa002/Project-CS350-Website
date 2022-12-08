@@ -104,9 +104,26 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isValidCategory(java.lang.String)" class="member-name-link">isValidCategory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Verifies that the user-supplied category is a letter (A-K).</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isValidInputs(java.lang.String%5B%5D)" class="member-name-link">isValidInputs</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns true, if the user-supplied inputs consist of two inputs: 
+ 1) a path to a valid file and 2) a valid classification's key (A-K).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isValidPath(java.lang.String)" class="member-name-link">isValidPath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Verifies that the user-supplied file path exists, is a valid document, and
+ has the extension ".pdf" or ".txt".</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Coordinates the execution of the ACMTrainer Program.</div>
 </div>
 </div>
@@ -154,6 +171,48 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>args</code> - A series of valid paths to pdf/txt files.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isValidInputs(java.lang.String[])">
+<h3>isValidInputs</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isValidInputs</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span></div>
+<div class="block">Returns true, if the user-supplied inputs consist of two inputs: 
+ 1) a path to a valid file and 2) a valid classification's key (A-K).
+ Otherwise, this function returns false.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>args</code> - The user-supplied inputs</dd>
+<dt>Returns:</dt>
+<dd>True if the inputs are valid, and False otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isValidPath(java.lang.String)">
+<h3>isValidPath</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isValidPath</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span></div>
+<div class="block">Verifies that the user-supplied file path exists, is a valid document, and
+ has the extension ".pdf" or ".txt".</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>path</code> - A user-supplied file path</dd>
+<dt>Returns:</dt>
+<dd>True if the path is valid, and False otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isValidCategory(java.lang.String)">
+<h3>isValidCategory</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isValidCategory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</span></div>
+<div class="block">Verifies that the user-supplied category is a letter (A-K).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>category</code> - A user-supplied category key</dd>
+<dt>Returns:</dt>
+<dd>True if the category key is valid, and False otherwise</dd>
 </dl>
 </section>
 </li>
