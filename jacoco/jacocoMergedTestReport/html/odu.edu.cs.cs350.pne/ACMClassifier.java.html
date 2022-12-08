@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * The ACMClassifier Program classifies a list of documents in accordance with the 1998 ACM Computing Classification System.
  */
-<span class="nc" id="L9">class ACMClassifier</span>
+<span class="nc" id="L9">public class ACMClassifier</span>
 {
     /**
      * Coordinates the execution of the ACMClassifier Program.
@@ -59,7 +59,7 @@ import java.util.*;
      * @param args The user-supplied inputs to the program
      * @return A list of valid file paths
      */
-    private static List&lt;String&gt; verifyPaths(String[] args)
+    public static List&lt;String&gt; verifyPaths(String[] args)
     {
 <span class="nc" id="L64">        List&lt;String&gt; validPaths = new ArrayList&lt;String&gt;();</span>
 <span class="nc bnc" id="L65" title="All 2 branches missed.">        for (String path: args)</span>
@@ -95,7 +95,7 @@ import java.util.*;
      * @param category A category key (A-K)
      * @return A classification name
      */
-    private static String retrieveCategory(String category)
+    public static String retrieveCategory(String category)
     {
         String categoryName;
 <span class="nc bnc" id="L101" title="All 12 branches missed.">        switch (category)</span>
