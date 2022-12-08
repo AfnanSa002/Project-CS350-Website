@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClassifyDocument.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">ClassifyDocument.java</span></div><h1>ClassifyDocument.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.util.*;
+
+
+public class ClassifyDocument extends Document
+{
+    //private String rawText;
+    //private int numOfWords = 0;
+    //private LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String, WordInfo&gt;();   //stores words as tokens with wordInfo
+<span class="nc" id="L11">    List&lt;String&gt; wordList = new ArrayList&lt;String&gt;();</span>
+
+    public ClassifyDocument (String rawText)
+    {
+        //Passing Null to Category as this doc has yet to be categorized
+<span class="nc" id="L16">        super(rawText, null);</span>
+<span class="nc" id="L17">    }</span>
+    
+    //split text omitting NONVOCAB WORDS
+    public void splitText(VocabCollection vocab)
+    {
+<span class="nc" id="L22">        Set&lt;String&gt; vocabWords = vocab.getKeySet();</span>
+        
+<span class="nc" id="L24">        String trimmedText = trimText(this.getRawText());</span>
+        
+<span class="nc" id="L26">        Scanner scanner = new Scanner(trimmedText);</span>
+<span class="nc" id="L27">        scanner.useDelimiter(&quot; &quot;);</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        while (scanner.hasNext())</span>
+        {
+<span class="nc" id="L31">            String word = scanner.next();</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            if(vocabWords.contains(word))</span>
+<span class="nc" id="L33">                wordList.add(word);</span>
+<span class="nc" id="L34">        }</span>
+<span class="nc" id="L35">        scanner.close();</span>
+<span class="nc" id="L36">    }</span>
+
+    //set keys using words in wordList (CONTAINS ONLY VOCAB WORDS) that appear more than 5 times
+    public void createTokenMap()
+    {
+<span class="nc" id="L41">        HashMap&lt;String,Integer&gt; counts = new HashMap&lt;String,Integer&gt;();</span>
+
+        //counts all words in wordList (CONTAINS ONLY VOCAB WORDS)
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for (String word: wordList)</span>
+        {             
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            if (!counts.containsKey(word))</span>
+            {
+<span class="nc" id="L48">                counts.put(word, (Integer)1);</span>
+<span class="nc" id="L49">                continue;</span>
+            }
+
+<span class="nc" id="L52">            int i = (int)counts.get(word);</span>
+<span class="nc" id="L53">            counts.put(word, (Integer)(++i));</span>
+<span class="nc" id="L54">        }</span>
+
+        //add all words in wordList (CONTAINS ONLY VOCAB WORDS) to TokenMap if they occur more than 5 times
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for (Map.Entry&lt;String,Integer&gt; element: counts.entrySet())</span>
+        {
+<span class="nc" id="L59">            int count = (int)element.getValue();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if (count &gt;= 5)</span>
+            {
+<span class="nc" id="L62">                String word = element.getKey();</span>
+<span class="nc" id="L63">                tokenMap.put(word, new WordInfo());</span>
+<span class="nc" id="L64">                WordInfo info = tokenMap.get(word);</span>
+<span class="nc" id="L65">                info.count = count;</span>
+<span class="nc" id="L66">                info.normalizedCount = 1;      //if in token map, it occured at least 5 times</span>
+            }
+<span class="nc" id="L68">        }</span>
+<span class="nc" id="L69">    }</span>
+    
+    public List&lt;String&gt; getWordList()
+    {
+<span class="nc" id="L73">        return wordList;</span>
+    }
+
+}
+
+// @Override
+//     public void createTokenMap(VocabCollection vocab)
+//     {
+//         //create map using vocabMap keys as keys for map (vocabMap has already omitted stopwords)
+//         Set&lt;String&gt; temp = vocab.getKeySet();
+//         for (String vocabWord: temp)
+//         {
+//             this.getTokenMap().put(vocabWord, new WordInfo());    //all values in wordInfo set to 0
+//         }
+
+//         String trimmedText = trimText(this.getData());
+        
+//         Scanner scanner = new Scanner(trimmedText);
+//         scanner.useDelimiter(&quot; &quot;);
+
+//         while (scanner.hasNext())
+//         {
+//             String word = scanner.next();
+//             if (this.getTokenMap().containsKey(word))
+//             {
+//                 WordInfo wordInfo = this.getTokenMap().get(word);
+//                 wordInfo.count++;
+//             }
+//         }
+
+//         scanner.close();
+//     }
+
+//     //calculates normalized count and the termweight using TF-IDF
+//     public void normalizeAndWeigh(VocabCollection vocab)
+//     {
+//         for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())
+//         {
+//             String word = element.getKey();
+//             WordInfo info = (WordInfo)element.getValue();
+//             if (info.count == 0)
+//                 continue;
+            
+//             if(info.count&gt;5)    //normalize using binary representation
+//                 info.normalizedCount = 1;
+
+//             // info.normalizedCount = (double)info.count/(double)numOfWords;    //normalize using TF-IDF
+//             info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word);
+//         }
+//     }
+
+    /*
+    public String getRawText()
+    {
+        return rawText;
+    }
+    
+    public LinkedHashMap&lt;String, WordInfo&gt; getTokenMap()
+    {
+        return tokenMap;
+    }
+    */
+    // public int getNumOfWords()
+    // {
+    //     return numOfWords;
+    // }
+
+    //calculates normalized count and the termweight using Binary-IDF
+    // public void calculateTermWeights(VocabCollection vocab)
+    // {
+    //     for (Map.Entry&lt;String, WordInfo&gt; element: this.getTokenMap().entrySet())
+    //     {
+    //         String word = element.getKey();
+    //         WordInfo info = (WordInfo)element.getValue();
+
+    //         // info.normalizedCount = (double)info.count/(double)numOfWords;    //normalize using TF-IDF
+    //         info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word); //normalize using Binary-IDF
+    //     }
+    // }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

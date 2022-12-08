@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LearningMachine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">LearningMachine.java</span></div><h1>LearningMachine.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.io.*;
+
+import weka.classifiers.functions.SMO;
+import weka.classifiers.functions.supportVector.RBFKernel;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.ArffLoader.ArffReader;
+
+
+public class LearningMachine 
+{
+    VocabCollection vocab;
+<span class="fc" id="L22">    Instances training = null;</span>
+<span class="fc" id="L23">    Instances classify = null;</span>
+<span class="fc" id="L24">    ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
+<span class="fc" id="L25">    SMO svm = new SMO();</span>
+
+    public LearningMachine(String trainPath, VocabCollection tempVocab)
+<span class="fc" id="L28">    {</span>
+<span class="fc" id="L29">        readInARFF(trainPath);      //TODO: Question: What do we do if file doesn't already exist? it should because initial trainer ran</span>
+<span class="fc" id="L30">        vocab = tempVocab;</span>
+<span class="fc" id="L31">    }</span>
+
+    public void run(List&lt;ClassifyDocument&gt; documents)
+    {
+<span class="nc" id="L35">        constructAttributeInfo();</span>
+
+        //extract data from classifyDocuments
+<span class="nc" id="L38">        extractClassifyData(documents);</span>
+
+        //create SMO(SVM)
+<span class="nc" id="L41">        createSMO();</span>
+
+        //run SMO(SVM)
+<span class="nc" id="L44">        classifyData(documents);</span>
+<span class="nc" id="L45">    }</span>
+
+    public void readInARFF(String arffPath)
+    {
+<span class="fc" id="L49">        File file = new File(arffPath);</span>
+<span class="pc bpc" id="L50" title="2 of 4 branches missed.">        if (!file.exists() || file.length()==0)     //guard against case of it not existing?</span>
+<span class="nc" id="L51">            return;</span>
+
+        try {
+<span class="fc" id="L54">            BufferedReader bReader = new BufferedReader(new FileReader(arffPath));</span>
+<span class="fc" id="L55">            ArffReader reader = new ArffReader(bReader);</span>
+<span class="fc" id="L56">            training = reader.getData();</span>
+<span class="fc" id="L57">            training.setClassIndex(0);  //sets the first attribute to be what we are predicting</span>
+<span class="nc" id="L58">        } catch (Exception e){</span>
+<span class="nc" id="L59">            System.out.println (&quot;An error occured reading in from &quot; + arffPath);</span>
+<span class="nc" id="L60">            e.printStackTrace();</span>
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">    }</span>
+
+    public void constructAttributeInfo()
+    {
+<span class="fc" id="L66">        Set&lt;String&gt; vocabSet = vocab.getKeySet();</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (String word: vocabSet)</span>
+        {
+<span class="fc" id="L69">            Attribute attr = new Attribute(word);</span>
+<span class="fc" id="L70">            attrInfo.add(attr);</span>
+<span class="fc" id="L71">        }</span>
+        
+<span class="fc" id="L73">        String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="fc" id="L74">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L75">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
+<span class="fc" id="L76">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
+<span class="fc" id="L77">        attrInfo.add(category);</span>
+<span class="fc" id="L78">    }</span>
+
+    public void extractClassifyData(List&lt;ClassifyDocument&gt; documents)
+    {
+<span class="fc" id="L82">        Set&lt;String&gt; vocabSet = vocab.getKeySet();</span>
+        
+<span class="fc" id="L84">        int numOfAttributes = attrInfo.size();</span>
+<span class="fc" id="L85">        classify = new Instances(&quot;toBeClassified&quot;, attrInfo, documents.size()); //attrInfo Usage</span>
+
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        for (ClassifyDocument doc: documents)</span>
+        {
+<span class="fc" id="L89">            Instance toClassify = new DenseInstance(numOfAttributes-1);</span>
+<span class="fc" id="L90">            toClassify.setDataset(classify);    //sets reference to dataset</span>
+            
+<span class="fc" id="L92">            int i = 0;          </span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">            for (String word: vocabSet)</span>
+            {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">                if (doc.contains(word))</span>
+<span class="fc" id="L96">                    toClassify.setValue(i, doc.getWordWeight(word));</span>
+                else
+<span class="fc" id="L98">                    toClassify.setValue(i, 0.0);</span>
+<span class="fc" id="L99">                i++;</span>
+<span class="fc" id="L100">            }</span>
+<span class="fc" id="L101">            classify.add(toClassify);</span>
+<span class="fc" id="L102">        }</span>
+<span class="fc" id="L103">    }</span>
+    
+    public void createSMO()
+    {
+<span class="fc" id="L107">        final double gamma = 0.01;</span>
+<span class="fc" id="L108">        final double C = 1.0;</span>
+<span class="fc" id="L109">        String[] options = {&quot;-N&quot;, &quot;0&quot;, &quot;-V&quot;, &quot;-1&quot;};</span>
+        
+        try{
+<span class="fc" id="L112">            svm.setOptions(options);</span>
+<span class="fc" id="L113">            svm.setKernel(new RBFKernel(training, 25007, gamma));</span>
+<span class="fc" id="L114">            svm.setC(C);</span>
+<span class="nc" id="L115">            svm.buildClassifier(training);</span>
+<span class="fc" id="L116">        } catch (Exception e) {</span>
+<span class="fc" id="L117">            System.out.println(&quot;Failed to create SMO.&quot;);</span>
+<span class="fc" id="L118">            e.printStackTrace();</span>
+<span class="nc" id="L119">        }</span>
+<span class="fc" id="L120">    }</span>
+
+    public void classifyData(List&lt;ClassifyDocument&gt; documents)
+    {   
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        for (int i=0; i&lt;documents.size(); i++)</span>
+        {
+            try{
+<span class="nc" id="L127">                double prediction = svm.classifyInstance(classify.get(i));</span>
+<span class="nc" id="L128">                String predictedCat = attrInfo.get(0).value((int)prediction);</span>
+<span class="nc" id="L129">                documents.get(i).setCategory(predictedCat);</span>
+<span class="nc" id="L130">            } catch (Exception e)</span>
+            {
+<span class="nc" id="L132">                System.out.println(&quot;Error occured in prediction&quot;);</span>
+<span class="nc" id="L133">                e.printStackTrace();</span>
+<span class="nc" id="L134">            }</span>
+        }
+<span class="nc" id="L136">    }</span>
+    
+    public Instances getTrainingInstances()
+    {
+<span class="fc" id="L140">        return training;</span>
+    }
+
+    public Instances getClassifyInstances()
+    {
+<span class="fc" id="L145">        return classify;</span>
+    }
+
+    public VocabCollection getVocabCollection()
+    {
+<span class="fc" id="L150">        return vocab;</span>
+    }
+
+    public ArrayList&lt;Attribute&gt; getAttrInfo()
+    {
+<span class="fc" id="L155">        return attrInfo;</span>
+    }
+
+    public SMO getSVM()
+    {
+<span class="fc" id="L160">        return svm;</span>
+    }
+
+    
+    
+
+
+
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

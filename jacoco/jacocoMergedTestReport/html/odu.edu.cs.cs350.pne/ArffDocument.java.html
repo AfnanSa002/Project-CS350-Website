@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ArffDocument.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">ArffDocument.java</span></div><h1>ArffDocument.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.util.Set;
+
+
+public class ArffDocument extends Document
+{
+    // private String category;
+    // private LinkedHashMap&lt;String, WordInfo&gt; tokenMap = new LinkedHashMap&lt;String,WordInfo&gt;();
+
+    public ArffDocument()
+    {
+<span class="fc" id="L13">        super(&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L14">    }</span>
+    
+    public void decodeArffData(String arffData, VocabCollection vocab)
+    {
+<span class="fc" id="L18">        Set&lt;String&gt; temp = vocab.getKeySet();</span>
+<span class="fc" id="L19">        String[] vocabWords = new String[temp.size()];</span>
+<span class="fc" id="L20">        vocabWords = temp.toArray(vocabWords);</span>
+
+<span class="fc" id="L22">        String[] values = arffData.split(&quot;,&quot;);</span>
+        
+
+<span class="fc" id="L25">        int i=0;  //iterates over vocabWords and arffDataValues</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (; i&lt;values.length-1; i++) </span>
+        {
+<span class="fc" id="L28">            double weight = Double.parseDouble(values[i]);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            if (weight!=0)</span>
+            {
+<span class="fc" id="L31">                tokenMap.put(vocabWords[i], new WordInfo());</span>
+<span class="fc" id="L32">                WordInfo info = tokenMap.get(vocabWords[i]);</span>
+<span class="fc" id="L33">                info.normalizedCount = 1;</span>
+<span class="fc" id="L34">            }</span>
+            else    //if weight == 0
+            {
+                //if every doc has word add to tokenMap (weight == nc*idf == 1*0), else dont do anything
+<span class="fc" id="L38">                int docFreq = vocab.getDocFreq(vocabWords[i]);</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">                if (docFreq == vocab.getTotalDocuments())       </span>
+                {
+<span class="fc" id="L41">                    tokenMap.put(vocabWords[i], new WordInfo());</span>
+<span class="fc" id="L42">                    WordInfo info = tokenMap.get(vocabWords[i]);</span>
+<span class="fc" id="L43">                    info.normalizedCount = 1;</span>
+                }
+            }
+        }
+<span class="fc" id="L47">        category = values[i];</span>
+<span class="fc" id="L48">    }</span>
+
+}
+
+// public void calculateTermWeights(VocabCollection vocab)
+//     {
+//         for (Map.Entry&lt;String,WordInfo&gt; element: tokenMap.entrySet())
+//         {
+//             String word = element.getKey();
+//             WordInfo info = element.getValue();
+
+//             info.termWeight = info.normalizedCount * vocab.getInvDocFreq(word);
+//         }
+//     }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VocabCollection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">VocabCollection.java</span></div><h1>VocabCollection.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.Math;
+
+/**
+ * This VocabCollection holds words that are significant to those documents used for training.
+ * This also contains each word's associated document frequency and inverse document frequency.
+ */
+
+public class VocabCollection
+{
+    /**
+     * Contains each word along with its respective document frequency and inverse document frequency.
+     * These words are ordered by insertion.
+     */
+<span class="fc" id="L23">    private LinkedHashMap&lt;String, WordFrequency&gt; vocabMap = new LinkedHashMap&lt;String, WordFrequency&gt;();</span>
+
+    /**
+     * The total number of documents that have contributed to this VocabCollection.
+     */
+    private int totalDocuments;
+
+    /**
+     * Creates a VocabCollection and initially sets the total number of documents to 0.
+     */
+    public VocabCollection()
+<span class="fc" id="L34">    {</span>
+<span class="fc" id="L35">        totalDocuments = 0;</span>
+<span class="fc" id="L36">    }</span>
+
+    /**
+     * Increases the total number of documents that have contributed to this VocabCollection.
+     */
+    public void increaseTotalDocs()
+    {
+<span class="nc" id="L43">        totalDocuments++;</span>
+<span class="nc" id="L44">    }</span>
+
+    /**
+     * Adds a word to this VocabCollection and increments the document frequency for that word.
+     * @param word A word to be added to this VocabCollection
+     */
+    public void addWord(String word)
+    {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (!vocabMap.containsKey(word))</span>
+<span class="nc" id="L53">            vocabMap.put(word, new WordFrequency());</span>
+        
+<span class="nc" id="L55">        var wordStats = vocabMap.get(word);</span>
+<span class="nc" id="L56">        wordStats.docFrequency++;</span>
+<span class="nc" id="L57">    }</span>
+
+    /**
+     * Calculates the inverse document frequency for every word in this VocabCollection using
+     * the equation, log_2(N/df) where N is the total number of documents and df is the
+     * document frequency of the respective word.
+     */
+    public void calcInverseDocFrequency()
+    {
+<span class="nc" id="L66">        double log2 = Math.log(2);</span>
+
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for (Map.Entry&lt;String, WordFrequency&gt; element: vocabMap.entrySet())</span>
+        {
+<span class="nc" id="L70">            WordFrequency wordStats = (WordFrequency)element.getValue();</span>
+<span class="nc" id="L71">            wordStats.inverseDocFrequency = Math.log(totalDocuments/(double)wordStats.docFrequency) / log2;</span>
+<span class="nc" id="L72">        }</span>
+<span class="nc" id="L73">    }</span>
+
+    /**
+     * Reads a VocabCollection from a file that contains the total number of documents and
+     * each word in the VocabCollection alongside its respective document frequency.
+     * @param vocabPath Path to a stored VocabCollection
+     */
+    public void readInVocab(String vocabPath)
+    {
+        try
+        {
+<span class="fc" id="L84">            File file = new File (vocabPath);</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">            if (!file.exists())</span>
+<span class="nc" id="L86">                file.createNewFile();</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            if (file.length()==0)</span>
+<span class="nc" id="L88">                return;</span>
+            
+<span class="fc" id="L90">            Scanner reader = new Scanner(file);</span>
+            
+<span class="fc" id="L92">            totalDocuments = reader.nextInt();</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">            while (reader.hasNext())</span>
+            {
+<span class="fc" id="L95">                String word = reader.next();</span>
+<span class="fc" id="L96">                vocabMap.put(word, new WordFrequency());</span>
+<span class="fc" id="L97">                WordFrequency wordStats = vocabMap.get(word);</span>
+<span class="fc" id="L98">                wordStats.docFrequency = reader.nextInt();</span>
+                //wordStats.isInAllDocuments = reader.nextBoolean();  //ADDTRACKING
+<span class="fc" id="L100">            }</span>
+<span class="fc" id="L101">            reader.close();</span>
+        }
+<span class="nc" id="L103">        catch (Exception e)</span>
+        {
+<span class="nc" id="L105">            System.out.println(&quot;An error occured&quot;);</span>
+<span class="nc" id="L106">            e.printStackTrace();</span>
+<span class="fc" id="L107">        }</span>
+<span class="fc" id="L108">    }</span>
+    
+    /**
+     * Writes this VocabCollection to a file, storing the total number of documents and
+     * each word in this VocabCollection alongside its respective document frequency.
+     * @param filePath Path to a file where the VocabCollection will be stored
+     */
+    public void writeOutVocab(String filePath)
+    {
+        try
+        {
+<span class="nc" id="L119">            FileWriter writer = new FileWriter(filePath);</span>
+<span class="nc" id="L120">            writer.write(totalDocuments + &quot;\n&quot;);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            for (Map.Entry&lt;String, WordFrequency&gt; element: vocabMap.entrySet())</span>
+            {
+<span class="nc" id="L123">                WordFrequency wordStats = (WordFrequency)element.getValue();</span>
+<span class="nc" id="L124">                writer.write(element.getKey() + &quot; &quot; + wordStats.docFrequency + &quot;\n&quot;);</span>
+<span class="nc" id="L125">            }</span>
+<span class="nc" id="L126">            writer.close();</span>
+        }
+<span class="nc" id="L128">        catch (IOException e)</span>
+        {
+<span class="nc" id="L130">            System.out.println(&quot;An error occurred&quot;);</span>
+<span class="nc" id="L131">            e.printStackTrace();</span>
+<span class="nc" id="L132">        }</span>
+<span class="nc" id="L133">    }</span>
+    
+    /**
+     * Returns all the words in the VocabCollection.
+     * @return Set of all words in this VocabCollection
+     */
+    public Set&lt;String&gt; getKeySet()
+    {
+<span class="fc" id="L141">        return vocabMap.keySet();</span>
+    }
+
+    /**
+     * Returns the LinkedHashMap used to store the words.
+     * @return LinkedHashMap containing all words along with their metadata
+     */
+    public LinkedHashMap&lt;String, WordFrequency&gt; getVocabMap()
+    {
+<span class="nc" id="L150">        return vocabMap;</span>
+    }
+
+    /**
+     * Returns the total number of documents associated with this VocabCollection.
+     * @return The total number of documents
+     */
+    public int getTotalDocuments()
+    {
+<span class="fc" id="L159">        return totalDocuments;</span>
+    }
+
+    /**
+     * Returns the inverse document frequency of a specific word
+     * @param word a word in the VocabCollection
+     * @return inverse document frequency of the word
+     */
+    public double getInvDocFreq(String word)
+    {
+<span class="nc" id="L169">        return vocabMap.get(word).inverseDocFrequency;</span>
+    }
+
+    /**
+     * Returns the document frequency of a specific word
+     * @param word a word in the VocabCollection
+     * @return document frequency of the word
+     */
+    public int getDocFreq(String word)
+    {
+<span class="fc" id="L179">        return vocabMap.get(word).docFrequency;</span>
+    }
+}
+
+/* Possible Special Cases (totalDocuments)(docFreq)
+ * (0)(n)   -&gt; will always result in Infinite idf (BAD)
+ * (1)(1)   -&gt; will always result in 0 idf (bad as all termweights will be 0)
+ * (n)(n)   -&gt; will always result in 0 idf (good because that means the word appears in every document)
+ * (2n)(n)  -&gt; will always result in 1 idf (idk (good or bad) termWeights will stay the same)
+ */
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
