@@ -76,6 +76,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">LearningMachine</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A Learning machine uses a WEKA SMO (SVM) to retrieve a predicted category for each Classify Document.
+ The Learning Machine uses the arff Data to construct a training Instances
+ and the Classify Documents to contruct a classify Instances.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +92,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">LearningMachine</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;trainPath,
  <a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;tempVocab)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Learning Machine with an arff file and an associated VocabCollection.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,37 +111,62 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#classifyData(java.util.List)" class="member-name-link">classifyData</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a>&gt;&nbsp;documents)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Classifies the classify Instances object using the SMO (SVM) and
+ sets the category in each respective Classify Document.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#constructAttributeInfo()" class="member-name-link">constructAttributeInfo</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Constructs the attribute info to be used in the creation of the classify Instances object.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createSMO()" class="member-name-link">createSMO</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Constructs the SMO (SVM) using the training Instances object.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#extractClassifyData(java.util.List)" class="member-name-link">extractClassifyData</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a>&gt;&nbsp;documents)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Constructs the classify Instances object from a list of Classify Documents.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;weka.core.Attribute&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAttrInfo()" class="member-name-link">getAttrInfo</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the associated Attribute Info</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>weka.core.Instances</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getClassifyInstances()" class="member-name-link">getClassifyInstances</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the classify Instances object.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>weka.classifiers.functions.SMO</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSVM()" class="member-name-link">getSVM</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the SMO (SVM).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>weka.core.Instances</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTrainingInstances()" class="member-name-link">getTrainingInstances</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the training Instances object.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVocabCollection()" class="member-name-link">getVocabCollection</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the associated VocabCollection.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#readInARFF(java.lang.String)" class="member-name-link">readInARFF</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Reads the data from an arff file into the training Instances object.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run(java.util.List)" class="member-name-link">run</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a>&gt;&nbsp;documents)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Coordinates the execution of the Learning Machine by constructing the Attribute Info,
+ extracting the data from the Classify Documents, and predicting the category of each
+ Classify Document.</div>
+</div>
 </div>
 </div>
 </div>
@@ -159,6 +189,13 @@ loadScripts(document, 'script');</script>
 <h3>LearningMachine</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">LearningMachine</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;trainPath,
  <a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a>&nbsp;tempVocab)</span></div>
+<div class="block">Creates a Learning Machine with an arff file and an associated VocabCollection.
+ Also, reads the arff file into the training Instances object.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>trainPath</code> - A path to an arff file</dd>
+<dd><code>tempVocab</code> - A VocabCollection associated with the arff file</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -173,66 +210,116 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="run(java.util.List)">
 <h3>run</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a>&gt;&nbsp;documents)</span></div>
+<div class="block">Coordinates the execution of the Learning Machine by constructing the Attribute Info,
+ extracting the data from the Classify Documents, and predicting the category of each
+ Classify Document.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>documents</code> - A list of Classify Documents to be classified.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="readInARFF(java.lang.String)">
 <h3>readInARFF</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">readInARFF</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</span></div>
+<div class="block">Reads the data from an arff file into the training Instances object.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arffPath</code> - A path to an arff file</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="constructAttributeInfo()">
 <h3>constructAttributeInfo</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">constructAttributeInfo</span>()</div>
+<div class="block">Constructs the attribute info to be used in the creation of the classify Instances object.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="extractClassifyData(java.util.List)">
 <h3>extractClassifyData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">extractClassifyData</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a>&gt;&nbsp;documents)</span></div>
+<div class="block">Constructs the classify Instances object from a list of Classify Documents.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>documents</code> - A list of Classify Documents</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="createSMO()">
 <h3>createSMO</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">createSMO</span>()</div>
+<div class="block">Constructs the SMO (SVM) using the training Instances object.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="classifyData(java.util.List)">
 <h3>classifyData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">classifyData</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a>&gt;&nbsp;documents)</span></div>
+<div class="block">Classifies the classify Instances object using the SMO (SVM) and
+ sets the category in each respective Classify Document.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>documents</code> - A list of Classify Documents</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTrainingInstances()">
 <h3>getTrainingInstances</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">weka.core.Instances</span>&nbsp;<span class="element-name">getTrainingInstances</span>()</div>
+<div class="block">Returns the training Instances object.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A training Instances object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getClassifyInstances()">
 <h3>getClassifyInstances</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">weka.core.Instances</span>&nbsp;<span class="element-name">getClassifyInstances</span>()</div>
+<div class="block">Returns the classify Instances object.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A classify Instances object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVocabCollection()">
 <h3>getVocabCollection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></span>&nbsp;<span class="element-name">getVocabCollection</span>()</div>
+<div class="block">Returns the associated VocabCollection.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A VocabCollection</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getAttrInfo()">
 <h3>getAttrInfo</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;weka.core.Attribute&gt;</span>&nbsp;<span class="element-name">getAttrInfo</span>()</div>
+<div class="block">Returns the associated Attribute Info</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A list of Attributes</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSVM()">
 <h3>getSVM</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">weka.classifiers.functions.SMO</span>&nbsp;<span class="element-name">getSVM</span>()</div>
+<div class="block">Returns the SMO (SVM).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A SMO object</dd>
+</dl>
 </section>
 </li>
 </ul>

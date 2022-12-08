@@ -5,112 +5,137 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-<span class="nc" id="L9">public class ACMTrainer </span>
+/**
+ * The ACMTrainer Program generates a training arff file by adding the document signature of a supplied document to an existing arff file.
+ */
+<span class="nc" id="L11">public class ACMTrainer </span>
 {
+    /**
+     * Coordinates the execution of the ACMTrainer Program.
+     * The user will supply the program with a path to a pdf/txt file and an assigned category.
+     * The supplied category should be a letter (A-K) that corresponds to one of the
+     * high-level areas of the ACM Computing Classification System.
+     * The result of this program will be the addition of document's document signature 
+     * to an existing arff file. If the arff file does not exist, an Initial Trainer will run
+     * and create an initial arff file from sample data files with known corresponding classifications.
+     * @param args A series of valid paths to pdf/txt files.
+     */
     public static void main(String[] args) 
     {
         //creates train.arff with sample data(Only runs if file has not been created)
-<span class="nc" id="L14">        InitialTrainer trainer = new InitialTrainer();</span>
-<span class="nc" id="L15">        trainer.run();</span>
+<span class="nc" id="L26">        InitialTrainer trainer = new InitialTrainer();</span>
+<span class="nc" id="L27">        trainer.run();</span>
         
         //Verify Input from User
-<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (!isValidInputs(args))</span>
-<span class="nc" id="L19">            System.exit(1);</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (!isValidInputs(args))</span>
+<span class="nc" id="L31">            System.exit(1);</span>
 
         //String vocabPath = &quot;src/main/resources/vocabCollection.txt&quot;;
         //String arffPath = &quot;src/main/resources/train.arff&quot;;
-<span class="nc" id="L23">        String vocabPath = &quot;acmclass-data/vocabCollection.txt&quot;;</span>
-<span class="nc" id="L24">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
-<span class="nc" id="L25">        StopList stopList = new StopList();</span>
+<span class="nc" id="L35">        String vocabPath = &quot;acmclass-data/vocabCollection.txt&quot;;</span>
+<span class="nc" id="L36">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
+<span class="nc" id="L37">        StopList stopList = new StopList();</span>
 
         //DECODE AND PROCESS Documents from ARFF
-<span class="nc" id="L28">        ArffParser arffParser = new ArffParser(vocabPath);</span>
-<span class="nc" id="L29">        List&lt;Document&gt; documents = arffParser.run(arffPath);</span>
+<span class="nc" id="L40">        ArffParser arffParser = new ArffParser(vocabPath);</span>
+<span class="nc" id="L41">        List&lt;Document&gt; documents = arffParser.run(arffPath);</span>
 
         //CREATE AND PROCESS NEW Inputted Documents
-<span class="nc" id="L32">        TrainParser tParser = new TrainParser(stopList, vocabPath);</span>
-<span class="nc" id="L33">        TrainDocument inputtedDocument = tParser.createDocument(args[0], args[1].toUpperCase());</span>
+<span class="nc" id="L44">        TrainParser tParser = new TrainParser(stopList, vocabPath);</span>
+<span class="nc" id="L45">        TrainDocument inputtedDocument = tParser.createDocument(args[0], args[1].toUpperCase());</span>
         ///tParser.processDocument(inputtedDocument);
         //tParser.writeOutVocabWrapper(vocabPath);
 
         //CALCULATE TERMWEIGHTS (doing all docs together so we have completed vocab)
-<span class="nc" id="L38">        VocabCollection vocab = tParser.getVocabCollection();</span>
-<span class="nc" id="L39">        vocab.calcInverseDocFrequency();</span>
-<span class="nc" id="L40">        vocab.writeOutVocab(vocabPath);</span>
-<span class="nc" id="L41">        documents.add((Document)inputtedDocument);</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        for (Document doc: documents)</span>
-<span class="nc" id="L43">            doc.calculateTermWeights(vocab);</span>
+<span class="nc" id="L50">        VocabCollection vocab = tParser.getVocabCollection();</span>
+<span class="nc" id="L51">        vocab.calcInverseDocFrequency();</span>
+<span class="nc" id="L52">        vocab.writeOutVocab(vocabPath);</span>
+<span class="nc" id="L53">        documents.add((Document)inputtedDocument);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        for (Document doc: documents)</span>
+<span class="nc" id="L55">            doc.calculateTermWeights(vocab);</span>
         
         //ENCODE NEW ARFF from Inputted Documents and ARFF Documents
-<span class="nc" id="L46">        ArffGenerator generator = new ArffGenerator(arffPath, vocab);</span>
-<span class="nc" id="L47">        generator.generateInstances(documents);</span>
-<span class="nc" id="L48">        generator.outputToArff();</span>
-        
-        //EXIT
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L58">        ArffGenerator generator = new ArffGenerator(arffPath, vocab);</span>
+<span class="nc" id="L59">        generator.generateInstances(documents);</span>
+<span class="nc" id="L60">        generator.outputToArff();</span>
+<span class="nc" id="L61">    }</span>
     
-    //Single File
+    /**
+     * Returns true, if the user-supplied inputs consist of two inputs: 
+     * 1) a path to a valid file and 2) a valid classification's key (A-K).
+     * Otherwise, this function returns false.
+     * @param args The user-supplied inputs
+     * @return True if the inputs are valid, and False otherwise
+     */
     private static boolean isValidInputs(String[] args)
     {
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (args.length != 2)</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (args.length != 2)</span>
         {
-<span class="nc" id="L58">            System.out.println(&quot;Please include a single file path followed by a specified category.\n&quot;);</span>
-<span class="nc" id="L59">            return false;</span>
+<span class="nc" id="L74">            System.out.println(&quot;Please include a single file path followed by a specified category.\n&quot;);</span>
+<span class="nc" id="L75">            return false;</span>
         }
         
-<span class="nc" id="L62">        String path = args[0];</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (!isValidPath(path))</span>
-<span class="nc" id="L64">            return false;   </span>
+<span class="nc" id="L78">        String path = args[0];</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (!isValidPath(path))</span>
+<span class="nc" id="L80">            return false;   </span>
 
-<span class="nc" id="L66">        String category = args[1];</span>
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (!isValidCategory(category))</span>
-<span class="nc" id="L68">            return false;</span>
+<span class="nc" id="L82">        String category = args[1];</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (!isValidCategory(category))</span>
+<span class="nc" id="L84">            return false;</span>
 
-<span class="nc" id="L70">        return true;</span>
+<span class="nc" id="L86">        return true;</span>
     }
 
+    /**
+     * Verifies that the user-supplied file path exists, is a valid document, and
+     * has the extension &quot;.pdf&quot; or &quot;.txt&quot;.
+     * @param path A user-supplied file path
+     * @return True if the path is valid, and False otherwise
+     */
     private static boolean isValidPath(String path)
     {
-<span class="nc" id="L75">        File file = new File(path);</span>
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (!file.exists())</span>
+<span class="nc" id="L97">        File file = new File(path);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (!file.exists())</span>
         {
-<span class="nc" id="L78">            System.out.println(path + &quot; does not exist.\n&quot;);</span>
-<span class="nc" id="L79">            return false;</span>
+<span class="nc" id="L100">            System.out.println(path + &quot; does not exist.\n&quot;);</span>
+<span class="nc" id="L101">            return false;</span>
         }
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (file.isDirectory())</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (file.isDirectory())</span>
         {
-<span class="nc" id="L83">            System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
-<span class="nc" id="L84">            return false;</span>
+<span class="nc" id="L105">            System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
+<span class="nc" id="L106">            return false;</span>
         }
-<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (file.length()==0)</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (file.length()==0)</span>
         {
-<span class="nc" id="L88">            System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
-<span class="nc" id="L89">            return false;</span>
+<span class="nc" id="L110">            System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
+<span class="nc" id="L111">            return false;</span>
         }
-<span class="nc" id="L91">        String extension = path.substring(path.length()-3);</span>
-<span class="nc bnc" id="L92" title="All 4 branches missed.">        if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;)</span>
+<span class="nc" id="L113">        String extension = path.substring(path.length()-3);</span>
+<span class="nc bnc" id="L114" title="All 4 branches missed.">        if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;)</span>
         {
-<span class="nc" id="L94">            System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
-<span class="nc" id="L95">            return false;</span>
+<span class="nc" id="L116">            System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
+<span class="nc" id="L117">            return false;</span>
         }
-<span class="nc" id="L97">        return true;</span>
+<span class="nc" id="L119">        return true;</span>
     }
 
-    //Verifies a single category
+    /**
+     * Verifies that the user-supplied category is a letter (A-K).
+     * @param category A user-supplied category key
+     * @return True if the category key is valid, and False otherwise
+     */
     private static boolean isValidCategory(String category)
     {
-<span class="nc" id="L103">        String[] validCategories = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
-<span class="nc" id="L104">        List&lt;String&gt; validCatList = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L105">        validCatList.addAll(Arrays.asList(validCategories));</span>
+<span class="nc" id="L129">        String[] validCategories = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="nc" id="L130">        List&lt;String&gt; validCatList = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L131">        validCatList.addAll(Arrays.asList(validCategories));</span>
 
-<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (validCatList.contains(category.toUpperCase()))</span>
-<span class="nc" id="L108">            return true;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        if (validCatList.contains(category.toUpperCase()))</span>
+<span class="nc" id="L134">            return true;</span>
         
-<span class="nc" id="L110">        System.out.println(&quot;Supplied Category must be within the range A-K according to the ACM Classification System.\n&quot;);</span>
-<span class="nc" id="L111">        return false;</span>
+<span class="nc" id="L136">        System.out.println(&quot;Supplied Category must be within the range A-K according to the ACM Classification System.\n&quot;);</span>
+<span class="nc" id="L137">        return false;</span>
     }
-    
     
 }
 
@@ -131,7 +156,7 @@ import java.util.List;
         //Creation of ZIP file
             //use github actions and/or gradle to create zip file dynamically on push
         //Javadoc
-            //label all functions using javadoc notation
+            //javadoc for Initial Trainer
         //CleanUp
             //eliminate as many Todo's as possible
             //remove commented out code below classes (do this list last)
@@ -173,39 +198,4 @@ import java.util.List;
                 //(n=previousNumOfVocabWords)(m=wordsThatWereNotInPreviousVocab))
 
     //Create ARFF with new documents and old train documents using new info and new number of attributes
-
-//NOTES:
-//TODO: issue can be handled when reading in arffs if we track vocab words in all documents.
-//Already created WordFrequency.isInAllDocuments and VocabCollection.trackWordsInAllDocs()
-    //Need to edit read/write functions for VocabCollection include isInAllDocuments member
-// if (weight == 0)
-// {
-//     if (thatVocabWord.isInAllDocuments == true)
-//         word.normalizedCount = 1;
-//     else
-//         word.normalizedCount = 0;
-// }
-// else
-//     word.normalizedCount = 1;
-
-//Loop through values of vocabWords (simulateVocabConstruction())
-            /*
-             * this function only adds word if vocabWord[v] in doc occurs more than 5 times(normalized count == 1). 
-             * However, in trainingDoc construction, each word is added to vocab if its 
-             * count is more than 0 (if it occurs at all and not in stopList)
-             * 
-             * EXAMPLE:
-             * weight == norm * idf
-             * weight == norm * log_2(N/df)
-             * therefore, if word appears in all docs N/df == 1 -&gt; idf == 0
-             *    if, all docs have this word less than 5 times -&gt; norm == 0
-             *        weight == 0 * 0 (insignificant effect)
-             *    if, one document has word more than 5 times -&gt; norm == 1
-             *        weight == 1 * 0 (SIGNIFICANT bc we are showing a weight of 0 for a word that is significant ot signature)
-             *    if, one document is added with word more than 5 times -&gt; norm == 1
-             *        weight == 1 * 0 (SIGNIFICANT bc we are showing a weight of 0 for a word that is significant ot signature)
-             * 
-             * QUESTION: Do we want to add words to vocab if they appear once?
-             *           Or, do we want to add words if they appear more than 5 times (normalized count == 1)?
-             */
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

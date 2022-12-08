@@ -52,7 +52,9 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/ACMTrainer.html" class="type-name-link" title="class in odu.edu.cs.cs350.pne">ACMTrainer</a> - Class in <a href="odu/edu/cs/cs350/pne/package-summary.html">odu.edu.cs.cs350.pne</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The ACMTrainer Program generates a training arff file by adding the document signature of a supplied document to an existing arff file.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ACMTrainer.html#%3Cinit%3E()" class="member-name-link">ACMTrainer()</a> - Constructor for class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ACMTrainer.html" title="class in odu.edu.cs.cs350.pne">ACMTrainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="odu/edu/cs/cs350/pne/TrainDocument.html#addToVocab(odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">addToVocab(VocabCollection)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/TrainDocument.html" title="class in odu.edu.cs.cs350.pne">TrainDocument</a></dt>
@@ -74,9 +76,13 @@ loadScripts(document, 'script');</script>
  and initially setting the category to null.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html" class="type-name-link" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a> - Class in <a href="odu/edu/cs/cs350/pne/package-summary.html">odu.edu.cs.cs350.pne</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">An Arff Generator generates an arff file from a list of Documents.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#%3Cinit%3E(java.lang.String,odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">ArffGenerator(String, VocabCollection)</a> - Constructor for class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an Arff Generator with a specified path and associated VocabCollection.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffParser.html" class="type-name-link" title="class in odu.edu.cs.cs350.pne">ArffParser</a> - Class in <a href="odu/edu/cs/cs350/pne/package-summary.html">odu.edu.cs.cs350.pne</a></dt>
 <dd>
 <div class="block">An Arff Parser reads in the text from an arff file and constructs a list of Arff Documents from the data in that text.</div>
@@ -103,7 +109,10 @@ loadScripts(document, 'script');</script>
 <div class="block">The associated category(classificiation) of a document.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#classifyData(java.util.List)" class="member-name-link">classifyData(List&lt;ClassifyDocument&gt;)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Classifies the classify Instances object using the SMO (SVM) and
+ sets the category in each respective Classify Document.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ClassifyDocument.html" class="type-name-link" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a> - Class in <a href="odu/edu/cs/cs350/pne/package-summary.html">odu.edu.cs.cs350.pne</a></dt>
 <dd>
 <div class="block">A Classify Document contains the raw text, assigned category, and document signature of a file
@@ -123,7 +132,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a Classify Parser with an associated VocabCollection.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#constructAttributeInfo()" class="member-name-link">constructAttributeInfo()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the attribute info to be used in the creation of the classify Instances object.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/Document.html#contains(java.lang.String)" class="member-name-link">contains(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/Document.html" title="class in odu.edu.cs.cs350.pne">Document</a></dt>
 <dd>
 <div class="block">Returns true if the document's tokenMap contains the word, false if not.</div>
@@ -145,7 +156,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a Train Document from a file path and a specified category.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#createSMO()" class="member-name-link">createSMO()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the SMO (SVM) using the training Instances object.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ClassifyDocument.html#createTokenMap()" class="member-name-link">createTokenMap()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a></dt>
 <dd>
 <div class="block">Counts up words in the word list and adds any that occur 5 or more times to tokenMap.</div>
@@ -180,28 +193,40 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#extractClassifyData(java.util.List)" class="member-name-link">extractClassifyData(List&lt;ClassifyDocument&gt;)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the classify Instances object from a list of Classify Documents.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#generateInstances(java.util.List)" class="member-name-link">generateInstances(List&lt;Document&gt;)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a training Instances object from a list of Documents.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#getArffPath()" class="member-name-link">getArffPath()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the path to an arff file associated with this Arff Generator.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#getAttrInfo()" class="member-name-link">getAttrInfo()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the associated Attribute Info</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/Document.html#getCategory()" class="member-name-link">getCategory()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/Document.html" title="class in odu.edu.cs.cs350.pne">Document</a></dt>
 <dd>
 <div class="block">Returns the category of this document.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#getClassifyInstances()" class="member-name-link">getClassifyInstances()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the classify Instances object.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/VocabCollection.html#getDocFreq(java.lang.String)" class="member-name-link">getDocFreq(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></dt>
 <dd>
 <div class="block">Returns the document frequency of a specific word</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#getInstances()" class="member-name-link">getInstances()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the training Instances object.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/VocabCollection.html#getInvDocFreq(java.lang.String)" class="member-name-link">getInvDocFreq(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></dt>
 <dd>
 <div class="block">Returns the inverse document frequency of a specific word</div>
@@ -223,7 +248,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the StopList associated with this Train Parser</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#getSVM()" class="member-name-link">getSVM()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the SMO (SVM).</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/Document.html#getTokenMap()" class="member-name-link">getTokenMap()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/Document.html" title="class in odu.edu.cs.cs350.pne">Document</a></dt>
 <dd>
 <div class="block">Returns the token map of this document.</div>
@@ -235,11 +262,15 @@ loadScripts(document, 'script');</script>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#getTrainData()" class="member-name-link">getTrainData()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#getTrainingInstances()" class="member-name-link">getTrainingInstances()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the training Instances object.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#getVocab()" class="member-name-link">getVocab()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#getVocabCollection()" class="member-name-link">getVocabCollection()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the associated VocabCollection.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffParser.html#getVocabCollection()" class="member-name-link">getVocabCollection()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffParser.html" title="class in odu.edu.cs.cs350.pne">ArffParser</a></dt>
 <dd>
 <div class="block">Returns the VocabCollection associated with this Arff Parser</div>
@@ -249,7 +280,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the VocabCollection associated with this Classify Parser</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#getVocabCollection()" class="member-name-link">getVocabCollection()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the associated VocabCollection.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/TrainParser.html#getVocabCollection()" class="member-name-link">getVocabCollection()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/TrainParser.html" title="class in odu.edu.cs.cs350.pne">TrainParser</a></dt>
 <dd>
 <div class="block">Returns the VocabCollection associated with this Train Parser</div>
@@ -297,14 +330,20 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html" class="type-name-link" title="class in odu.edu.cs.cs350.pne">LearningMachine</a> - Class in <a href="odu/edu/cs/cs350/pne/package-summary.html">odu.edu.cs.cs350.pne</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A Learning machine uses a WEKA SMO (SVM) to retrieve a predicted category for each Classify Document.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#%3Cinit%3E(java.lang.String,odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">LearningMachine(String, VocabCollection)</a> - Constructor for class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a Learning Machine with an arff file and an associated VocabCollection.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/ACMTrainer.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ACMTrainer.html" title="class in odu.edu.cs.cs350.pne">ACMTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Coordinates the execution of the ACMTrainer Program.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
 <dl class="index">
@@ -318,7 +357,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="odu/edu/cs/cs350/pne/package-summary.html">odu.edu.cs.cs350.pne</a> - package odu.edu.cs.cs350.pne</dt>
 <dd>&nbsp;</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#outputToArff()" class="member-name-link">outputToArff()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Outputs the training Instances object to an arff file.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#outputToARFF(weka.core.Instances,java.lang.String)" class="member-name-link">outputToARFF(Instances, String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -341,7 +382,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Reads in the raw text of an arff file.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#readInARFF(java.lang.String)" class="member-name-link">readInARFF(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Reads the data from an arff file into the training Instances object.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/VocabCollection.html#readInVocab(java.lang.String)" class="member-name-link">readInVocab(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></dt>
 <dd>
 <div class="block">Reads a VocabCollection from a file that contains the total number of documents and
@@ -354,7 +397,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Coordinates the contruction of Arff Documents from the data lines of an Arff File.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#run(java.util.List)" class="member-name-link">run(List&lt;ClassifyDocument&gt;)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Coordinates the execution of the Learning Machine by constructing the Attribute Info,
+ extracting the data from the Classify Documents, and predicting the category of each
+ Classify Document.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">

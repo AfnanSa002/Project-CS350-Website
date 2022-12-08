@@ -11,91 +11,131 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSink;
 
-
+/**
+ * An Arff Generator generates an arff file from a list of Documents.
+ */
 public class ArffGenerator 
 {
+    /**
+     * A path to an arff File.
+     */
     String arffPath;
-    Instances training;
-    VocabCollection vocab;
-<span class="fc" id="L20">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
 
-   
+    /**
+     * Holds the data associated with all Train Documents ever read into the supplied Arff.
+     */
+    Instances training;
+
+    /**
+     * Holds significant words found across all Train Documents
+     * that have been or will eventually be stored in an arff file.
+     */
+    VocabCollection vocab;
+
+    /**
+     * An array of valid category keys.
+     */
+<span class="fc" id="L38">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+
+    /**
+     * Creates an Arff Generator with a specified path and associated VocabCollection.
+     * @param path A path to an arff file
+     * @param v An associated VocabCollection
+     */
     public ArffGenerator(String path, VocabCollection v)
-<span class="fc" id="L24">    {</span>
-<span class="fc" id="L25">        arffPath = path;</span>
-<span class="fc" id="L26">        vocab = v;</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L46">    {</span>
+<span class="fc" id="L47">        arffPath = path;</span>
+<span class="fc" id="L48">        vocab = v;</span>
+<span class="fc" id="L49">    }</span>
     
-    //Create a file that consists of the trained data
+    /**
+     * Creates a training Instances object from a list of Documents.
+     * @param listOfDocuments A list of Documents
+     */
     public void generateInstances(List&lt;Document&gt; listOfDocuments)
     {
-<span class="fc" id="L32">        Set&lt;String&gt; vocabSet = vocab.getKeySet();  //set does maintain order of linkedhashmap</span>
-<span class="fc" id="L33">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
+<span class="fc" id="L57">        Set&lt;String&gt; vocabSet = vocab.getKeySet();  //set does maintain order of linkedhashmap</span>
+<span class="fc" id="L58">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
 
         //create vocab attributes
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (String word: vocabSet)</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (String word: vocabSet)</span>
         {
-<span class="fc" id="L38">            Attribute attr = new Attribute(word);</span>
-<span class="fc" id="L39">            attrInfo.add(attr);</span>
-<span class="fc" id="L40">        }</span>
+<span class="fc" id="L63">            Attribute attr = new Attribute(word);</span>
+<span class="fc" id="L64">            attrInfo.add(attr);</span>
+<span class="fc" id="L65">        }</span>
 
         //create and add category attribute
-<span class="fc" id="L43">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L44">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
-<span class="fc" id="L45">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
-<span class="fc" id="L46">        attrInfo.add(category);</span>
+<span class="fc" id="L68">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L69">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
+<span class="fc" id="L70">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
+<span class="fc" id="L71">        attrInfo.add(category);</span>
 
-<span class="fc" id="L48">        final int numOfAttributes = attrInfo.size();</span>
+<span class="fc" id="L73">        final int numOfAttributes = attrInfo.size();</span>
 
-<span class="fc" id="L50">        training = new Instances(&quot;TrainingData&quot;, attrInfo, listOfDocuments.size());</span>
-<span class="fc" id="L51">        training.setClass(category);</span>
+<span class="fc" id="L75">        training = new Instances(&quot;TrainingData&quot;, attrInfo, listOfDocuments.size());</span>
+<span class="fc" id="L76">        training.setClass(category);</span>
 
-<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (Document doc: listOfDocuments)</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (Document doc: listOfDocuments)</span>
         {
-<span class="fc" id="L55">            Instance instance = new DenseInstance(numOfAttributes);</span>
-<span class="fc" id="L56">            instance.setDataset(training);</span>
+<span class="fc" id="L80">            Instance instance = new DenseInstance(numOfAttributes);</span>
+<span class="fc" id="L81">            instance.setDataset(training);</span>
             
-<span class="fc" id="L58">            int i = 0;</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">            for (String word: vocabSet)</span>
+<span class="fc" id="L83">            int i = 0;</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            for (String word: vocabSet)</span>
             {
-<span class="fc bfc" id="L61" title="All 2 branches covered.">                if (doc.contains(word))</span>
-<span class="fc" id="L62">                    instance.setValue(i, doc.getWordWeight(word));</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">                if (doc.contains(word))</span>
+<span class="fc" id="L87">                    instance.setValue(i, doc.getWordWeight(word));</span>
                 else
-<span class="fc" id="L64">                    instance.setValue(i, 0.0);</span>
-<span class="fc" id="L65">                i++;</span>
-<span class="fc" id="L66">            }</span>
+<span class="fc" id="L89">                    instance.setValue(i, 0.0);</span>
+<span class="fc" id="L90">                i++;</span>
+<span class="fc" id="L91">            }</span>
 
-<span class="fc" id="L68">            instance.setValue(i, doc.getCategory());</span>
-<span class="fc" id="L69">            training.add(instance);</span>
-<span class="fc" id="L70">        }</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L93">            instance.setValue(i, doc.getCategory());</span>
+<span class="fc" id="L94">            training.add(instance);</span>
+<span class="fc" id="L95">        }</span>
+<span class="fc" id="L96">    }</span>
 
+    /**
+     * Outputs the training Instances object to an arff file.
+     */
     public void outputToArff()
     {
         try
         {
-<span class="fc" id="L77">            DataSink.write(arffPath, training);</span>
+<span class="fc" id="L105">            DataSink.write(arffPath, training);</span>
         }
-<span class="nc" id="L79">        catch (Exception e)</span>
+<span class="nc" id="L107">        catch (Exception e)</span>
         {
-<span class="nc" id="L81">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
-<span class="nc" id="L82">            e.printStackTrace();</span>
-<span class="fc" id="L83">        }</span>
-<span class="fc" id="L84">    }</span>
+<span class="nc" id="L109">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
+<span class="nc" id="L110">            e.printStackTrace();</span>
+<span class="fc" id="L111">        }</span>
+<span class="fc" id="L112">    }</span>
 
+    /**
+     * Returns the path to an arff file associated with this Arff Generator.
+     * @return A path to an arff file
+     */
     public String getArffPath()
     {
-<span class="fc" id="L88">        return arffPath;</span>
+<span class="fc" id="L120">        return arffPath;</span>
     }
 
+    /**
+     * Returns the associated VocabCollection.
+     * @return A VocabCollection
+     */
     public VocabCollection getVocabCollection()
     {
-<span class="fc" id="L93">        return vocab;</span>
+<span class="fc" id="L129">        return vocab;</span>
     }
 
+    /**
+     * Returns the training Instances object.
+     * @return A training Instances object
+     */
     public Instances getInstances()
     {
-<span class="fc" id="L98">        return training;</span>
+<span class="fc" id="L138">        return training;</span>
     }
     
 }
