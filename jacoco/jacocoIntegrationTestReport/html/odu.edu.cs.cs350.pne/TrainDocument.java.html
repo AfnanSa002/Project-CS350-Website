@@ -26,7 +26,7 @@ public class TrainDocument extends Document
     
     /**
      * Splits the raw text into individual words and adds words not found
-     * in the stop list to wordList.
+     * in the stop list to a word list.
      * @param stopWords A StopList that contains words not to be recorded in wordList
      */
     public void splitText(StopList stopWords)
@@ -49,7 +49,7 @@ public class TrainDocument extends Document
 <span class="nc" id="L49">    }</span>
     
     /**
-     * Counts up words in wordList and adds any that occur 5 or more times to tokenMap.
+     * Counts up words in the word list and adds any that occur 5 or more times to tokenMap.
      * Also, each word's count is set along with setting its normalized count to 1.
      */
     public void createTokenMap()
@@ -98,7 +98,7 @@ public class TrainDocument extends Document
 <span class="nc" id="L98">    }</span>
     
     /**
-     * Returns the wordList that contains all words in rawText that aren't stop words.
+     * Returns the word list that contains all words in rawText that aren't stop words.
      * @return A List of words in rawText that aren't stop words
      */
     public List&lt;String&gt; getWordList()

@@ -127,18 +127,18 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createTokenMap()" class="member-name-link">createTokenMap</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Counts up words in wordList and adds any that occur 5 or more times to tokenMap.</div>
+<div class="block">Counts up words in the word list and adds any that occur 5 or more times to tokenMap.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWordList()" class="member-name-link">getWordList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the wordList that contains all words in rawText that aren't stop words.</div>
+<div class="block">Returns the word list that contains all words in rawText that aren't stop words.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#splitText(odu.edu.cs.cs350.pne.StopList)" class="member-name-link">splitText</a><wbr>(<a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a>&nbsp;stopWords)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Splits the raw text into individual words and adds words not found
- in the stop list to wordList.</div>
+ in the stop list to a word list.</div>
 </div>
 </div>
 </div>
@@ -186,7 +186,7 @@ loadScripts(document, 'script');</script>
 <h3>splitText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">splitText</span><wbr><span class="parameters">(<a href="StopList.html" title="class in odu.edu.cs.cs350.pne">StopList</a>&nbsp;stopWords)</span></div>
 <div class="block">Splits the raw text into individual words and adds words not found
- in the stop list to wordList.</div>
+ in the stop list to a word list.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>stopWords</code> - A StopList that contains words not to be recorded in wordList</dd>
@@ -197,7 +197,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="createTokenMap()">
 <h3>createTokenMap</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">createTokenMap</span>()</div>
-<div class="block">Counts up words in wordList and adds any that occur 5 or more times to tokenMap.
+<div class="block">Counts up words in the word list and adds any that occur 5 or more times to tokenMap.
  Also, each word's count is set along with setting its normalized count to 1.</div>
 </section>
 </li>
@@ -216,7 +216,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getWordList()">
 <h3>getWordList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getWordList</span>()</div>
-<div class="block">Returns the wordList that contains all words in rawText that aren't stop words.</div>
+<div class="block">Returns the word list that contains all words in rawText that aren't stop words.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>A List of words in rawText that aren't stop words</dd>

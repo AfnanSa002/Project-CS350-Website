@@ -2,7 +2,7 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.21.0" timestamp="2022-12-08T02:35:20.055">
+    version="6.21.0" timestamp="2022-12-08T03:02:53.557">
 <file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ACMClassifier.java">
 <violation beginline="7" endline="124" begincolumn="1" endcolumn="1" rule="StdCyclomaticComplexity" ruleset="Design" package="odu.edu.cs.cs350.pne" class="ACMClassifier" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_design.html#stdcyclomaticcomplexity" priority="3">
 The class 'ACMClassifier' has a Standard Cyclomatic Complexity of 7 (Highest = 12).
@@ -1323,34 +1323,34 @@ Explicit type arguments can be replaced by Diamond Operator
 <violation beginline="16" endline="16" begincolumn="25" endcolumn="33" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="StopList" variable="stopWords" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
-<violation beginline="28" endline="28" begincolumn="21" endcolumn="35" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="StopList" variable="filePath" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
+<violation beginline="31" endline="31" begincolumn="21" endcolumn="35" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="StopList" variable="filePath" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
 Parameter 'filePath' is not assigned and could be declared final
 </violation>
-<violation beginline="30" endline="30" begincolumn="9" endcolumn="26" rule="ConstructorCallsOverridableMethod" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="StopList" method="StopList" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#constructorcallsoverridablemethod" priority="1">
+<violation beginline="33" endline="33" begincolumn="9" endcolumn="26" rule="ConstructorCallsOverridableMethod" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="StopList" method="StopList" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#constructorcallsoverridablemethod" priority="1">
 Overridable method 'readFile' called during object construction
 </violation>
-<violation beginline="33" endline="33" begincolumn="26" endcolumn="40" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="filePath" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
+<violation beginline="40" endline="40" begincolumn="26" endcolumn="40" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="filePath" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
 Parameter 'filePath' is not assigned and could be declared final
 </violation>
-<violation beginline="36" endline="36" begincolumn="13" endcolumn="50" rule="LocalVariableCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="VariableDeclaratorId" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#localvariablecouldbefinal" priority="3">
+<violation beginline="43" endline="43" begincolumn="13" endcolumn="50" rule="LocalVariableCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="VariableDeclaratorId" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#localvariablecouldbefinal" priority="3">
 Local variable 'stopWordFile' could be declared final
 </violation>
-<violation beginline="37" endline="37" begincolumn="21" endcolumn="30" rule="CloseResource" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="fileReader" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+<violation beginline="44" endline="44" begincolumn="21" endcolumn="30" rule="CloseResource" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="fileReader" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
 Ensure that resources like this Scanner object are closed after use
 </violation>
-<violation beginline="37" endline="37" begincolumn="13" endcolumn="58" rule="LocalVariableCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="VariableDeclaratorId" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#localvariablecouldbefinal" priority="3">
+<violation beginline="44" endline="44" begincolumn="13" endcolumn="58" rule="LocalVariableCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="VariableDeclaratorId" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#localvariablecouldbefinal" priority="3">
 Local variable 'fileReader' could be declared final
 </violation>
-<violation beginline="41" endline="41" begincolumn="17" endcolumn="51" rule="LocalVariableCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="VariableDeclaratorId" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#localvariablecouldbefinal" priority="3">
+<violation beginline="48" endline="48" begincolumn="17" endcolumn="51" rule="LocalVariableCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" variable="VariableDeclaratorId" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#localvariablecouldbefinal" priority="3">
 Local variable 'data' could be declared final
 </violation>
-<violation beginline="47" endline="47" begincolumn="13" endcolumn="30" rule="SystemPrintln" ruleset="Best Practices" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+<violation beginline="54" endline="54" begincolumn="13" endcolumn="30" rule="SystemPrintln" ruleset="Best Practices" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
 System.out.println is used
 </violation>
-<violation beginline="48" endline="48" begincolumn="13" endcolumn="31" rule="AvoidPrintStackTrace" ruleset="Best Practices" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_bestpractices.html#avoidprintstacktrace" priority="3">
+<violation beginline="55" endline="55" begincolumn="13" endcolumn="31" rule="AvoidPrintStackTrace" ruleset="Best Practices" package="odu.edu.cs.cs350.pne" class="StopList" method="readFile" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_bestpractices.html#avoidprintstacktrace" priority="3">
 Avoid printStackTrace(); use a logger call instead.
 </violation>
-<violation beginline="52" endline="52" begincolumn="29" endcolumn="40" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="contains" variable="token" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
+<violation beginline="64" endline="64" begincolumn="29" endcolumn="40" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" method="contains" variable="token" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
 Parameter 'token' is not assigned and could be declared final
 </violation>
 </file>
@@ -1676,30 +1676,30 @@ Potential violation of Law of Demeter (method chain calls)
 </violation>
 </file>
 <file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/WordFrequency.java">
-<violation beginline="3" endline="8" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#atleastoneconstructor" priority="3">
+<violation beginline="6" endline="17" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#atleastoneconstructor" priority="3">
 Each class should declare at least one constructor
 </violation>
-<violation beginline="5" endline="5" begincolumn="16" endcolumn="31" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordFrequency" variable="docFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
+<violation beginline="11" endline="11" begincolumn="16" endcolumn="31" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordFrequency" variable="docFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
 Avoid using redundant field initializer for 'docFrequency'
 </violation>
-<violation beginline="6" endline="6" begincolumn="19" endcolumn="37" rule="LongVariable" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordFrequency" variable="inverseDocFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#longvariable" priority="3">
+<violation beginline="16" endline="16" begincolumn="19" endcolumn="37" rule="LongVariable" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordFrequency" variable="inverseDocFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#longvariable" priority="3">
 Avoid excessively long variable names like inverseDocFrequency
 </violation>
-<violation beginline="6" endline="6" begincolumn="19" endcolumn="43" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordFrequency" variable="inverseDocFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
+<violation beginline="16" endline="16" begincolumn="19" endcolumn="43" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordFrequency" variable="inverseDocFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
 Avoid using redundant field initializer for 'inverseDocFrequency'
 </violation>
 </file>
 <file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/WordInfo.java">
-<violation beginline="3" endline="8" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordInfo" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#atleastoneconstructor" priority="3">
+<violation beginline="6" endline="23" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordInfo" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#atleastoneconstructor" priority="3">
 Each class should declare at least one constructor
 </violation>
-<violation beginline="5" endline="5" begincolumn="16" endcolumn="24" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordInfo" variable="count" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
+<violation beginline="11" endline="11" begincolumn="16" endcolumn="24" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordInfo" variable="count" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
 Avoid using redundant field initializer for 'count'
 </violation>
-<violation beginline="6" endline="6" begincolumn="16" endcolumn="34" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordInfo" variable="normalizedCount" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
+<violation beginline="16" endline="16" begincolumn="16" endcolumn="34" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordInfo" variable="normalizedCount" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
 Avoid using redundant field initializer for 'normalizedCount'
 </violation>
-<violation beginline="7" endline="7" begincolumn="19" endcolumn="34" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordInfo" variable="termWeight" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
+<violation beginline="22" endline="22" begincolumn="19" endcolumn="34" rule="RedundantFieldInitializer" ruleset="Performance" package="odu.edu.cs.cs350.pne" class="WordInfo" variable="termWeight" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_performance.html#redundantfieldinitializer" priority="3">
 Avoid using redundant field initializer for 'termWeight'
 </violation>
 </file>

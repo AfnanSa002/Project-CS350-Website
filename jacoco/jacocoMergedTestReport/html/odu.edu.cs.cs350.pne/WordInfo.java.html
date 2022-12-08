@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WordInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project-CS350</a> &gt; <a href="index.source.html" class="el_package">odu.edu.cs.cs350.pne</a> &gt; <span class="el_source">WordInfo.java</span></div><h1>WordInfo.java</h1><pre class="source lang-java linenums">package odu.edu.cs.cs350.pne;
 
-<span class="fc" id="L3">public class WordInfo</span>
+/**
+ * Contains the count, normalized count, and term weight of a word found in a document.
+ */
+<span class="fc" id="L6">public class WordInfo</span>
 {
-<span class="fc" id="L5">    public int count = 0;</span>
-<span class="fc" id="L6">    public int normalizedCount = 0; //storing</span>
-<span class="fc" id="L7">    public double termWeight = 0.0;</span>
+    /**
+     * The number of times a word occurs in a document.
+     */
+<span class="fc" id="L11">    public int count = 0;</span>
+
+    /**
+     * Set to 1 if the word's count is 5 or greater and set to 0 otherwise.
+     */
+<span class="fc" id="L16">    public int normalizedCount = 0;</span>
+
+    /**
+     * The term weight of a word, calculated by multiplying the normalized count
+     * by the word's inverse document frequency found in VocabCollection
+     */
+<span class="fc" id="L22">    public double termWeight = 0.0;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

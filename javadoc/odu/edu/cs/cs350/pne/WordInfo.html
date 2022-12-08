@@ -72,6 +72,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">WordInfo</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Contains the count, normalized count, and term weight of a word found in a document.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -86,13 +87,20 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>int</code></div>
 <div class="col-second even-row-color"><code><a href="#count" class="member-name-link">count</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The number of times a word occurs in a document.</div>
+</div>
 <div class="col-first odd-row-color"><code>int</code></div>
 <div class="col-second odd-row-color"><code><a href="#normalizedCount" class="member-name-link">normalizedCount</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Set to 1 if the word's count is 5 or greater and set to 0 otherwise.</div>
+</div>
 <div class="col-first even-row-color"><code>double</code></div>
 <div class="col-second even-row-color"><code><a href="#termWeight" class="member-name-link">termWeight</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The term weight of a word, calculated by multiplying the normalized count
+ by the word's inverse document frequency found in VocabCollection</div>
+</div>
 </div>
 </section>
 </li>
@@ -131,18 +139,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="count">
 <h3>count</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">count</span></div>
+<div class="block">The number of times a word occurs in a document.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="normalizedCount">
 <h3>normalizedCount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">normalizedCount</span></div>
+<div class="block">Set to 1 if the word's count is 5 or greater and set to 0 otherwise.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="termWeight">
 <h3>termWeight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">termWeight</span></div>
+<div class="block">The term weight of a word, calculated by multiplying the normalized count
+ by the word's inverse document frequency found in VocabCollection</div>
 </section>
 </li>
 </ul>
