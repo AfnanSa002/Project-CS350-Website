@@ -2,8 +2,8 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.21.0" timestamp="2022-12-09T17:15:59.552">
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ACMClassifier.java">
+    version="6.21.0" timestamp="2022-12-09T17:38:39.124">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ACMClassifier.java">
 <violation beginline="9" endline="139" begincolumn="8" endcolumn="1" rule="StdCyclomaticComplexity" ruleset="Design" package="odu.edu.cs.cs350.pne" class="ACMClassifier" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_design.html#stdcyclomaticcomplexity" priority="3">
 The class 'ACMClassifier' has a Standard Cyclomatic Complexity of 7 (Highest = 12).
 </violation>
@@ -149,7 +149,7 @@ The method 'retrieveCategory(String)' has a cyclomatic complexity of 12.
 A switch statement does not contain a break
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ACMTrainer.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ACMTrainer.java">
 <violation beginline="11" endline="136" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="ACMTrainer" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
 The utility class name 'ACMTrainer' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'
 </violation>
@@ -343,7 +343,7 @@ This statement should have braces
 System.out.println is used
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ArffDocument.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ArffDocument.java">
 <violation beginline="26" endline="26" begincolumn="32" endcolumn="46" rule="MethodArgumentCouldBeFinal" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="ArffDocument" method="decodeArffData" variable="arffData" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#methodargumentcouldbefinal" priority="3">
 Parameter 'arffData' is not assigned and could be declared final
 </violation>
@@ -402,7 +402,7 @@ Local variable 'info' could be declared final
 Potential violation of Law of Demeter (method chain calls)
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ArffGenerator.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ArffGenerator.java">
 <violation beginline="22" endline="22" begincolumn="12" endcolumn="19" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="ArffGenerator" variable="arffPath" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
@@ -512,7 +512,7 @@ System.out.println is used
 Avoid printStackTrace(); use a logger call instead.
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ArffParser.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ArffParser.java">
 <violation beginline="20" endline="20" begincolumn="29" endcolumn="33" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="ArffParser" variable="vocab" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
@@ -598,7 +598,7 @@ Ensure that resources like this Scanner object are closed after use
 Local variable 'scanner' could be declared final
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ClassifyDocument.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ClassifyDocument.java">
 <violation beginline="14" endline="14" begincolumn="29" endcolumn="51" rule="UseDiamondOperator" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="ClassifyDocument" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#usediamondoperator" priority="3">
 Explicit type arguments can be replaced by Diamond Operator
 </violation>
@@ -675,7 +675,7 @@ Avoid instantiating new objects inside loops
 Local variable 'info' could be declared final
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ClassifyParser.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/ClassifyParser.java">
 <violation beginline="19" endline="19" begincolumn="29" endcolumn="33" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="ClassifyParser" variable="vocab" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
@@ -785,7 +785,7 @@ A method should have only one exit point, and that should be the last statement 
 System.out.println is used
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/Document.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/Document.java">
 <violation beginline="13" endline="13" begincolumn="20" endcolumn="26" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="Document" variable="rawText" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
@@ -865,7 +865,7 @@ Parameter 'word' is not assigned and could be declared final
 Potential violation of Law of Demeter (method chain calls)
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/InitialTrainer.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/InitialTrainer.java">
 <violation beginline="27" endline="27" begincolumn="28" endcolumn="39" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="InitialTrainer" variable="categoryKeys" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
@@ -1095,7 +1095,7 @@ Returning 'trainData' may expose an internal array.
 Returning 'vocabWords' may expose an internal array.
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/LearningMachine.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/LearningMachine.java">
 <violation beginline="3" endline="3" begincolumn="1" endcolumn="20" rule="DuplicateImports" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="LearningMachine" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#duplicateimports" priority="4">
 Avoid duplicate imports such as 'java.io.File'
 </violation>
@@ -1334,7 +1334,7 @@ Avoid printStackTrace(); use a logger call instead.
 Avoid using implementation types like 'ArrayList'; use the interface instead
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/StopList.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/StopList.java">
 <violation beginline="6" endline="6" begincolumn="1" endcolumn="25" rule="DuplicateImports" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="StopList" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#duplicateimports" priority="4">
 Avoid duplicate imports such as 'java.util.Scanner'
 </violation>
@@ -1375,7 +1375,7 @@ Avoid printStackTrace(); use a logger call instead.
 Parameter 'token' is not assigned and could be declared final
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/TrainDocument.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/TrainDocument.java">
 <violation beginline="15" endline="15" begincolumn="37" endcolumn="59" rule="UseDiamondOperator" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="TrainDocument" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#usediamondoperator" priority="3">
 Explicit type arguments can be replaced by Diamond Operator
 </violation>
@@ -1467,7 +1467,7 @@ Local variable 'word' could be declared final
 This statement should have braces
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/TrainParser.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/TrainParser.java">
 <violation beginline="15" endline="15" begincolumn="22" endcolumn="30" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="odu.edu.cs.cs350.pne" class="TrainParser" variable="stopWords" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
 </violation>
@@ -1574,7 +1574,7 @@ A method should have only one exit point, and that should be the last statement 
 System.out.println is used
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/VocabCollection.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/VocabCollection.java">
 <violation beginline="10" endline="10" begincolumn="1" endcolumn="22" rule="DontImportJavaLang" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="VocabCollection" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#dontimportjavalang" priority="4">
 Avoid importing anything from the package java.lang
 </violation>
@@ -1696,7 +1696,7 @@ Parameter 'word' is not assigned and could be declared final
 Potential violation of Law of Demeter (method chain calls)
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/WordFrequency.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/WordFrequency.java">
 <violation beginline="6" endline="17" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordFrequency" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#atleastoneconstructor" priority="3">
 Each class should declare at least one constructor
 </violation>
@@ -1710,7 +1710,7 @@ Avoid excessively long variable names like inverseDocFrequency
 Avoid using redundant field initializer for 'inverseDocFrequency'
 </violation>
 </file>
-<file name="/Users/jayfoster/John's Code/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/WordInfo.java">
+<file name="/home/cs_jnews004/classes/cs350/Project-CS350/src/main/java/odu/edu/cs/cs350/pne/WordInfo.java">
 <violation beginline="6" endline="23" begincolumn="8" endcolumn="1" rule="AtLeastOneConstructor" ruleset="Code Style" package="odu.edu.cs.cs350.pne" class="WordInfo" externalInfoUrl="https://pmd.github.io/pmd-6.21.0/pmd_rules_java_codestyle.html#atleastoneconstructor" priority="3">
 Each class should declare at least one constructor
 </violation>
