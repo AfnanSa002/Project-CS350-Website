@@ -31,7 +31,7 @@ javadoc - Generates Javadoc API documentation for the main source code.
 
 GitHub Pages tasks
 ------------------
-copyJBakePagesForUse
+copyFilesForUse
 updateGitHubPages - Copy everything into gh-pages directory and push to Report Website
 
 Help tasks

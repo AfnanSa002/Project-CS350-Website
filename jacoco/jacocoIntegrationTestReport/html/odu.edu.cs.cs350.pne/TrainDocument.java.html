@@ -12,7 +12,7 @@ public class TrainDocument extends Document
     /**
      * Stores all words except for stop words that are found in the document.
      */
-<span class="nc" id="L15">    private List&lt;String&gt; wordList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L15">    private List&lt;String&gt; wordList = new ArrayList&lt;String&gt;();</span>
     
     /**
      * Creates a Train Document with the raw text of a file and an assigned category.
@@ -21,8 +21,8 @@ public class TrainDocument extends Document
      */
     public TrainDocument (String rawText, String category)
     {
-<span class="nc" id="L24">        super(rawText, category);</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L24">        super(rawText, category);</span>
+<span class="fc" id="L25">    }</span>
     
     /**
      * Splits the raw text into individual words and adds words not found
@@ -31,22 +31,22 @@ public class TrainDocument extends Document
      */
     public void splitText(StopList stopWords)
     {
-<span class="nc" id="L34">        String trimmedText = trimText(this.getRawText());</span>
+<span class="fc" id="L34">        String trimmedText = trimText(this.getRawText());</span>
         
-<span class="nc" id="L36">        Scanner scanner = new Scanner(trimmedText);</span>
-<span class="nc" id="L37">        scanner.useDelimiter(&quot; &quot;);</span>
+<span class="fc" id="L36">        Scanner scanner = new Scanner(trimmedText);</span>
+<span class="fc" id="L37">        scanner.useDelimiter(&quot; &quot;);</span>
 
-<span class="nc bnc" id="L39" title="All 2 branches missed.">        while (scanner.hasNext())</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        while (scanner.hasNext())</span>
         {
-<span class="nc" id="L41">            String word = scanner.next();</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">            if(stopWords.contains(word))</span>
-<span class="nc" id="L43">                continue;</span>
+<span class="fc" id="L41">            String word = scanner.next();</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            if(stopWords.contains(word))</span>
+<span class="fc" id="L43">                continue;</span>
             else
-<span class="nc" id="L45">                wordList.add(word);</span>
-<span class="nc" id="L46">        }</span>
+<span class="fc" id="L45">                wordList.add(word);</span>
+<span class="fc" id="L46">        }</span>
 
-<span class="nc" id="L48">        scanner.close();</span>
-<span class="nc" id="L49">    }</span>
+<span class="fc" id="L48">        scanner.close();</span>
+<span class="fc" id="L49">    }</span>
     
     /**
      * Counts up words in the word list and adds any that occur 5 or more times to tokenMap.
@@ -54,33 +54,33 @@ public class TrainDocument extends Document
      */
     public void createTokenMap()
     {
-<span class="nc" id="L57">        HashMap&lt;String,Integer&gt; counts = new HashMap&lt;String,Integer&gt;();</span>
+<span class="fc" id="L57">        HashMap&lt;String,Integer&gt; counts = new HashMap&lt;String,Integer&gt;();</span>
 
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (String word: wordList)</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (String word: wordList)</span>
         {             
-<span class="nc bnc" id="L61" title="All 2 branches missed.">            if (!counts.containsKey(word))</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            if (!counts.containsKey(word))</span>
             {
-<span class="nc" id="L63">                counts.put(word, (Integer)1);</span>
-<span class="nc" id="L64">                continue;</span>
+<span class="fc" id="L63">                counts.put(word, (Integer)1);</span>
+<span class="fc" id="L64">                continue;</span>
             }
             
-<span class="nc" id="L67">            int i = (int)counts.get(word);</span>
-<span class="nc" id="L68">            counts.put(word, (Integer)(++i));</span>
-<span class="nc" id="L69">        }</span>
+<span class="fc" id="L67">            int i = (int)counts.get(word);</span>
+<span class="fc" id="L68">            counts.put(word, (Integer)(++i));</span>
+<span class="fc" id="L69">        }</span>
 
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        for (Map.Entry&lt;String,Integer&gt; element: counts.entrySet())</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        for (Map.Entry&lt;String,Integer&gt; element: counts.entrySet())</span>
         {
-<span class="nc" id="L73">            int count = (int)element.getValue();</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">            if (count &gt;= 5)</span>
+<span class="fc" id="L73">            int count = (int)element.getValue();</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            if (count &gt;= 5)</span>
             {
-<span class="nc" id="L76">                String word = element.getKey();</span>
-<span class="nc" id="L77">                tokenMap.put(word, new WordInfo());</span>
-<span class="nc" id="L78">                WordInfo info = tokenMap.get(word);</span>
-<span class="nc" id="L79">                info.count = count;</span>
-<span class="nc" id="L80">                info.normalizedCount = 1;   //if in token map, it occured at least 5 times</span>
+<span class="fc" id="L76">                String word = element.getKey();</span>
+<span class="fc" id="L77">                tokenMap.put(word, new WordInfo());</span>
+<span class="fc" id="L78">                WordInfo info = tokenMap.get(word);</span>
+<span class="fc" id="L79">                info.count = count;</span>
+<span class="fc" id="L80">                info.normalizedCount = 1;   //if in token map, it occured at least 5 times</span>
             }
-<span class="nc" id="L82">        }</span>
-<span class="nc" id="L83">    }</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">    }</span>
     
     /**
      * Adds every word in the tokenMap to a VocabCollection.
@@ -89,13 +89,13 @@ public class TrainDocument extends Document
     public void addToVocab(VocabCollection vocab)
     {
         
-<span class="nc" id="L92">        Set&lt;String&gt; wordSet = tokenMap.keySet();</span>
+<span class="fc" id="L92">        Set&lt;String&gt; wordSet = tokenMap.keySet();</span>
 
-<span class="nc" id="L94">        vocab.increaseTotalDocs();</span>
+<span class="fc" id="L94">        vocab.increaseTotalDocs();</span>
 
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        for (String word: wordSet)</span>
-<span class="nc" id="L97">            vocab.addWord(word);</span>
-<span class="nc" id="L98">    }</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for (String word: wordSet)</span>
+<span class="fc" id="L97">            vocab.addWord(word);</span>
+<span class="fc" id="L98">    }</span>
     
     /**
      * Returns the word list that contains all words in rawText that aren't stop words.

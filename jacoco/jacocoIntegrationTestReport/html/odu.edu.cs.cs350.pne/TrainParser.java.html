@@ -18,7 +18,7 @@ public class TrainParser      //Singleton
      * Holds significant words found across all Train Documents
      * that have been or will eventually be stored in an arff file.
      */
-<span class="nc" id="L21">    private VocabCollection vocab = new VocabCollection();</span>
+<span class="fc" id="L21">    private VocabCollection vocab = new VocabCollection();</span>
     
     
     /**
@@ -27,10 +27,10 @@ public class TrainParser      //Singleton
      * @param vocabPath A path to a file storing a VocabCollection
      */
     public TrainParser (StopList list, String vocabPath)
-<span class="nc" id="L30">    {   </span>
-<span class="nc" id="L31">        stopWords = list;</span>
-<span class="nc" id="L32">        vocab.readInVocab(vocabPath);</span>
-<span class="nc" id="L33">    }</span>
+<span class="fc" id="L30">    {   </span>
+<span class="fc" id="L31">        stopWords = list;</span>
+<span class="fc" id="L32">        vocab.readInVocab(vocabPath);</span>
+<span class="fc" id="L33">    }</span>
    
     //entry point for document creation
     /**
@@ -41,12 +41,12 @@ public class TrainParser      //Singleton
      */
     public TrainDocument createDocument(String filePath, String category)
     {   
-<span class="nc" id="L44">        String text = readFileStandard(filePath);</span>
-<span class="nc" id="L45">        TrainDocument document = new TrainDocument(text, category);</span>
-<span class="nc" id="L46">        document.splitText(stopWords); //ommitting stopwords</span>
-<span class="nc" id="L47">        document.createTokenMap();</span>
-<span class="nc" id="L48">        document.addToVocab(vocab);</span>
-<span class="nc" id="L49">        return document;</span>
+<span class="fc" id="L44">        String text = readFileStandard(filePath);</span>
+<span class="fc" id="L45">        TrainDocument document = new TrainDocument(text, category);</span>
+<span class="fc" id="L46">        document.splitText(stopWords); //ommitting stopwords</span>
+<span class="fc" id="L47">        document.createTokenMap();</span>
+<span class="fc" id="L48">        document.addToVocab(vocab);</span>
+<span class="fc" id="L49">        return document;</span>
     }
 
     /**
@@ -56,9 +56,9 @@ public class TrainParser      //Singleton
      */
     public String readFileStandard(String filePath)
     {
-<span class="nc" id="L59">        String extension = filePath.substring(filePath.length()-3);</span>
+<span class="fc" id="L59">        String extension = filePath.substring(filePath.length()-3);</span>
         
-<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (extension.equals(&quot;pdf&quot;))</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (extension.equals(&quot;pdf&quot;))</span>
         {
             try
             {  
@@ -77,20 +77,20 @@ public class TrainParser      //Singleton
 <span class="nc" id="L77">                return &quot;Error&quot;;</span>
             }
         }    
-<span class="nc bnc" id="L80" title="All 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        else if (extension.equals(&quot;txt&quot;))</span>
         {
-<span class="nc" id="L82">            StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L82">            StringBuilder builder = new StringBuilder();</span>
             
-<span class="nc" id="L84">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
+<span class="fc" id="L84">            try (BufferedReader buffer = new BufferedReader(new FileReader(filePath)))</span>
             {   
                 String str;
 
-<span class="nc bnc" id="L88" title="All 2 branches missed.">                while ((str = buffer.readLine()) != null)</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">                while ((str = buffer.readLine()) != null)</span>
                 {    
-<span class="nc" id="L90">                    builder.append(str + &quot; &quot;);</span>
+<span class="fc" id="L90">                    builder.append(str + &quot; &quot;);</span>
                 }
-<span class="nc" id="L92">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
-<span class="nc" id="L93">                return builder.toString();</span>
+<span class="fc" id="L92">                builder.deleteCharAt(builder.length()-1); //removes space after last line</span>
+<span class="fc" id="L93">                return builder.toString();</span>
             }
 <span class="nc" id="L95">            catch (IOException e)</span>
             {
@@ -121,7 +121,7 @@ public class TrainParser      //Singleton
      */
     public VocabCollection getVocabCollection()
     {
-<span class="nc" id="L124">        return vocab;</span>
+<span class="fc" id="L124">        return vocab;</span>
     }
     
 }

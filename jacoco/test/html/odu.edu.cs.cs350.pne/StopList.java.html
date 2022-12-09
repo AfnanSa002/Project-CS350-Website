@@ -20,18 +20,17 @@ public class StopList
      */
     public StopList()
 <span class="nc" id="L22">    {</span>
-        //readFile(&quot;src/main/resources/stopwords.txt&quot;);
-<span class="nc" id="L24">        readFile(&quot;acmclass-data/stopwords.txt&quot;);</span>
-<span class="nc" id="L25">    }</span>
+<span class="nc" id="L23">        readFile(&quot;acmclass-data/stopwords.txt&quot;);</span>
+<span class="nc" id="L24">    }</span>
 
     /**
      * Creates a StopList by calling readFile with a specified file path.
      * @param filePath the file path of a file containing stop words
      */
     public StopList(String filePath)
-<span class="fc" id="L32">    {</span>
-<span class="fc" id="L33">        readFile(filePath);</span>
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L31">    {</span>
+<span class="fc" id="L32">        readFile(filePath);</span>
+<span class="fc" id="L33">    }</span>
     
     /**
      * Reads in a StopList from a file containing stop words
@@ -40,21 +39,21 @@ public class StopList
     public void readFile(String filePath)
     {
         try {
-<span class="fc" id="L43">            File stopWordFile = new File(filePath);</span>
-<span class="fc" id="L44">            Scanner fileReader = new Scanner(stopWordFile);</span>
-<span class="fc bfc" id="L45" title="All 2 branches covered.">            while(fileReader.hasNextLine())</span>
+<span class="fc" id="L42">            File stopWordFile = new File(filePath);</span>
+<span class="fc" id="L43">            Scanner fileReader = new Scanner(stopWordFile);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            while(fileReader.hasNextLine())</span>
             {
                 //Read another line of the stop list
-<span class="fc" id="L48">                String data = fileReader.nextLine();</span>
-<span class="fc" id="L49">                stopWords.add(data);</span>
-<span class="fc" id="L50">            }</span>
-<span class="fc" id="L51">            fileReader.close();</span>
+<span class="fc" id="L47">                String data = fileReader.nextLine();</span>
+<span class="fc" id="L48">                stopWords.add(data);</span>
+<span class="fc" id="L49">            }</span>
+<span class="fc" id="L50">            fileReader.close();</span>
         }
-<span class="nc" id="L53">        catch (FileNotFoundException e) {</span>
-<span class="nc" id="L54">            System.out.println(&quot;Error: File was not found.&quot;);</span>
-<span class="nc" id="L55">            e.printStackTrace();</span>
-<span class="fc" id="L56">        }</span>
-<span class="fc" id="L57">    }</span>
+<span class="nc" id="L52">        catch (FileNotFoundException e) {</span>
+<span class="nc" id="L53">            System.out.println(&quot;Error: File was not found.&quot;);</span>
+<span class="nc" id="L54">            e.printStackTrace();</span>
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">    }</span>
 
     /**
      * Returns true if the StopList contains token, false if not.
@@ -63,7 +62,7 @@ public class StopList
      */
     public boolean contains(String token)
     {
-<span class="fc" id="L66">        return stopWords.contains(token);</span>
+<span class="fc" id="L65">        return stopWords.contains(token);</span>
     }
     
     /**
@@ -72,7 +71,7 @@ public class StopList
      */
     public List&lt;String&gt; getList()
     {
-<span class="fc" id="L75">        return stopWords;</span>
+<span class="fc" id="L74">        return stopWords;</span>
     }
     
 }
