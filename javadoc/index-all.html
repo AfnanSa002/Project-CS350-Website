@@ -177,7 +177,10 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#dataExtractionWithData()" class="member-name-link">dataExtractionWithData()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs a training Instances object from the Initial Trainer's
+ train data and associated VocabCollection.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffDocument.html#decodeArffData(java.lang.String,odu.edu.cs.cs350.pne.VocabCollection)" class="member-name-link">decodeArffData(String, VocabCollection)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffDocument.html" title="class in odu.edu.cs.cs350.pne">ArffDocument</a></dt>
 <dd>
 <div class="block">Decodes an arff data line and sets up the document's token map and category
@@ -266,13 +269,17 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the total number of documents associated with this VocabCollection.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#getTrainData()" class="member-name-link">getTrainData()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the array of data lines associated with the Initial Trainer.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/LearningMachine.html#getTrainingInstances()" class="member-name-link">getTrainingInstances()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/LearningMachine.html" title="class in odu.edu.cs.cs350.pne">LearningMachine</a></dt>
 <dd>
 <div class="block">Returns the training Instances object.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#getVocab()" class="member-name-link">getVocab()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the associated VocabCollection.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffGenerator.html#getVocabCollection()" class="member-name-link">getVocabCollection()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffGenerator.html" title="class in odu.edu.cs.cs350.pne">ArffGenerator</a></dt>
 <dd>
 <div class="block">Returns the associated VocabCollection.</div>
@@ -298,7 +305,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the LinkedHashMap used to store the words.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#getVocabWords()" class="member-name-link">getVocabWords()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the array of vocab words associated with the Initial Trainer.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ClassifyDocument.html#getWordList()" class="member-name-link">getWordList()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ClassifyDocument.html" title="class in odu.edu.cs.cs350.pne">ClassifyDocument</a></dt>
 <dd>
 <div class="block">Returns the word list that contains all words in rawText that aren't stop words.</div>
@@ -323,9 +332,13 @@ loadScripts(document, 'script');</script>
 <div class="block">The Initial Trainer creates an initial arff file from raw train data (until sample files are provided) if no file already exists.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#%3Cinit%3E()" class="member-name-link">InitialTrainer()</a> - Constructor for class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an Initial Trainer by setting up the data and vocab words to default values.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#%3Cinit%3E(java.lang.String%5B%5D,java.lang.String%5B%5D)" class="member-name-link">InitialTrainer(String[], String[])</a> - Constructor for class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an Initial Trainer by setting up the data and vocab words with specified values (used in testing).</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/WordFrequency.html#inverseDocFrequency" class="member-name-link">inverseDocFrequency</a> - Variable in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/WordFrequency.html" title="class in odu.edu.cs.cs350.pne">WordFrequency</a></dt>
 <dd>
 <div class="block">The inverse document frequency of a word.</div>
@@ -387,7 +400,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Outputs the training Instances object to an arff file.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#outputToARFF(weka.core.Instances,java.lang.String)" class="member-name-link">outputToARFF(Instances, String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Outputs training Instances object to an arff file.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
@@ -421,7 +436,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Retrieves a supplied category key's corresponding classification name.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#run()" class="member-name-link">run()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Coordinates the creation of an initial arff file using data and vocab words</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ArffParser.html#run(java.lang.String)" class="member-name-link">run(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ArffParser.html" title="class in odu.edu.cs.cs350.pne">ArffParser</a></dt>
 <dd>
 <div class="block">Coordinates the contruction of Arff Documents from the data lines of an Arff File.</div>
@@ -440,7 +457,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Sets the category of this document.</div>
 </dd>
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#simulateVocabConstruction()" class="member-name-link">simulateVocabConstruction()</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Simulates the construction of a VocabCollection from the Initial Trainer's
+ array of vocab words and array of faux data lines.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/TrainDocument.html#splitText(odu.edu.cs.cs350.pne.StopList)" class="member-name-link">splitText(StopList)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/TrainDocument.html" title="class in odu.edu.cs.cs350.pne">TrainDocument</a></dt>
 <dd>
 <div class="block">Splits the raw text into individual words and adds words not found
@@ -505,7 +525,9 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
 <dt><a href="odu/edu/cs/cs350/pne/InitialTrainer.html#validARFFPresent(java.lang.String)" class="member-name-link">validARFFPresent(String)</a> - Method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/InitialTrainer.html" title="class in odu.edu.cs.cs350.pne">InitialTrainer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Checks to see if a valid arff file is present.</div>
+</dd>
 <dt><a href="odu/edu/cs/cs350/pne/ACMClassifier.html#verifyPaths(java.lang.String%5B%5D)" class="member-name-link">verifyPaths(String[])</a> - Static method in class odu.edu.cs.cs350.pne.<a href="odu/edu/cs/cs350/pne/ACMClassifier.html" title="class in odu.edu.cs.cs350.pne">ACMClassifier</a></dt>
 <dd>
 <div class="block">Verifies that the user-supplied file paths exist, are valid documents, and

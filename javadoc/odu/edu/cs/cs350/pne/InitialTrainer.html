@@ -90,10 +90,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">InitialTrainer</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an Initial Trainer by setting up the data and vocab words to default values.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String%5B%5D,java.lang.String%5B%5D)" class="member-name-link">InitialTrainer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tempData,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tempVocab)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates an Initial Trainer by setting up the data and vocab words with specified values (used in testing).</div>
+</div>
 </div>
 </section>
 </li>
@@ -110,29 +114,47 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>weka.core.Instances</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dataExtractionWithData()" class="member-name-link">dataExtractionWithData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Constructs a training Instances object from the Initial Trainer's
+ train data and associated VocabCollection.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTrainData()" class="member-name-link">getTrainData</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the array of data lines associated with the Initial Trainer.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVocab()" class="member-name-link">getVocab</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the associated VocabCollection.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVocabWords()" class="member-name-link">getVocabWords</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the array of vocab words associated with the Initial Trainer.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#outputToARFF(weka.core.Instances,java.lang.String)" class="member-name-link">outputToARFF</a><wbr>(weka.core.Instances&nbsp;training,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Outputs training Instances object to an arff file.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Coordinates the creation of an initial arff file using data and vocab words</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#simulateVocabConstruction()" class="member-name-link">simulateVocabConstruction</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Simulates the construction of a VocabCollection from the Initial Trainer's
+ array of vocab words and array of faux data lines.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validARFFPresent(java.lang.String)" class="member-name-link">validARFFPresent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks to see if a valid arff file is present.</div>
+</div>
 </div>
 </div>
 </div>
@@ -154,6 +176,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>InitialTrainer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">InitialTrainer</span>()</div>
+<div class="block">Creates an Initial Trainer by setting up the data and vocab words to default values.</div>
 </section>
 </li>
 <li>
@@ -161,6 +184,12 @@ loadScripts(document, 'script');</script>
 <h3>InitialTrainer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">InitialTrainer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tempData,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tempVocab)</span></div>
+<div class="block">Creates an Initial Trainer by setting up the data and vocab words with specified values (used in testing).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>tempData</code> - An array of data lines</dd>
+<dd><code>tempVocab</code> - An array of vocab words</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -175,24 +204,40 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="run()">
 <h3>run</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span>()</div>
+<div class="block">Coordinates the creation of an initial arff file using data and vocab words</div>
 </section>
 </li>
 <li>
 <section class="detail" id="validARFFPresent(java.lang.String)">
 <h3>validARFFPresent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">validARFFPresent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</span></div>
+<div class="block">Checks to see if a valid arff file is present.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>arffPath</code> - A path to be validated</dd>
+<dt>Returns:</dt>
+<dd>True if the path is valid, and False otherwise</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="simulateVocabConstruction()">
 <h3>simulateVocabConstruction</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">simulateVocabConstruction</span>()</div>
+<div class="block">Simulates the construction of a VocabCollection from the Initial Trainer's
+ array of vocab words and array of faux data lines.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="dataExtractionWithData()">
 <h3>dataExtractionWithData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">weka.core.Instances</span>&nbsp;<span class="element-name">dataExtractionWithData</span>()</div>
+<div class="block">Constructs a training Instances object from the Initial Trainer's
+ train data and associated VocabCollection.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A training Instances object</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -200,24 +245,45 @@ loadScripts(document, 'script');</script>
 <h3>outputToARFF</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">outputToARFF</span><wbr><span class="parameters">(weka.core.Instances&nbsp;training,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;arffPath)</span></div>
+<div class="block">Outputs training Instances object to an arff file.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>training</code> - The training Instances object to be outputted</dd>
+<dd><code>arffPath</code> - A path to an arff file</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVocab()">
 <h3>getVocab</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="VocabCollection.html" title="class in odu.edu.cs.cs350.pne">VocabCollection</a></span>&nbsp;<span class="element-name">getVocab</span>()</div>
+<div class="block">Returns the associated VocabCollection.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The associated VocabCollection</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTrainData()">
 <h3>getTrainData</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</span>&nbsp;<span class="element-name">getTrainData</span>()</div>
+<div class="block">Returns the array of data lines associated with the Initial Trainer.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>An array of data lines</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVocabWords()">
 <h3>getVocabWords</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</span>&nbsp;<span class="element-name">getVocabWords</span>()</div>
+<div class="block">Returns the array of vocab words associated with the Initial Trainer.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>An array of vocab words</dd>
+</dl>
 </section>
 </li>
 </ul>

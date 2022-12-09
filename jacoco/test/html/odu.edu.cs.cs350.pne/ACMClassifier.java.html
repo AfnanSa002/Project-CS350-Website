@@ -16,40 +16,39 @@ import java.util.*;
      * If the arff file does not exist, an Initial Trainer will run and create an 
      * initial arff file from sample data files with known corresponding classifications.
      * @param args A series of valid paths to pdf/txt files.
-     * @param args A series of valid paths to pdf/txt files.
      */
     public static void main(String[] args) 
     {
         //creates train.arff with sample data(Only runs if file has not been created)
-<span class="nc" id="L24">        InitialTrainer trainer = new InitialTrainer();</span>
-<span class="nc" id="L25">        trainer.run();</span>
+<span class="nc" id="L23">        InitialTrainer trainer = new InitialTrainer();</span>
+<span class="nc" id="L24">        trainer.run();</span>
         
         //Verify Input from User
-<span class="nc" id="L28">        List&lt;String&gt; listOfPaths = verifyPaths(args);</span>
+<span class="nc" id="L27">        List&lt;String&gt; listOfPaths = verifyPaths(args);</span>
         
         //create and process classify docs
-<span class="nc" id="L31">        String vocabPath = &quot;acmclass-data/vocabCollection.text&quot;;</span>
-<span class="nc" id="L32">        List&lt;ClassifyDocument&gt; documentsToClassify = new ArrayList&lt;ClassifyDocument&gt;();</span>
-<span class="nc" id="L33">        ClassifyParser cParser = new ClassifyParser(vocabPath);</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (String path: listOfPaths)</span>
-<span class="nc" id="L35">            documentsToClassify.add(cParser.createAndProcessDocument(path));</span>
+<span class="nc" id="L30">        String vocabPath = &quot;acmclass-data/vocabCollection.text&quot;;</span>
+<span class="nc" id="L31">        List&lt;ClassifyDocument&gt; documentsToClassify = new ArrayList&lt;ClassifyDocument&gt;();</span>
+<span class="nc" id="L32">        ClassifyParser cParser = new ClassifyParser(vocabPath);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (String path: listOfPaths)</span>
+<span class="nc" id="L34">            documentsToClassify.add(cParser.createAndProcessDocument(path));</span>
 
         //run machine to classify documents with train.arff
-<span class="nc" id="L38">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
-<span class="nc" id="L39">        LearningMachine machine = new LearningMachine(arffPath, cParser.getVocabCollection());</span>
-<span class="nc" id="L40">        machine.run(documentsToClassify);</span>
+<span class="nc" id="L37">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
+<span class="nc" id="L38">        LearningMachine machine = new LearningMachine(arffPath, cParser.getVocabCollection());</span>
+<span class="nc" id="L39">        machine.run(documentsToClassify);</span>
 
         //return output
-<span class="nc" id="L43">        int i = 0;</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        for (String path: listOfPaths)</span>
+<span class="nc" id="L42">        int i = 0;</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        for (String path: listOfPaths)</span>
         {
-<span class="nc" id="L46">            String categoryKey = documentsToClassify.get(i).getCategory();</span>
-<span class="nc" id="L47">            String category = retrieveCategory(categoryKey.toUpperCase());</span>
+<span class="nc" id="L45">            String categoryKey = documentsToClassify.get(i).getCategory();</span>
+<span class="nc" id="L46">            String category = retrieveCategory(categoryKey.toUpperCase());</span>
             
-<span class="nc" id="L49">            System.out.println(path + &quot;\n  &quot; + category + &quot;\n&quot;);</span>
-<span class="nc" id="L50">            i++;</span>
-<span class="nc" id="L51">        }</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L48">            System.out.println(path + &quot;\n  &quot; + category + &quot;\n&quot;);</span>
+<span class="nc" id="L49">            i++;</span>
+<span class="nc" id="L50">        }</span>
+<span class="nc" id="L51">    }</span>
 
     /**
      * Verifies that the user-supplied file paths exist, are valid documents, and
@@ -59,33 +58,33 @@ import java.util.*;
      */
     public static List&lt;String&gt; verifyPaths(String[] args)
     {
-<span class="nc" id="L62">        List&lt;String&gt; validPaths = new ArrayList&lt;String&gt;();</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (String path: args)</span>
+<span class="nc" id="L61">        List&lt;String&gt; validPaths = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for (String path: args)</span>
         {
-<span class="nc" id="L65">            File file = new File(path);</span>
-<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (!file.exists())</span>
+<span class="nc" id="L64">            File file = new File(path);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (!file.exists())</span>
             {
-<span class="nc" id="L68">                System.out.println(path + &quot; does not exist.\n&quot;);</span>
-<span class="nc" id="L69">                continue;</span>
+<span class="nc" id="L67">                System.out.println(path + &quot; does not exist.\n&quot;);</span>
+<span class="nc" id="L68">                continue;</span>
             }
-<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (file.isDirectory())</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (file.isDirectory())</span>
             {
-<span class="nc" id="L73">                System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
-<span class="nc" id="L74">                continue;</span>
+<span class="nc" id="L72">                System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
+<span class="nc" id="L73">                continue;</span>
             }
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (file.length()==0)</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (file.length()==0)</span>
             {
-<span class="nc" id="L78">                System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
-<span class="nc" id="L79">                continue;</span>
+<span class="nc" id="L77">                System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
+<span class="nc" id="L78">                continue;</span>
             }
-<span class="nc" id="L81">            String extension = path.substring(path.length()-3);</span>
-<span class="nc bnc" id="L82" title="All 4 branches missed.">            if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;);</span>
+<span class="nc" id="L80">            String extension = path.substring(path.length()-3);</span>
+<span class="nc bnc" id="L81" title="All 4 branches missed.">            if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;);</span>
             {
-<span class="nc" id="L84">                System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
+<span class="nc" id="L83">                System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
             }
-<span class="nc" id="L86">            validPaths.add(path);</span>
+<span class="nc" id="L85">            validPaths.add(path);</span>
         }
-<span class="nc" id="L88">        return validPaths;</span>
+<span class="nc" id="L87">        return validPaths;</span>
     }
 
     /**
@@ -96,45 +95,45 @@ import java.util.*;
     public static String retrieveCategory(String category)
     {
         String categoryName;
-<span class="nc bnc" id="L99" title="All 12 branches missed.">        switch (category)</span>
+<span class="nc bnc" id="L98" title="All 12 branches missed.">        switch (category)</span>
         {
             case &quot;A&quot;:
-<span class="nc" id="L102">                categoryName = &quot;A. General Literature&quot;;</span>
-<span class="nc" id="L103">                break;</span>
+<span class="nc" id="L101">                categoryName = &quot;A. General Literature&quot;;</span>
+<span class="nc" id="L102">                break;</span>
             case &quot;B&quot;:
-<span class="nc" id="L105">                categoryName = &quot;B. Hardware&quot;;</span>
-<span class="nc" id="L106">                break;</span>
+<span class="nc" id="L104">                categoryName = &quot;B. Hardware&quot;;</span>
+<span class="nc" id="L105">                break;</span>
             case &quot;C&quot;:
-<span class="nc" id="L108">                categoryName = &quot;C. Computer Systems Organization&quot;;</span>
-<span class="nc" id="L109">                break;</span>
+<span class="nc" id="L107">                categoryName = &quot;C. Computer Systems Organization&quot;;</span>
+<span class="nc" id="L108">                break;</span>
             case &quot;D&quot;:
-<span class="nc" id="L111">                categoryName = &quot;D. Software&quot;;</span>
-<span class="nc" id="L112">                break;</span>
+<span class="nc" id="L110">                categoryName = &quot;D. Software&quot;;</span>
+<span class="nc" id="L111">                break;</span>
             case &quot;E&quot;:
-<span class="nc" id="L114">                categoryName = &quot;E. Data&quot;;</span>
-<span class="nc" id="L115">                break;</span>
+<span class="nc" id="L113">                categoryName = &quot;E. Data&quot;;</span>
+<span class="nc" id="L114">                break;</span>
             case &quot;F&quot;:
-<span class="nc" id="L117">                categoryName = &quot;F. Theory of Computation&quot;;</span>
-<span class="nc" id="L118">                break;</span>
+<span class="nc" id="L116">                categoryName = &quot;F. Theory of Computation&quot;;</span>
+<span class="nc" id="L117">                break;</span>
             case &quot;G&quot;:
-<span class="nc" id="L120">                categoryName = &quot;G. Mathematics of Computing&quot;;</span>
-<span class="nc" id="L121">                break;</span>
+<span class="nc" id="L119">                categoryName = &quot;G. Mathematics of Computing&quot;;</span>
+<span class="nc" id="L120">                break;</span>
             case &quot;H&quot;:
-<span class="nc" id="L123">                categoryName = &quot;H. Information Systems&quot;;</span>
-<span class="nc" id="L124">                break;</span>
+<span class="nc" id="L122">                categoryName = &quot;H. Information Systems&quot;;</span>
+<span class="nc" id="L123">                break;</span>
             case &quot;I&quot;:
-<span class="nc" id="L126">                categoryName = &quot;I. Computing and Methodologies&quot;;</span>
-<span class="nc" id="L127">                break;</span>
+<span class="nc" id="L125">                categoryName = &quot;I. Computing and Methodologies&quot;;</span>
+<span class="nc" id="L126">                break;</span>
             case &quot;J&quot;:
-<span class="nc" id="L129">                categoryName = &quot;J. Computer Applications&quot;;</span>
-<span class="nc" id="L130">                break;</span>
+<span class="nc" id="L128">                categoryName = &quot;J. Computer Applications&quot;;</span>
+<span class="nc" id="L129">                break;</span>
             case &quot;K&quot;:
-<span class="nc" id="L132">                categoryName = &quot;K. Computing Milieux&quot;;</span>
-<span class="nc" id="L133">                break;</span>
+<span class="nc" id="L131">                categoryName = &quot;K. Computing Milieux&quot;;</span>
+<span class="nc" id="L132">                break;</span>
             default:
-<span class="nc" id="L135">                categoryName = &quot;(no classes)&quot;;</span>
+<span class="nc" id="L134">                categoryName = &quot;(no classes)&quot;;</span>
         }
-<span class="nc" id="L137">        return categoryName;</span>
+<span class="nc" id="L136">        return categoryName;</span>
     }
 
 }
