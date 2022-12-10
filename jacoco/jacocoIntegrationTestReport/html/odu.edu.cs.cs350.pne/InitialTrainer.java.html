@@ -24,7 +24,7 @@ public class InitialTrainer
     /**
      * An array of valid category keys.
      */
-<span class="nc" id="L27">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="pc" id="L27">    private final String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
 
     /**
      * An array of data lines that hold information about a simulated document.
@@ -39,18 +39,18 @@ public class InitialTrainer
     /**
      * A VocabCollection created from the simulated train data.
      */
-<span class="nc" id="L42">    private VocabCollection tempVocab = new VocabCollection();</span>
+<span class="pc" id="L42">    private VocabCollection tempVocab = new VocabCollection();</span>
 
     /**
      * Creates an Initial Trainer by setting up the data and vocab words to default values.
      */
     public InitialTrainer()
-<span class="nc" id="L48">    {</span>
+<span class="fc" id="L48">    {</span>
         // String[] tempData = {&quot;&quot;};   //category last
         // String[] tempVocab = {&quot;&quot;};
         // String[] tempData = {&quot;1.7,1.3,3,0,A&quot;,&quot;1.3,3,4,0,B&quot;,&quot;1.5,0,0,2,C&quot;};
         // String[] tempVocab = {&quot;computer&quot;, &quot;data&quot;, &quot;java&quot;, &quot;test&quot;}; 
-<span class="nc" id="L53">        String[] tempData = {&quot;3.46,0,0,0,0,0,0,0,0,0,0,A&quot;,</span>
+<span class="fc" id="L53">        String[] tempData = {&quot;3.46,0,0,0,0,0,0,0,0,0,0,A&quot;,</span>
                              &quot;0,3.46,0,0,0,0,0,0,0,0,0,B&quot;,
                              &quot;0,0,3.46,0,0,0,0,0,0,0,0,C&quot;,
                              &quot;0,0,0,3.46,0,0,0,0,0,0,0,D&quot;,
@@ -61,12 +61,12 @@ public class InitialTrainer
                              &quot;0,0,0,0,0,0,0,0,3.46,0,0,I&quot;,
                              &quot;0,0,0,0,0,0,0,0,0,3.46,0,J&quot;,
                              &quot;0,0,0,0,0,0,0,0,0,0,3.46,K&quot;};
-<span class="nc" id="L64">        String[] tempVocab = {&quot;literature&quot;, &quot;hardware&quot;, &quot;organization&quot;, &quot;software&quot;, &quot;data&quot;, &quot;theory&quot;, &quot;math&quot;, &quot;information&quot;,</span>
+<span class="fc" id="L64">        String[] tempVocab = {&quot;literature&quot;, &quot;hardware&quot;, &quot;organization&quot;, &quot;software&quot;, &quot;data&quot;, &quot;theory&quot;, &quot;math&quot;, &quot;information&quot;,</span>
                              &quot;method&quot;, &quot;application&quot;, &quot;milieux&quot;};
         
-<span class="nc" id="L67">        trainData = tempData;</span>
-<span class="nc" id="L68">        vocabWords = tempVocab;</span>
-<span class="nc" id="L69">    }</span>
+<span class="fc" id="L67">        trainData = tempData;</span>
+<span class="fc" id="L68">        vocabWords = tempVocab;</span>
+<span class="fc" id="L69">    }</span>
 
     /**
      * Creates an Initial Trainer by setting up the data and vocab words with specified values (used in testing).
@@ -84,20 +84,20 @@ public class InitialTrainer
      */
     public void run()
     {
-<span class="nc" id="L87">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
-<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (validARFFPresent(arffPath))</span>
+<span class="fc" id="L87">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (validARFFPresent(arffPath))</span>
 <span class="nc" id="L89">            return;</span>
 
-<span class="nc" id="L91">        String vocabPath = &quot;acmclass-data/vocabCollection.txt&quot;;</span>
-<span class="nc" id="L92">        File vocabFile = new File(vocabPath);</span>
-<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (vocabFile.exists()) //guard against prior runs</span>
+<span class="fc" id="L91">        String vocabPath = &quot;acmclass-data/vocabCollection.txt&quot;;</span>
+<span class="fc" id="L92">        File vocabFile = new File(vocabPath);</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (vocabFile.exists()) //guard against prior runs</span>
 <span class="nc" id="L94">            vocabFile.delete();</span>
-<span class="nc" id="L95">        tempVocab.readInVocab(vocabPath);   //no path exists so it creates a new vocabFile</span>
-<span class="nc" id="L96">        simulateVocabConstruction();</span>
-<span class="nc" id="L97">        tempVocab.writeOutVocab(vocabPath); </span>
-<span class="nc" id="L98">        Instances dTraining = dataExtractionWithData();</span>
-<span class="nc" id="L99">        outputToARFF(dTraining, arffPath);</span>
-<span class="nc" id="L100">    }</span>
+<span class="fc" id="L95">        tempVocab.readInVocab(vocabPath);   //no path exists so it creates a new vocabFile</span>
+<span class="fc" id="L96">        simulateVocabConstruction();</span>
+<span class="fc" id="L97">        tempVocab.writeOutVocab(vocabPath); </span>
+<span class="fc" id="L98">        Instances dTraining = dataExtractionWithData();</span>
+<span class="fc" id="L99">        outputToARFF(dTraining, arffPath);</span>
+<span class="fc" id="L100">    }</span>
 
     /**
      * Checks to see if a valid arff file is present.
@@ -106,13 +106,13 @@ public class InitialTrainer
      */
     public boolean validARFFPresent(String arffPath)
     {
-<span class="nc" id="L109">        File file = new File(arffPath);</span>
+<span class="fc" id="L109">        File file = new File(arffPath);</span>
         try {
-<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (!file.exists())     //if file does not exist, create a file</span>
-<span class="nc" id="L112">                file.createNewFile();</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if (!file.exists())     //if file does not exist, create a file</span>
+<span class="fc" id="L112">                file.createNewFile();</span>
             
-<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (file.length()==0)   //if file does not have content it is invalid</span>
-<span class="nc" id="L115">                return false;</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">            if (file.length()==0)   //if file does not have content it is invalid</span>
+<span class="fc" id="L115">                return false;</span>
 
 <span class="nc" id="L117">            return true;            //else it is valid</span>
 <span class="nc" id="L118">        } catch (IOException e) {</span>
@@ -128,27 +128,27 @@ public class InitialTrainer
      */
     public void simulateVocabConstruction()
     {
-<span class="nc" id="L131">        int numOfDocuments = trainData.length;</span>
+<span class="fc" id="L131">        int numOfDocuments = trainData.length;</span>
 
         //initializes number of documents
-<span class="nc bnc" id="L134" title="All 2 branches missed.">        for (int i=0; i&lt;numOfDocuments; i++)</span>
-<span class="nc" id="L135">            tempVocab.increaseTotalDocs();</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">        for (int i=0; i&lt;numOfDocuments; i++)</span>
+<span class="fc" id="L135">            tempVocab.increaseTotalDocs();</span>
 
         //Loop through document data
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        for (String data: trainData)</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        for (String data: trainData)</span>
         {
-<span class="nc" id="L140">            String[] values = data.split(&quot;,&quot;);</span>
+<span class="fc" id="L140">            String[] values = data.split(&quot;,&quot;);</span>
 
-<span class="nc bnc" id="L142" title="All 2 branches missed.">            for (int i=0; i&lt;values.length-1; i++)</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">            for (int i=0; i&lt;values.length-1; i++)</span>
             {
-<span class="nc" id="L144">                double weight = Double.parseDouble(values[i]); //0 if not in doc, any number if in doc</span>
-<span class="nc bnc" id="L145" title="All 2 branches missed.">                if (weight!=0)</span>
-<span class="nc" id="L146">                    tempVocab.addWord(vocabWords[i]);</span>
+<span class="fc" id="L144">                double weight = Double.parseDouble(values[i]); //0 if not in doc, any number if in doc</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">                if (weight!=0)</span>
+<span class="fc" id="L146">                    tempVocab.addWord(vocabWords[i]);</span>
             }
         }
 
-<span class="nc" id="L150">        tempVocab.calcInverseDocFrequency();</span>
-<span class="nc" id="L151">    }</span>
+<span class="fc" id="L150">        tempVocab.calcInverseDocFrequency();</span>
+<span class="fc" id="L151">    }</span>
 
     /**
      * Constructs a training Instances object from the Initial Trainer's
@@ -157,48 +157,64 @@ public class InitialTrainer
      */
     public Instances dataExtractionWithData()
     {
-<span class="nc" id="L160">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
+<span class="fc" id="L160">        ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
 
-<span class="nc bnc" id="L162" title="All 2 branches missed.">        for (String word: vocabWords)</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        for (String word: vocabWords)</span>
         {
-<span class="nc" id="L164">            Attribute attr = new Attribute(word);</span>
-<span class="nc" id="L165">            attrInfo.add(attr);</span>
+<span class="fc" id="L164">            Attribute attr = new Attribute(word);</span>
+<span class="fc" id="L165">            attrInfo.add(attr);</span>
         }
 
         //create and add category attribute
-<span class="nc" id="L169">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L170">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
-<span class="nc" id="L171">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
-<span class="nc" id="L172">        attrInfo.add(category);</span>
+<span class="fc" id="L169">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L170">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
+<span class="fc" id="L171">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
+<span class="fc" id="L172">        attrInfo.add(category);</span>
 
-<span class="nc" id="L174">        final int numOfAttributes = attrInfo.size();</span>
+<span class="fc" id="L174">        final int numOfAttributes = attrInfo.size();</span>
+<span class="fc" id="L175">        int indexOfLastAttr = numOfAttributes-1;</span>
 
-<span class="nc" id="L176">        Instances training = new Instances(&quot;TrainingData&quot;, attrInfo, trainData.length);</span>
-<span class="nc" id="L177">        training.setClass(category);</span>
+<span class="fc" id="L177">        Instances training = new Instances(&quot;TrainingData&quot;, attrInfo, trainData.length);</span>
+<span class="fc" id="L178">        training.setClass(category);</span>
 
-<span class="nc bnc" id="L179" title="All 2 branches missed.">        for (String data: trainData)</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        for (String data: trainData)</span>
         {
-<span class="nc" id="L181">            String[] values = data.split(&quot;,&quot;);</span>
-<span class="nc" id="L182">            Instance instance = new DenseInstance(numOfAttributes);</span>
-<span class="nc" id="L183">            instance.setDataset(training);</span>
-            
-<span class="nc" id="L185">            int i = 0;</span>
-<span class="nc bnc" id="L186" title="All 2 branches missed.">            for (; i&lt;values.length-1; i++)</span>
+<span class="fc" id="L182">            String[] values = data.split(&quot;,&quot;);</span>
+
+<span class="fc" id="L184">            double[] instanceValues = new double[numOfAttributes];</span>
+<span class="fc" id="L185">            int i = 0;</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">            for(; i&lt;values.length-1; i++)</span>
             {
-<span class="nc" id="L188">                double weight = Double.parseDouble(values[i]);</span>
-<span class="nc bnc" id="L189" title="All 2 branches missed.">                if (weight == 0.0)</span>
-<span class="nc" id="L190">                    instance.setValue(i, 0); //values[i] = 0</span>
-<span class="nc bnc" id="L191" title="All 2 branches missed.">                else if (tempVocab.getDocFreq(vocabWords[i])==tempVocab.getTotalDocuments())</span>
-<span class="nc" id="L192">                    instance.setValue(i, 0); //values[i] != 0 for all data lines (documents)</span>
+<span class="fc" id="L188">                double weight = Double.parseDouble(values[i]);</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">                if (weight == 0.0)</span>
+<span class="fc" id="L190">                    instanceValues[i] = 0.0; //values[i] = 0</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">                else if (tempVocab.getDocFreq(vocabWords[i])==tempVocab.getTotalDocuments())</span>
+<span class="nc" id="L192">                    instanceValues[i] = 0.0; //values[i] != 0 for all data lines (documents)</span>
                 else
-<span class="nc" id="L194">                    instance.setValue(i, weight); //values[i] != 0 but not in all data lines (documents)</span>
+<span class="fc" id="L194">                    instanceValues[i] = weight; //values[i] != 0 but not in all data lines (documents)</span>
             }
-<span class="nc" id="L196">            instance.setValue(i, values[i]);</span>
+<span class="fc" id="L196">            instanceValues[i] = training.attribute(indexOfLastAttr).indexOfValue(values[i]);</span>
+
+<span class="fc" id="L198">            Instance instance = new DenseInstance(1.0, instanceValues);</span>
+<span class="fc" id="L199">            training.add(instance);</span>
+            // Instance instance = new DenseInstance(numOfAttributes);
+            // instance.setDataset(training);
             
-<span class="nc" id="L198">            training.add(instance);</span>
+            // int i = 0;
+            // for (; i&lt;values.length-1; i++)
+            // {
+            //     double weight = Double.parseDouble(values[i]);
+            //     if (weight == 0.0)
+            //         instance.setValue(i, 0); //values[i] = 0
+            //     else if (tempVocab.getDocFreq(vocabWords[i])==tempVocab.getTotalDocuments())
+            //         instance.setValue(i, 0); //values[i] != 0 for all data lines (documents)
+            //     else
+            //         instance.setValue(i, weight); //values[i] != 0 but not in all data lines (documents)
+            // }
+            // instance.setValue(i, values[i]);
         }
 
-<span class="nc" id="L201">        return training;</span>
+<span class="fc" id="L217">        return training;</span>
     }
 
     /**
@@ -210,14 +226,14 @@ public class InitialTrainer
     {
         try
         {
-<span class="nc" id="L213">            DataSink.write(arffPath, training);</span>
+<span class="fc" id="L229">            DataSink.write(arffPath, training);</span>
         }
-<span class="nc" id="L215">        catch (Exception e)</span>
+<span class="nc" id="L231">        catch (Exception e)</span>
         {
-<span class="nc" id="L217">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
-<span class="nc" id="L218">            e.printStackTrace();</span>
-<span class="nc" id="L219">        }</span>
-<span class="nc" id="L220">    }</span>
+<span class="nc" id="L233">            System.out.println(&quot;Failed to save to: &quot; + arffPath);</span>
+<span class="nc" id="L234">            e.printStackTrace();</span>
+<span class="fc" id="L235">        }</span>
+<span class="fc" id="L236">    }</span>
 
     /**
      * Returns the associated VocabCollection.
@@ -225,7 +241,7 @@ public class InitialTrainer
      */
     public VocabCollection getVocab()
     {
-<span class="nc" id="L228">        return tempVocab;</span>
+<span class="nc" id="L244">        return tempVocab;</span>
     }
 
     /**
@@ -234,7 +250,7 @@ public class InitialTrainer
      */
     public String[] getTrainData()
     {
-<span class="nc" id="L237">        return trainData;</span>
+<span class="nc" id="L253">        return trainData;</span>
     }
 
     /**
@@ -243,7 +259,7 @@ public class InitialTrainer
      */
     public String[] getVocabWords()
     {
-<span class="nc" id="L246">        return vocabWords;</span>
+<span class="nc" id="L262">        return vocabWords;</span>
     }
     
 }

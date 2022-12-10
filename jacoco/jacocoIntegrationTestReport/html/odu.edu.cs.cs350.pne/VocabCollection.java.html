@@ -116,21 +116,21 @@ public class VocabCollection
     {
         try
         {
-<span class="nc" id="L119">            FileWriter writer = new FileWriter(filePath);</span>
-<span class="nc" id="L120">            writer.write(totalDocuments + &quot;\n&quot;);</span>
-<span class="nc bnc" id="L121" title="All 2 branches missed.">            for (Map.Entry&lt;String, WordFrequency&gt; element: vocabMap.entrySet())</span>
+<span class="fc" id="L119">            FileWriter writer = new FileWriter(filePath);</span>
+<span class="fc" id="L120">            writer.write(totalDocuments + &quot;\n&quot;);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            for (Map.Entry&lt;String, WordFrequency&gt; element: vocabMap.entrySet())</span>
             {
-<span class="nc" id="L123">                WordFrequency wordStats = (WordFrequency)element.getValue();</span>
-<span class="nc" id="L124">                writer.write(element.getKey() + &quot; &quot; + wordStats.docFrequency + &quot;\n&quot;);</span>
-<span class="nc" id="L125">            }</span>
-<span class="nc" id="L126">            writer.close();</span>
+<span class="fc" id="L123">                WordFrequency wordStats = (WordFrequency)element.getValue();</span>
+<span class="fc" id="L124">                writer.write(element.getKey() + &quot; &quot; + wordStats.docFrequency + &quot;\n&quot;);</span>
+<span class="fc" id="L125">            }</span>
+<span class="fc" id="L126">            writer.close();</span>
         }
 <span class="nc" id="L128">        catch (IOException e)</span>
         {
 <span class="nc" id="L130">            System.out.println(&quot;An error occurred&quot;);</span>
 <span class="nc" id="L131">            e.printStackTrace();</span>
-<span class="nc" id="L132">        }</span>
-<span class="nc" id="L133">    }</span>
+<span class="fc" id="L132">        }</span>
+<span class="fc" id="L133">    }</span>
     
     /**
      * Returns all the words in the VocabCollection.

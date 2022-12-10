@@ -18,43 +18,43 @@ import java.util.List;
      * The result of this program will be the addition of document's document signature 
      * to an existing arff file. If the arff file does not exist, an Initial Trainer will run
      * and create an initial arff file from sample data files with known corresponding classifications.
-     * @param args A series of valid paths to pdf/txt files.
+     * @param args A valid path followed by a valid category key
      */
     public static void main(String[] args) 
     {
         //creates train.arff with sample data(Only runs if file has not been created)
-<span class="nc" id="L26">        InitialTrainer trainer = new InitialTrainer();</span>
-<span class="nc" id="L27">        trainer.run();</span>
+<span class="fc" id="L26">        InitialTrainer trainer = new InitialTrainer();</span>
+<span class="fc" id="L27">        trainer.run();</span>
         
         //Verify Input from User
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (!isValidInputs(args))</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (!isValidInputs(args))</span>
 <span class="nc" id="L31">            System.exit(1);</span>
 
-<span class="nc" id="L33">        String vocabPath = &quot;acmclass-data/vocabCollection.txt&quot;;</span>
-<span class="nc" id="L34">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
-<span class="nc" id="L35">        StopList stopList = new StopList();</span>
+<span class="fc" id="L33">        String vocabPath = &quot;acmclass-data/vocabCollection.txt&quot;;</span>
+<span class="fc" id="L34">        String arffPath = &quot;acmclass-data/train.arff&quot;;</span>
+<span class="fc" id="L35">        StopList stopList = new StopList();</span>
 
         //DECODE AND PROCESS Documents from ARFF
-<span class="nc" id="L38">        ArffParser arffParser = new ArffParser(vocabPath);</span>
-<span class="nc" id="L39">        List&lt;Document&gt; documents = arffParser.run(arffPath);</span>
+<span class="fc" id="L38">        ArffParser arffParser = new ArffParser(vocabPath);</span>
+<span class="fc" id="L39">        List&lt;Document&gt; documents = arffParser.run(arffPath);</span>
 
         //CREATE AND PROCESS NEW Inputted Documents
-<span class="nc" id="L42">        TrainParser tParser = new TrainParser(stopList, vocabPath);</span>
-<span class="nc" id="L43">        TrainDocument inputtedDocument = tParser.createDocument(args[0], args[1].toUpperCase());</span>
+<span class="fc" id="L42">        TrainParser tParser = new TrainParser(stopList, vocabPath);</span>
+<span class="fc" id="L43">        TrainDocument inputtedDocument = tParser.createDocument(args[0], args[1].toUpperCase());</span>
 
         //CALCULATE TERMWEIGHTS (doing all docs together so we have completed vocab)
-<span class="nc" id="L46">        VocabCollection vocab = tParser.getVocabCollection();</span>
-<span class="nc" id="L47">        vocab.calcInverseDocFrequency();</span>
-<span class="nc" id="L48">        vocab.writeOutVocab(vocabPath);</span>
-<span class="nc" id="L49">        documents.add((Document)inputtedDocument);</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">        for (Document doc: documents)</span>
-<span class="nc" id="L51">            doc.calculateTermWeights(vocab);</span>
+<span class="fc" id="L46">        VocabCollection vocab = tParser.getVocabCollection();</span>
+<span class="fc" id="L47">        vocab.calcInverseDocFrequency();</span>
+<span class="fc" id="L48">        vocab.writeOutVocab(vocabPath);</span>
+<span class="fc" id="L49">        documents.add((Document)inputtedDocument);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (Document doc: documents)</span>
+<span class="fc" id="L51">            doc.calculateTermWeights(vocab);</span>
         
         //ENCODE NEW ARFF from Inputted Documents and ARFF Documents
-<span class="nc" id="L54">        ArffGenerator generator = new ArffGenerator(arffPath, vocab);</span>
-<span class="nc" id="L55">        generator.generateInstances(documents);</span>
-<span class="nc" id="L56">        generator.outputToArff();</span>
-<span class="nc" id="L57">    }</span>
+<span class="fc" id="L54">        ArffGenerator generator = new ArffGenerator(arffPath, vocab);</span>
+<span class="fc" id="L55">        generator.generateInstances(documents);</span>
+<span class="fc" id="L56">        generator.outputToArff();</span>
+<span class="fc" id="L57">    }</span>
     
     /**
      * Returns true, if the user-supplied inputs consist of two inputs: 
@@ -65,21 +65,21 @@ import java.util.List;
      */
     public static boolean isValidInputs(String[] args)
     {
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (args.length != 2)</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (args.length != 2)</span>
         {
 <span class="nc" id="L70">            System.out.println(&quot;Please include a single file path followed by a specified category.\n&quot;);</span>
 <span class="nc" id="L71">            return false;</span>
         }
         
-<span class="nc" id="L74">        String path = args[0];</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (!isValidPath(path))</span>
+<span class="fc" id="L74">        String path = args[0];</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (!isValidPath(path))</span>
 <span class="nc" id="L76">            return false;   </span>
 
-<span class="nc" id="L78">        String category = args[1];</span>
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (!isValidCategory(category))</span>
+<span class="fc" id="L78">        String category = args[1];</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (!isValidCategory(category))</span>
 <span class="nc" id="L80">            return false;</span>
 
-<span class="nc" id="L82">        return true;</span>
+<span class="fc" id="L82">        return true;</span>
     }
 
     /**
@@ -90,29 +90,29 @@ import java.util.List;
      */
     public static boolean isValidPath(String path)
     {
-<span class="nc" id="L93">        File file = new File(path);</span>
-<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (!file.exists())</span>
+<span class="fc" id="L93">        File file = new File(path);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (!file.exists())</span>
         {
 <span class="nc" id="L96">            System.out.println(path + &quot; does not exist.\n&quot;);</span>
 <span class="nc" id="L97">            return false;</span>
         }
-<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (file.isDirectory())</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (file.isDirectory())</span>
         {
 <span class="nc" id="L101">            System.out.println(path + &quot; is a directory, not a file.\n&quot;);</span>
 <span class="nc" id="L102">            return false;</span>
         }
-<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (file.length()==0)</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (file.length()==0)</span>
         {
 <span class="nc" id="L106">            System.out.println(path + &quot; is empty and cannot be classified.\n&quot;);</span>
 <span class="nc" id="L107">            return false;</span>
         }
-<span class="nc" id="L109">        String extension = path.substring(path.length()-3);</span>
-<span class="nc bnc" id="L110" title="All 4 branches missed.">        if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;)</span>
+<span class="fc" id="L109">        String extension = path.substring(path.length()-3);</span>
+<span class="pc bpc" id="L110" title="2 of 4 branches missed.">        if (!extension.equals(&quot;pdf&quot;) &amp;&amp; !extension.equals(&quot;txt&quot;))</span>
         {
 <span class="nc" id="L112">            System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
 <span class="nc" id="L113">            return false;</span>
         }
-<span class="nc" id="L115">        return true;</span>
+<span class="fc" id="L115">        return true;</span>
     }
 
     /**
@@ -122,36 +122,18 @@ import java.util.List;
      */
     public static boolean isValidCategory(String category)
     {
-<span class="nc" id="L125">        String[] validCategories = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
-<span class="nc" id="L126">        List&lt;String&gt; validCatList = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L127">        validCatList.addAll(Arrays.asList(validCategories));</span>
+<span class="fc" id="L125">        String[] validCategories = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="fc" id="L126">        List&lt;String&gt; validCatList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L127">        validCatList.addAll(Arrays.asList(validCategories));</span>
 
-<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (validCatList.contains(category.toUpperCase()))</span>
-<span class="nc" id="L130">            return true;</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (validCatList.contains(category.toUpperCase()))</span>
+<span class="fc" id="L130">            return true;</span>
         
 <span class="nc" id="L132">        System.out.println(&quot;Supplied Category must be within the range A-K according to the ACM Classification System.\n&quot;);</span>
 <span class="nc" id="L133">        return false;</span>
     }
     
 }
-
-//TODOS (In Order of Importance)
-    //General 
-        //Javadoc
-            //javadoc for Initial Trainer
-        //Learning Machine Optimization (Tabled till Data Hardcoded or Sample Files provided)
-            //Optimize gamma and C values of SMO (Section 5.4 in Design Notes)
-            //Test machine accuracy using N-fold Cross Validation (Section 5.3 in Design Notes)
-            //LearningMachine.classifyDataTest (Tabled till learning machine optimized)
-        //Integration Tests (Jozef)
-            //TestACMClassifier.java
-            //TestACMTrainer.java
-            //TestRunLearningMachine.java
-        //CleanUp
-            //eliminate as many Todo's as possible    
-    //WAITING FOR SAMPLE FILES (Wendnesday)
-        //input sample filepaths and associated categories into InitTrainer
-        //InitTrainer.constructInitialDataTest (Tabled till sample files available)
             
     
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

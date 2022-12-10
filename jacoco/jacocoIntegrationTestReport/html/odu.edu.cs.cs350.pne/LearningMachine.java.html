@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Set;
 import java.io.*;
 
+//import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.functions.supportVector.RBFKernel;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.Utils;
+//import weka.core.Utils;
+//import weka.core.Debug.Random;
 import weka.core.converters.ArffLoader.ArffReader;
 
 /**
@@ -32,24 +34,24 @@ public class LearningMachine
     /**
      * Holds the data associated with all Train Documents ever read into the supplied Arff.
      */
-<span class="fc" id="L35">    Instances training = null;</span>
+<span class="fc" id="L37">    Instances training = null;</span>
 
     /**
      * Holds the data associated with the Classify Documents to be classified by the Learning Machine.
      */
-<span class="fc" id="L40">    Instances classify = null;</span>
+<span class="fc" id="L42">    Instances classify = null;</span>
 
     /**
      * A list of Attributes that holds all attribute info associated with
      * the training and classify Instances.
      */
-<span class="fc" id="L46">    ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
+<span class="fc" id="L48">    ArrayList&lt;Attribute&gt; attrInfo = new ArrayList&lt;Attribute&gt;();</span>
 
     /**
      * The actual learning machine provided by the WEKA Library.
      * The SMO will predict the category attribute of the classify Instances using the training Instances.
      */
-<span class="fc" id="L52">    SMO svm = new SMO();</span>
+<span class="fc" id="L54">    SMO svm = new SMO();</span>
 
     /**
      * Creates a Learning Machine with an arff file and an associated VocabCollection.
@@ -58,10 +60,10 @@ public class LearningMachine
      * @param tempVocab A VocabCollection associated with the arff file
      */
     public LearningMachine(String trainPath, VocabCollection tempVocab)
-<span class="fc" id="L61">    {</span>
-<span class="fc" id="L62">        readInARFF(trainPath);</span>
-<span class="fc" id="L63">        vocab = tempVocab;</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L63">    {</span>
+<span class="fc" id="L64">        readInARFF(trainPath);</span>
+<span class="fc" id="L65">        vocab = tempVocab;</span>
+<span class="fc" id="L66">    }</span>
 
     /**
      * Coordinates the execution of the Learning Machine by constructing the Attribute Info,
@@ -71,20 +73,21 @@ public class LearningMachine
      */
     public void run(List&lt;ClassifyDocument&gt; documents)
     {
-<span class="fc" id="L74">        constructAttributeInfo();</span>
+<span class="fc" id="L76">        constructAttributeInfo();</span>
 
         //extract data from classifyDocuments
-<span class="fc" id="L77">        extractClassifyData(documents);</span>
+<span class="fc" id="L79">        extractClassifyData(documents);</span>
 
         //Maybe do crossvalidation to find optimal gamma and C values every time run
             //We might want to create a temp SMO to test values on
+        //optimizeMachineVariables();
 
         //create SMO(SVM)
-<span class="fc" id="L83">        createSMO();</span>
+<span class="fc" id="L86">        createSMO();</span>
 
         //run SMO(SVM)
-<span class="fc" id="L86">        classifyData(documents);</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L89">        classifyData(documents);</span>
+<span class="fc" id="L90">    }</span>
 
     /**
      * Reads the data from an arff file into the training Instances object.
@@ -92,39 +95,39 @@ public class LearningMachine
      */
     public void readInARFF(String arffPath)
     {
-<span class="fc" id="L95">        File file = new File(arffPath);</span>
-<span class="pc bpc" id="L96" title="2 of 4 branches missed.">        if (!file.exists() || file.length()==0)  //guard against case of it not existing?</span>
-<span class="nc" id="L97">            return;</span>
+<span class="fc" id="L98">        File file = new File(arffPath);</span>
+<span class="pc bpc" id="L99" title="2 of 4 branches missed.">        if (!file.exists() || file.length()==0)  //guard against case of it not existing?</span>
+<span class="nc" id="L100">            return;</span>
 
         try {
-<span class="fc" id="L100">            BufferedReader bReader = new BufferedReader(new FileReader(arffPath));</span>
-<span class="fc" id="L101">            ArffReader reader = new ArffReader(bReader);</span>
-<span class="fc" id="L102">            training = reader.getData();</span>
-<span class="fc" id="L103">            training.setClassIndex(training.numAttributes()-1);  //sets the first attribute to be what we are predicting</span>
-<span class="nc" id="L104">        } catch (Exception e){</span>
-<span class="nc" id="L105">            System.out.println (&quot;An error occured reading in from &quot; + arffPath);</span>
-<span class="nc" id="L106">            e.printStackTrace();</span>
-<span class="fc" id="L107">        }</span>
-<span class="fc" id="L108">    }</span>
+<span class="fc" id="L103">            BufferedReader bReader = new BufferedReader(new FileReader(arffPath));</span>
+<span class="fc" id="L104">            ArffReader reader = new ArffReader(bReader);</span>
+<span class="fc" id="L105">            training = reader.getData();</span>
+<span class="fc" id="L106">            training.setClassIndex(training.numAttributes()-1);  //sets the first attribute to be what we are predicting</span>
+<span class="nc" id="L107">        } catch (Exception e){</span>
+<span class="nc" id="L108">            System.out.println (&quot;An error occured reading in from &quot; + arffPath);</span>
+<span class="nc" id="L109">            e.printStackTrace();</span>
+<span class="fc" id="L110">        }</span>
+<span class="fc" id="L111">    }</span>
 
     /**
      * Constructs the attribute info to be used in the creation of the classify Instances object.
      */
     public void constructAttributeInfo()
     {
-<span class="fc" id="L115">        Set&lt;String&gt; vocabSet = vocab.getKeySet();</span>
-<span class="fc bfc" id="L116" title="All 2 branches covered.">        for (String word: vocabSet)</span>
+<span class="fc" id="L118">        Set&lt;String&gt; vocabSet = vocab.getKeySet();</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        for (String word: vocabSet)</span>
         {
-<span class="fc" id="L118">            Attribute attr = new Attribute(word);</span>
-<span class="fc" id="L119">            attrInfo.add(attr);</span>
-<span class="fc" id="L120">        }</span>
+<span class="fc" id="L121">            Attribute attr = new Attribute(word);</span>
+<span class="fc" id="L122">            attrInfo.add(attr);</span>
+<span class="fc" id="L123">        }</span>
         
-<span class="fc" id="L122">        String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
-<span class="fc" id="L123">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L124">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
-<span class="fc" id="L125">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
-<span class="fc" id="L126">        attrInfo.add(category);</span>
-<span class="fc" id="L127">    }</span>
+<span class="fc" id="L125">        String[] categoryKeys = {&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;};</span>
+<span class="fc" id="L126">        ArrayList&lt;String&gt; categoryList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L127">        categoryList.addAll(Arrays.asList(categoryKeys));</span>
+<span class="fc" id="L128">        Attribute category = new Attribute(&quot;category&quot;, categoryList);</span>
+<span class="fc" id="L129">        attrInfo.add(category);</span>
+<span class="fc" id="L130">    }</span>
 
     /**
      * Constructs the classify Instances object from a list of Classify Documents.
@@ -132,46 +135,48 @@ public class LearningMachine
      */
     public void extractClassifyData(List&lt;ClassifyDocument&gt; documents)
     {
-<span class="fc" id="L135">        Set&lt;String&gt; vocabSet = vocab.getKeySet();</span>
+<span class="fc" id="L138">        Set&lt;String&gt; vocabSet = vocab.getKeySet();</span>
         
-<span class="fc" id="L137">        int numOfAttributes = attrInfo.size();</span>
-<span class="fc" id="L138">        classify = new Instances(&quot;toBeClassified&quot;, attrInfo, documents.size()); //attrInfo Usage</span>
+<span class="fc" id="L140">        int numOfAttributes = attrInfo.size();</span>
+<span class="fc" id="L141">        classify = new Instances(&quot;toBeClassified&quot;, attrInfo, documents.size()); //attrInfo Usage</span>
 
-<span class="fc bfc" id="L140" title="All 2 branches covered.">        for (ClassifyDocument doc: documents)</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        for (ClassifyDocument doc: documents)</span>
         {
-<span class="fc" id="L142">            Instance toClassify = new DenseInstance(numOfAttributes-1);</span>
-<span class="fc" id="L143">            toClassify.setDataset(classify);    //sets reference to dataset</span>
+<span class="fc" id="L145">            Instance toClassify = new DenseInstance(numOfAttributes-1);</span>
+<span class="fc" id="L146">            toClassify.setDataset(classify);    //sets reference to dataset</span>
             
-<span class="fc" id="L145">            int i = 0;          </span>
-<span class="fc bfc" id="L146" title="All 2 branches covered.">            for (String word: vocabSet)</span>
+<span class="fc" id="L148">            int i = 0;          </span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">            for (String word: vocabSet)</span>
             {
-<span class="fc bfc" id="L148" title="All 2 branches covered.">                if (doc.contains(word))</span>
-<span class="fc" id="L149">                    toClassify.setValue(i, doc.getWordWeight(word));</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">                if (doc.contains(word))</span>
+<span class="fc" id="L152">                    toClassify.setValue(i, doc.getWordWeight(word));</span>
                 else
-<span class="fc" id="L151">                    toClassify.setValue(i, 0.0);</span>
-<span class="fc" id="L152">                i++;</span>
-<span class="fc" id="L153">            }</span>
-<span class="fc" id="L154">            classify.add(toClassify);</span>
-<span class="fc" id="L155">        }</span>
-<span class="fc" id="L156">    }</span>
+<span class="fc" id="L154">                    toClassify.setValue(i, 0.0);</span>
+<span class="fc" id="L155">                i++;</span>
+<span class="fc" id="L156">            }</span>
+<span class="fc" id="L157">            classify.add(toClassify);</span>
+<span class="fc" id="L158">        }</span>
+<span class="fc" id="L159">    }</span>
     
     /**
      * Constructs the SMO (SVM) using the training Instances object.
      */
-    public void createSMO()
+    public void createSMO() //TODO: waiting on sample files for accurate data
     {
-<span class="fc" id="L163">        final double gamma = 0.01;</span>
-<span class="fc" id="L164">        final double C = 1.0;</span>
+<span class="fc" id="L166">        final double gamma = 0.01;</span>
+<span class="fc" id="L167">        final double C = 1.0;</span>
+        //REMOVED Options because it was set to all default values, and the function setOptions
+        //was resulting in an exception
 
         try{
-<span class="fc" id="L167">            svm.setKernel(new RBFKernel(training, 25007, gamma));</span>
-<span class="fc" id="L168">            svm.setC(C);</span>
-<span class="fc" id="L169">            svm.buildClassifier(training);</span>
-<span class="nc" id="L170">        } catch (Exception e) {</span>
-<span class="nc" id="L171">            System.out.println(&quot;Failed to create SMO.&quot;);</span>
-<span class="nc" id="L172">            e.printStackTrace();</span>
-<span class="fc" id="L173">        }</span>
-<span class="fc" id="L174">    }</span>
+<span class="fc" id="L172">            svm.setKernel(new RBFKernel(training, 25007, gamma));</span>
+<span class="fc" id="L173">            svm.setC(C);</span>
+<span class="fc" id="L174">            svm.buildClassifier(training);</span>
+<span class="nc" id="L175">        } catch (Exception e) {</span>
+<span class="nc" id="L176">            System.out.println(&quot;Failed to create SMO.&quot;);</span>
+<span class="nc" id="L177">            e.printStackTrace();</span>
+<span class="fc" id="L178">        }</span>
+<span class="fc" id="L179">    }</span>
 
     /**
      * Classifies the classify Instances object using the SMO (SVM) and
@@ -180,19 +185,127 @@ public class LearningMachine
      */
     public void classifyData(List&lt;ClassifyDocument&gt; documents)
     {   
-<span class="fc bfc" id="L183" title="All 2 branches covered.">        for (int i=0; i&lt;documents.size(); i++)</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">        for (int i=0; i&lt;documents.size(); i++)</span>
         {
             try{
-<span class="nc" id="L186">                double prediction = svm.classifyInstance(classify.get(i));</span>
-<span class="nc" id="L187">                String predictedCat = attrInfo.get(0).value((int)prediction);</span>
-<span class="nc" id="L188">                documents.get(i).setCategory(predictedCat);</span>
-<span class="fc" id="L189">            } catch (Exception e)</span>
+<span class="nc" id="L191">                double prediction = svm.classifyInstance(classify.get(i));</span>
+<span class="nc" id="L192">                String predictedCat = attrInfo.get(0).value((int)prediction);</span>
+<span class="nc" id="L193">                documents.get(i).setCategory(predictedCat);</span>
+<span class="fc" id="L194">            } catch (Exception e)</span>
             {
-<span class="fc" id="L191">                System.out.println(&quot;Error occured in prediction&quot;);</span>
-<span class="fc" id="L192">                e.printStackTrace();</span>
-<span class="nc" id="L193">            }</span>
+<span class="fc" id="L196">                System.out.println(&quot;Error occured in prediction&quot;);</span>
+<span class="fc" id="L197">                e.printStackTrace();</span>
+<span class="nc" id="L198">            }</span>
         }
-<span class="fc" id="L195">    }</span>
+<span class="fc" id="L200">    }</span>
+
+    
+    // public double finalGamma;  
+    // public double finalC;
+
+    //TODO: Optimize Values waiting on sample files for accurate data
+    // public void optimizeMachineVariables()
+    // {
+    //     double g = 0.1;
+    //     double c = 1.0;
+    //     int gIndex = -1;
+    //     int cIndex = -1;
+    //     double[] gRange = {g/32.0, g/16.0, g/8.0, g/4.0, g/2.0, g, g*2.0, g*4.0, g*8.0, g*16.0, g*32.0};
+    //     double[] cRange = {c/32.0, c/16.0, c/8.0, c/4.0, c/2.0, c, c*2.0, c*4.0, c*8.0, c*16.0, c*32.0};
+
+    //     double highestScore = 0.0;
+    //     int i=0;
+    //     for (double gVal: gRange)
+    //     {
+    //         try{
+    //             SMO temp = new SMO();         // new instance of classifier
+    //             //temp.setOptions(options);     // set the options
+    //             temp.setKernel(new RBFKernel(training, 25007, gVal));
+    //             temp.setC(c);
+
+    //             Evaluation eval = new Evaluation(training);
+    //             final int numberOfCrossClasses = 11;
+
+    //             eval.crossValidateModel(svm, training, numberOfCrossClasses, new Random(1));
+
+    //             double score = eval.pctCorrect();
+    //             if (score&gt;highestScore)
+    //             {
+    //                 highestScore = score;
+    //                 gIndex = i;
+    //             }      
+    //         } catch (Exception e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
+
+    //     highestScore = 0.0;
+    //     i=0;
+    //     for (double cVal: cRange)
+    //     {
+    //         try{
+    //             SMO temp = new SMO();         // new instance of classifier
+    //             //temp.setOptions(options);     // set the options
+    //             temp.setKernel(new RBFKernel(training, 25007, gRange[gIndex]));
+    //             temp.setC(cVal);
+
+    //             Evaluation eval = new Evaluation(training);
+    //             final int numberOfCrossClasses = 11;
+
+    //             eval.crossValidateModel(svm, training, numberOfCrossClasses, new Random(1));
+
+    //             double score = eval.pctCorrect();
+    //             if (score&gt;highestScore)
+    //             {
+    //                 highestScore = score;
+    //                 cIndex = i;
+    //             }      
+    //         } catch (Exception e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
+
+    //     double gamma_L = gRange[gIndex-1];
+    //     double gamma_U = gRange[gIndex+1];
+    //     double C_L = cRange[cIndex-1];
+    //     double C_U = cRange[cIndex+1];
+    //     double bestGamma = 0.0;
+    //     double bestC = 0.0;
+    //     int M = gRange.length;
+
+    //     highestScore = 0.0;
+    //     for (i = 0; i &lt; M; ++i) {
+    //         double gam = gamma_L + (double)i * (gamma_U - gamma_L) / (double)(M-1);
+    //         for (int j = 0; j &lt; M; ++j) {
+    //             double C = C_L + (double)j * (C_U - C_L) / (double)(M-1);
+    //             try{
+    //                 SMO temp = new SMO();         // new instance of classifier
+    //                 //temp.setOptions(options);     // set the options
+    //                 temp.setKernel(new RBFKernel(training, 25007, gam));
+    //                 temp.setC(C);
+
+    //                 Evaluation eval = new Evaluation(training);
+    //                 final int numberOfCrossClasses = 11;
+
+    //                 eval.crossValidateModel(svm, training, numberOfCrossClasses, new Random(1));
+
+    //                 double score = eval.pctCorrect();
+    //                 if (score&gt;highestScore)
+    //                 {
+    //                     highestScore = score;
+    //                     bestGamma = gam;
+    //                     bestC = C;
+    //                 }      
+    //             } catch (Exception e) {
+    //                 e.printStackTrace();
+    //             }
+    //         }
+    //     }
+
+    //     finalGamma = bestGamma;
+    //     finalC = bestC;
+
+    // }
     
     /**
      * Returns the training Instances object.
@@ -200,7 +313,7 @@ public class LearningMachine
      */
     public Instances getTrainingInstances()
     {
-<span class="nc" id="L203">        return training;</span>
+<span class="nc" id="L316">        return training;</span>
     }
 
     /**
@@ -209,7 +322,7 @@ public class LearningMachine
      */
     public Instances getClassifyInstances()
     {
-<span class="nc" id="L212">        return classify;</span>
+<span class="nc" id="L325">        return classify;</span>
     }
 
     /**
@@ -218,7 +331,7 @@ public class LearningMachine
      */
     public VocabCollection getVocabCollection()
     {
-<span class="nc" id="L221">        return vocab;</span>
+<span class="nc" id="L334">        return vocab;</span>
     }
 
     /**
@@ -227,7 +340,7 @@ public class LearningMachine
      */
     public ArrayList&lt;Attribute&gt; getAttrInfo()
     {
-<span class="nc" id="L230">        return attrInfo;</span>
+<span class="nc" id="L343">        return attrInfo;</span>
     }
 
     /**
@@ -236,7 +349,7 @@ public class LearningMachine
      */
     public SMO getSVM()
     {
-<span class="nc" id="L239">        return svm;</span>
+<span class="nc" id="L352">        return svm;</span>
     }
 
 }

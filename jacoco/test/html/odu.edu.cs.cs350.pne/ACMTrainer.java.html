@@ -18,7 +18,7 @@ import java.util.List;
      * The result of this program will be the addition of document's document signature 
      * to an existing arff file. If the arff file does not exist, an Initial Trainer will run
      * and create an initial arff file from sample data files with known corresponding classifications.
-     * @param args A series of valid paths to pdf/txt files.
+     * @param args A valid path followed by a valid category key
      */
     public static void main(String[] args) 
     {
@@ -107,7 +107,7 @@ import java.util.List;
 <span class="nc" id="L107">            return false;</span>
         }
 <span class="nc" id="L109">        String extension = path.substring(path.length()-3);</span>
-<span class="nc bnc" id="L110" title="All 4 branches missed.">        if (extension!=&quot;pdf&quot; &amp;&amp; extension!=&quot;txt&quot;)</span>
+<span class="nc bnc" id="L110" title="All 4 branches missed.">        if (!extension.equals(&quot;pdf&quot;) &amp;&amp; !extension.equals(&quot;txt&quot;))</span>
         {
 <span class="nc" id="L112">            System.out.println(path + &quot;: file needs to be a pdf or txt file. \n&quot;);</span>
 <span class="nc" id="L113">            return false;</span>
@@ -134,24 +134,6 @@ import java.util.List;
     }
     
 }
-
-//TODOS (In Order of Importance)
-    //General 
-        //Javadoc
-            //javadoc for Initial Trainer
-        //Learning Machine Optimization (Tabled till Data Hardcoded or Sample Files provided)
-            //Optimize gamma and C values of SMO (Section 5.4 in Design Notes)
-            //Test machine accuracy using N-fold Cross Validation (Section 5.3 in Design Notes)
-            //LearningMachine.classifyDataTest (Tabled till learning machine optimized)
-        //Integration Tests (Jozef)
-            //TestACMClassifier.java
-            //TestACMTrainer.java
-            //TestRunLearningMachine.java
-        //CleanUp
-            //eliminate as many Todo's as possible    
-    //WAITING FOR SAMPLE FILES (Wendnesday)
-        //input sample filepaths and associated categories into InitTrainer
-        //InitTrainer.constructInitialDataTest (Tabled till sample files available)
             
     
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
